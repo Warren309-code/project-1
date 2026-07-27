@@ -1,10 +1,16 @@
 /* ---------------------------------------------------------------
    Affinity Institute · design system
-   Type: Fraunces (display) + Instrument Sans (text)
+   Type: Cabinet Grotesk (display/headings) + Manrope (body/UI)
    Palette: cream paper, forest ink, sage, warm orange
+   Note: Manrope stands in for DIN Pro / PolySans (commercial) —
+   swap the @import + --sans stack for licensed files if available.
+   Note: Cabinet Grotesk is a free Fontshare typeface (ITF), imported from
+   api.fontshare.com. The variable instance covers the full 100–900 range
+   so every tuned --display weight (incl. 480/490/560) renders exactly.
 --------------------------------------------------------------- */
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380..640;1,9..144,380..640&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk&display=swap");
 
 :root {
   --paper: #faf4eb;
@@ -26,8 +32,12 @@
   --muted: #5e6448;
   --muted-on-dark: #aeb89a;
 
-  --serif: "Fraunces", "Georgia", serif;
-  --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --irish-green: #2f7d44;
+  --grad-irish: linear-gradient(110deg, var(--orange) 0%, var(--irish-green) 95%);
+  --grad-irish-bright: linear-gradient(110deg, var(--orange-bright) 0%, #3c9a55 95%);
+
+  --display: "Cabinet Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
 
   --wrap: 1240px;
   --gutter: clamp(22px, 4.5vw, 64px);
@@ -72,27 +82,35 @@ button { font: inherit; color: inherit; }
 
 .d-xl, .d-lg, .d-md, .d-sm {
   margin: 0;
-  font-family: var(--serif);
-  font-weight: 470;
-  letter-spacing: -0.022em;
-  line-height: 1.02;
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
   text-wrap: balance;
-  font-variation-settings: "opsz" 100;
 }
 
-.d-xl { font-size: clamp(52px, 7.6vw, 108px); line-height: 0.99; }
-.d-lg { font-size: clamp(40px, 5.4vw, 74px); }
-.d-md { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.06; }
-.d-sm { font-size: clamp(23px, 2.4vw, 30px); line-height: 1.14; }
+.d-xl { font-size: clamp(48px, 5.6vw, 64px); line-height: 1.02; }
+.d-lg { font-size: clamp(38px, 4.6vw, 56px); }
+.d-md { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.06; }
+.d-sm { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.14; }
 
 .d-xl em, .d-lg em, .d-md em, .d-sm em {
-  font-style: italic;
-  font-weight: 440;
-  letter-spacing: -0.015em;
-  color: var(--olive);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--grad-irish);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-.on-dark .d-xl em, .on-dark .d-lg em, .on-dark .d-md em { color: var(--olive-soft); }
+.on-dark .d-xl em, .on-dark .d-lg em, .on-dark .d-md em {
+  background: var(--grad-irish-bright);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .label {
   display: flex;
@@ -160,14 +178,14 @@ button { font: inherit; color: inherit; }
 .brand img { width: 34px; height: auto; }
 
 .brand-name {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 22px;
   font-weight: 520;
   letter-spacing: -0.015em;
   white-space: nowrap;
 }
 
-.brand-name span { color: var(--sage); font-style: italic; font-weight: 440; }
+.brand-name span { color: var(--sage); font-weight: 440; }
 
 .menu {
   display: flex;
@@ -355,7 +373,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   align-items: center;
 }
 
-.hero h1 { margin: 0 0 30px; }
+.hero h1 { margin: 0 0 30px; font-size: clamp(56px, 7.2vw, 86px); line-height: 1.0; }
 
 .hero .lede { margin: 0 0 38px; }
 
@@ -489,9 +507,9 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: clamp(56px, 8vw, 110px);
   width: max-content;
   animation: belt 36s linear infinite;
+  will-change: transform;
 }
 
 .marquee:hover .marquee-track { animation-play-state: paused; }
@@ -504,6 +522,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   height: 42px;
   width: auto;
   object-fit: contain;
+  margin-inline-end: clamp(56px, 8vw, 110px);
   opacity: 0.82;
   transition: opacity 0.3s ease;
 }
@@ -525,8 +544,8 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .wordmark:hover { color: var(--ink); }
 
-.wordmark.lower { font-family: var(--serif); font-weight: 560; font-size: 26px; letter-spacing: -0.01em; }
-.wordmark.ital { font-family: var(--serif); font-style: italic; font-weight: 480; font-size: 24px; }
+.wordmark.lower { font-family: var(--display); font-weight: 560; font-size: 26px; letter-spacing: -0.01em; }
+.wordmark.ital { font-family: var(--display); font-weight: 480; font-size: 24px; }
 
 /* ---------------------------------------------------- sections */
 
@@ -568,7 +587,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .score-figure b {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(84px, 9vw, 128px);
   font-weight: 440;
   line-height: 0.85;
@@ -601,7 +620,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .quote-card blockquote {
   margin: 0 0 22px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 18.5px;
   font-weight: 450;
   line-height: 1.42;
@@ -643,7 +662,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .stat b {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(40px, 4.4vw, 64px);
   font-weight: 450;
   letter-spacing: -0.025em;
@@ -755,8 +774,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .row-ed .num {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: 15px;
   color: var(--orange);
   letter-spacing: 0.08em;
@@ -876,7 +894,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .story-body h3 {
   margin: 0 0 10px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 26px;
   font-weight: 480;
   letter-spacing: -0.02em;
@@ -894,8 +912,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .story-quote .story-media blockquote {
   margin: 0;
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: 21px;
   font-weight: 440;
   line-height: 1.45;
@@ -951,8 +968,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .comm-points li::before {
   content: counter(pts, decimal-leading-zero);
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: 13px;
   color: var(--orange-soft);
 }
@@ -993,7 +1009,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   color: var(--muted);
 }
 
-.ph .ph-icon { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--orange-soft); }
+.ph .ph-icon { font-family: var(--display); font-size: 19px; color: var(--orange-soft); }
 .ph.on-paper .ph-icon { color: var(--orange); }
 
 /* community ticker */
@@ -1018,8 +1034,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   display: flex;
   align-items: center;
   gap: 18px;
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: clamp(19px, 2vw, 24px);
   font-weight: 430;
   color: rgba(250, 244, 235, 0.75);
@@ -1119,7 +1134,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .foot-word span {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 460;
   font-size: clamp(64px, 11.5vw, 168px);
   letter-spacing: -0.03em;
@@ -1159,7 +1174,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .panel h3 {
   margin: 18px 0 14px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(25px, 2.4vw, 32px);
   font-weight: 480;
   letter-spacing: -0.02em;
@@ -1229,8 +1244,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .step::before {
   content: "0" counter(step);
   display: block;
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--display);
   font-size: 46px;
   font-weight: 430;
   color: var(--orange);
@@ -1238,7 +1252,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   margin-bottom: 22px;
 }
 
-.step h3 { margin: 0 0 12px; font-family: var(--serif); font-size: 26px; font-weight: 490; letter-spacing: -0.02em; }
+.step h3 { margin: 0 0 12px; font-family: var(--display); font-size: 26px; font-weight: 490; letter-spacing: -0.02em; }
 
 .step p { margin: 0; font-size: 14.5px; color: var(--muted); }
 
@@ -1258,9 +1272,9 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .disc:hover { background: rgba(253, 249, 243, 0.9); }
 
-.disc .disc-num { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--orange); }
+.disc .disc-num { font-family: var(--display); font-size: 17px; color: var(--orange); }
 
-.disc h3 { margin: 0; font-family: var(--serif); font-size: clamp(23px, 2.3vw, 30px); font-weight: 480; letter-spacing: -0.02em; }
+.disc h3 { margin: 0; font-family: var(--display); font-size: clamp(23px, 2.3vw, 30px); font-weight: 480; letter-spacing: -0.02em; }
 
 .disc p { margin: 0; font-size: 15px; color: var(--muted); max-width: 34em; }
 

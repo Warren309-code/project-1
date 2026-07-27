@@ -104,9 +104,12 @@
     if (next) next.addEventListener("click", function () { step(1); });
   });
 
-  /* duplicate marquee tracks so the loop is seamless */
+  /* duplicate marquee tracks so the loop is seamless (-50% translate lands
+     exactly one set over). Logos decode async so the duplicated set never
+     blocks first paint. */
   document.querySelectorAll("[data-marquee]").forEach(function (track) {
     track.innerHTML += track.innerHTML;
+    track.querySelectorAll("img").forEach(function (img) { img.decoding = "async"; });
   });
 
   /* header condenses once the page is scrolled past the hero edge */

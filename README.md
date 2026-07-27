@@ -14,7 +14,7 @@ Static, framework-free build. No dependencies, no build step. HTML, CSS and vani
 
 Defined entirely in `css/main.css`.
 
-- Type: Fraunces (display serif, loaded from Google Fonts) and Instrument Sans (text).
+- Type: Cabinet Grotesk (display/headings, medium weight, tight tracking, imported from Fontshare) and Manrope (body/UI). Cabinet Grotesk is a free Fontshare typeface (Indian Type Foundry) imported via `api.fontshare.com`; the family includes a variable instance so the odd tuned `--display` weights (480/490/560) render exactly. Headings use weight 500 (emphasis words 600) — deliberately mid-weight, not bold. Manrope stands in for the commercial DIN Pro / PolySans — swap the `@import` and `--sans` stack for licensed files if available. Heading emphasis words use an Irish two-tone orange→green gradient (`--grad-irish`).
 - Palette: warm cream paper, deep forest green, sage, warm orange. All tokens are CSS custom properties in `:root`.
 - Motion: scroll reveals with stagger, marquee belts, counter animations. All respect `prefers-reduced-motion`.
 
