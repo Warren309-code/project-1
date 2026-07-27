@@ -1,0 +1,9 @@
+# local reference material, keep out of the public repo
+*.pdf
+CareerFoundry*
+Affinity Institute - Ireland*
+screenshots/
+
+# OS noise
+Thumbs.db
+.DS_Store
