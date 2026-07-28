@@ -7,3 +7,6 @@ screenshots/
 # OS noise
 Thumbs.db
 .DS_Store
+
+# local tool config
+.claude/

@@ -124,12 +124,7 @@ button { font: inherit; color: inherit; }
   color: var(--muted);
 }
 
-.label::before {
-  content: "";
-  width: 26px;
-  height: 1px;
-  background: var(--orange);
-}
+.label::before { display: none; }
 
 .on-dark .label { color: var(--muted-on-dark); }
 
@@ -1040,6 +1035,18 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .community .wrap { position: relative; }
+
+/* ---- dark alternating band (mirrors .community's forest-deep) ----
+   Used on inner pages so they don't read as a flat run of cream.
+   Person-cards / .panel keep their own light bg and float on the
+   dark band; everything else inherits the paper colour. */
+.band-dark { background: var(--forest-deep); color: var(--paper); }
+.band-dark .row-ed p,
+.band-dark .disc p { color: var(--muted-on-dark); }
+.band-dark .row-ed .num,
+.band-dark .disc-num { color: var(--orange-soft); }
+.band-dark .disc { border-color: rgba(250, 244, 235, 0.14); }
+.band-dark .disc:hover { background: rgba(250, 244, 235, 0.06); }
 
 .comm-grid {
   display: grid;
