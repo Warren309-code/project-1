@@ -133,39 +133,8 @@
     });
   });
 
-  /* editorial rows: media slides in from whichever side it sits on */
-  document.querySelectorAll(".row-media.rv").forEach(function (el) {
-    el.classList.add(el.closest(".row-ed.flip") ? "rv-left" : "rv-right");
-  });
-
-  /* gentle scroll parallax on floating decorative elements */
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduced) {
-    var floats = Array.prototype.slice.call(
-      document.querySelectorAll(".row-float, .hero-photo-sub, .hero-chip")
-    );
-    if (floats.length) {
-      var items = floats.map(function (el) {
-        return {
-          el: el,
-          speed: parseFloat(el.dataset.parallax) || (el.classList.contains("hero-chip") ? 0.05 : 0.1)
-        };
-      });
-      var ticking = false;
-      var update = function () {
-        ticking = false;
-        var vh = window.innerHeight;
-        items.forEach(function (f) {
-          var r = f.el.getBoundingClientRect();
-          if (r.bottom < -240 || r.top > vh + 240) return;
-          var fromCenter = (r.top + r.height / 2 - vh / 2) / vh;
-          f.el.style.transform = "translate3d(0," + (-fromCenter * f.speed * 100).toFixed(2) + "px,0)";
-        });
-      };
-      window.addEventListener("scroll", function () {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
-      }, { passive: true });
-      update();
-    }
-  }
+  /* Motion is intentionally restrained: the homepage hero is the one
+     orchestrated entrance (handled above). Everything else simply
+     appears — no scroll parallax, no side-entrance transforms. The
+     .rv class is a no-op outside .hero by design (see main.css). */
 })();
