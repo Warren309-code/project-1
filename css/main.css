@@ -1303,12 +1303,17 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   gap: 14px;
   padding: 22px 0 26px;
   border-top: 1px solid rgba(250, 244, 235, 0.12);
   font-size: 12px;
   color: rgba(250, 244, 235, 0.42);
 }
+
+/* designer credit logo, bottom-right */
+.foot-credit { display: inline-flex; line-height: 0; }
+.foot-credit img { height: 30px; width: auto; display: block; border-radius: 4px; }
 
 /* ------------------------------------------------- grid helpers */
 
