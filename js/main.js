@@ -7,7 +7,20 @@
   if (toggle) {
     toggle.addEventListener("click", function () {
       var open = body.classList.toggle("nav-open");
+      document.documentElement.classList.toggle("nav-open", open);
       toggle.setAttribute("aria-expanded", String(open));
+      /* while the drawer is open, force the full at-rest header bar (logo +
+         kebab) at the top so there is always a way to close the menu,
+         regardless of how far down the page was scrolled. On close, re-sync
+         the scrolled state to match the current scroll position. */
+      var head = document.querySelector(".site-head");
+      if (head) {
+        if (open) {
+          head.classList.remove("scrolled");
+        } else {
+          head.classList.toggle("scrolled", window.scrollY > head.offsetHeight);
+        }
+      }
     });
   }
 
@@ -105,18 +118,33 @@
   });
 
   /* duplicate marquee tracks so the loop is seamless (-50% translate lands
-     exactly one set over). Logos decode async so the duplicated set never
-     blocks first paint. */
+     exactly one set over). A single source set can be narrower than the
+     viewport (e.g. only 6 logos on a wide screen), which would leave a
+     visible gap right before the wrap point — so first repeat the source
+     set until it alone spans at least the viewport width, then double
+     that. Logos decode async so the duplicated content never blocks first
+     paint. */
   document.querySelectorAll("[data-marquee]").forEach(function (track) {
+    var original = track.innerHTML;
+    track.innerHTML = original;
+    var guard = 0;
+    while (track.scrollWidth < window.innerWidth && guard < 20) {
+      track.innerHTML += original;
+      guard++;
+    }
     track.innerHTML += track.innerHTML;
     track.querySelectorAll("img").forEach(function (img) { img.decoding = "async"; });
   });
 
-  /* header condenses once the page is scrolled past the hero edge */
+  /* header gathers into a floating glass block only once the visitor has
+     scrolled past the header's own height — i.e. the at-rest header has
+     left view. Measured once at load (min-height is fixed, so it is stable
+     regardless of font load). */
   var head = document.querySelector(".site-head");
   if (head) {
+    var threshold = head.offsetHeight;
     var syncHead = function () {
-      head.classList.toggle("scrolled", window.scrollY > 40);
+      head.classList.toggle("scrolled", window.scrollY > threshold);
     };
     syncHead();
     window.addEventListener("scroll", syncHead, { passive: true });

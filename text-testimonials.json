@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1a0e6003-2018-43ea-ba56-484bff0c3177",
+    "name": "JayJay's testimonial",
+    "text_content": "Great place to learn online sales and grow your bank account, great job market and sales trainings from super individuals. Id recommend it to anybody who wants to jump into the world of sales or online work. just gotta be willing to learn and but the work in.\nJoining has led to me living in a different country, working online and having an insane network of high achieving entrepreneurs.",
+    "rating": 5,
+    "created_at": "2026-07-28T07:30:26.005966+00:00",
+    "client": {
+      "first_name": "JayJay",
+      "last_name": "McCarthy",
+      "company": null
+    }
+  },
+  {
+    "id": "156ddc7c-589d-4ccc-ad63-3b13404dde6f",
+    "name": "Oisin's testimonial",
+    "text_content": "Got me a second income in 30 days, now 60 in and improving month by month. The amount of training is unbelievable. Not to mention community",
+    "rating": 5,
+    "created_at": "2026-07-28T07:28:33.198166+00:00",
+    "client": {
+      "first_name": "Oisin",
+      "last_name": "Cummins Fuller",
+      "company": null
+    }
+  },
+  {
+    "id": "20236e18-ab92-493d-b4fd-8647adc25dc0",
+    "name": "Leon's testimonial",
+    "text_content": "I’d been around the online business space for a couple of years before actually getting involved with Affinity. This is my honest take. From the outside, it looks like a sales training brand. From the inside, it’s a room full of operators.The real value for me hasn’t just been the frameworks or the live calls with the guys. It’s been the conversations and the in-person events. Getting in rooms with people who are actually building changes your standards quickly.",
+    "rating": 5,
+    "created_at": "2026-07-28T07:26:48.548433+00:00",
+    "client": {
+      "first_name": "Leon",
+      "last_name": null,
+      "company": null
+    }
+  },
+  {
+    "id": "8b4fa57b-aeb2-4add-93ec-26dd1b7a54af",
+    "name": "Shaun's testimonial",
+    "text_content": "Joined AST around June time and honestly it's incredible from the training to the trips. The recent ski trip was one of the highlights being part of ast getting to meet the boys and building the friendships with like minded and getting to travel with them. Couldn't recommend AST anymore it's changed the trajectory of mine and many other people's lives 🤝",
+    "rating": 5,
+    "created_at": "2026-07-28T07:24:36.363655+00:00",
+    "client": {
+      "first_name": "Shaun",
+      "last_name": "Norris",
+      "company": null
+    }
+  },
+  {
+    "id": "5d1b88fc-0518-4dd7-b1ab-04c32174e3c6",
+    "name": "Matthew's testimonial",
+    "text_content": "I’ve known the guys since they started the community and to see the amount of time effort and passion put into growing this and seeing it become what it is now has been a sight to see. From the training to the trips they plan to travel to so many different places around the world it’s truly a world class community, program, experience and family. AST for life",
+    "rating": 5,
+    "created_at": "2026-07-28T07:23:35.395409+00:00",
+    "client": {
+      "first_name": "Matthew",
+      "last_name": "Mendoza",
+      "company": null
+    }
+  },
+  {
+    "id": "f6a4a3e6-8cc7-4be1-a7ef-c07def40b575",
+    "name": "Lauren's testimonial",
+    "text_content": "Joined AST recently and it definitely has shifted my mindset! It’s a great community and you’re surrounded by amazing people. The team constantly supports and helps you with getting a role! They don’t just help with sales, they help with your mindset, fitness etc! Definitely keeps you motivated and on target for your goals!",
+    "rating": 5,
+    "created_at": "2026-07-28T07:21:38.892862+00:00",
+    "client": {
+      "first_name": "Lauren",
+      "last_name": "Matthews",
+      "company": null
+    }
+  },
+  {
+    "id": "4121e946-1fbc-4860-8a04-e91f04d838e3",
+    "name": "Biljana's testimonial",
+    "text_content": "This year will be 2 years since I joined AST I was one of first few girls to be here so definitely seen the growth throughout the years. AST was the vehicle for me to freedom , growth & working remotely . not only that but also meeting like minded people & grow in highs in my own personal life . I joined because I knew I wanted more in life & working in multiple 9-5s wasn’t the answer for me . Having the AFW (women’s group) in AST has been amazing [...]",
+    "rating": 5,
+    "created_at": "2026-07-28T07:20:04.856261+00:00",
+    "client": {
+      "first_name": "Biljana",
+      "last_name": "Radu",
+      "company": null
+    }
+  },
+  {
+    "id": "994d4169-711b-4ab8-9050-ec284c5e3b9e",
+    "name": "Sophia's testimonial",
+    "text_content": "I was kindly invited to AFWs first of many girls dinner; i am so delighted I went as the experience and food was devine, top to bottom everything was so perfectly planned and all the girls were so welcoming and kind. Throughout the night we covered not just sales but also mindset, fitness and community. And we were lucky enough to be blessed with a photographer to capture cute memories of the night, I’m looking forward to many more future girl dinners here in AFW.",
+    "rating": 5,
+    "created_at": "2026-07-28T07:19:17.254158+00:00",
+    "client": {
+      "first_name": "Sophia",
+      "last_name": "Deykun",
+      "company": null
+    }
+  },
+  {
+    "id": "32ec88b3-2d58-4543-93f5-e9a84fd41b43",
+    "name": "Lynn's testimonial",
+    "text_content": "The community is extremely welcoming and everyone is so helpful! The weekly group calls I find are a great way to feel more involved in the community as well as learn and gain valuable insights from other!",
+    "rating": 4,
+    "created_at": "2026-07-28T07:13:08.71195+00:00",
+    "client": {
+      "first_name": "Lynn",
+      "last_name": "O'Callaghan",
+      "company": "Tusla - Child and Family Agency"
+    }
+  },
+  {
+    "id": "20b7467b-cc36-421e-b96f-be04999c151b",
+    "name": "Roksana's testimonial",
+    "text_content": "Joining AST has been the best decision of my life, who knew one ad on instagram can change the course of ones life for the better. The community and opportunities that AST has to offer is nothing like ive seen before. Everybody supporting each other all the time and the different jobs available is nothing like a traditional workspace. Overall 100/10!!!",
+    "rating": 5,
+    "created_at": "2026-07-28T07:10:00.815026+00:00",
+    "client": {
+      "first_name": "Roksana",
+      "last_name": "Pisarczyk",
+      "company": "Dunnes Stores"
+    }
+  }
+]

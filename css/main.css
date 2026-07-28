@@ -54,7 +54,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 body {
   margin: 0;
@@ -65,11 +65,16 @@ body {
   line-height: 1.6;
   letter-spacing: 0.001em;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* lock the body when the mobile menu is open */
-body.nav-open { overflow: hidden; }
+/* lock scrolling when the mobile menu is open. The page scrolls on the
+   root (html), not body, so the lock must be on html — locking body alone
+   leaves the page scrollable behind the drawer. overflow:hidden on html
+   also keeps it as the scroll container, so the sticky header still pins
+   to the viewport (locking body would turn body into a scroll container
+   and re-anchor the sticky header off-screen). */
+html.nav-open { overflow: hidden; }
 
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -128,6 +133,8 @@ button { font: inherit; color: inherit; }
 
 .on-dark .label { color: var(--muted-on-dark); }
 
+.label.no-dash::before { display: none; }
+
 .lede {
   font-size: clamp(16.5px, 1.6vw, 19px);
   line-height: 1.6;
@@ -139,20 +146,24 @@ button { font: inherit; color: inherit; }
 
 /* ------------------------------------------------------ header */
 
-/* Solid paper header — no blur/glass. Reads cleaner and avoids the
-   glassmorphism tell. A hairline border carries the separation. */
+/* Solid paper header at the top of the page. Once the visitor scrolls
+   past the header's own height, .scrolled turns the bar transparent and
+   the inner .nav condenses into a floating, translucent glass block —
+   the elements gather into one detached pill at the top of the viewport.
+   No glass at rest; it only appears once the header has left view. */
 .site-head {
   position: sticky;
   top: 0;
   z-index: 90;
-  background: var(--paper);
-  border-bottom: 1px solid var(--cream-line-soft);
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  background: rgba(250, 244, 235, 1);
+  /* flow-root establishes a BFC so the .nav's top margin (the float gap)
+     is contained instead of collapsing out the top of the sticky header. */
+  display: flow-root;
+  transition: background-color 0.45s ease;
 }
 
 .site-head.scrolled {
-  border-bottom-color: transparent;
-  box-shadow: 0 10px 34px -20px rgba(34, 42, 34, 0.22);
+  background: rgba(250, 244, 235, 0);
 }
 
 .nav {
@@ -161,6 +172,57 @@ button { font: inherit; color: inherit; }
   align-items: center;
   min-height: 76px;
   gap: 20px;
+  /* default pill geometry — flush and invisible until .scrolled gathers
+     it into a floating block. Colors use the SAME rgb channels as the
+     scrolled state but at alpha 0, so the transition only animates alpha
+     (and so genuinely fades) instead of jumping channel-by-channel from
+     the `transparent` keyword's rgba(0,0,0,0). */
+  margin-top: 0;
+  padding: 0;
+  border: 1px solid rgba(209, 196, 178, 0);
+  border-radius: 18px;
+  background: rgba(255, 253, 250, 0);
+  transition: background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s ease,
+              border-color 0.45s ease,
+              border-radius 0.45s ease,
+              margin-top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              padding 0.45s ease,
+              min-height 0.45s ease,
+              width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* the floating header block — detached from the viewport edge,
+   condensed, near-solid white card with a crisp edge + strong shadow so
+   it reads unmistakably against any background beneath it (the page is
+   cream, so the pill cannot be the same cream or it would vanish).
+   Animates in as one and animates back out when returning to the top. */
+.site-head.scrolled .nav {
+  margin-top: 16px;
+  padding: 0 20px;
+  min-height: 64px;
+  /* Solid opaque on mobile — NO backdrop-filter here. backdrop-filter
+     creates a containing block that traps the position:fixed mobile drawer
+     inside the pill, throwing it off-screen when scrolled. Glass is
+     applied desktop-only below. */
+  background: rgba(255, 253, 250, 1);
+  border-color: rgba(209, 196, 178, 0.85);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+              0 14px 40px -14px rgba(34, 42, 34, 0.5),
+              0 2px 8px -2px rgba(34, 42, 34, 0.18);
+}
+
+/* Desktop: the floating pill narrows (grid side columns compress, so the
+   logo + Apply button slide inward toward the centered menu) and gains a
+   frosted-glass finish. Both are desktop-only — mobile keeps a solid pill
+   and uses a drawer for the menu. */
+@media (min-width: 961px) {
+  .site-head.scrolled .nav {
+    width: clamp(640px, 78vw, 940px);
+    background: rgba(255, 253, 250, 0.96);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    backdrop-filter: blur(14px) saturate(1.3);
+  }
 }
 
 .brand {
@@ -369,7 +431,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .hero { padding: clamp(56px, 8vw, 110px) 0 clamp(40px, 6vw, 80px); }
 
-.hero h1 { margin: 0 0 30px; font-size: clamp(44px, 7vw, 80px); line-height: 1.0; }
+.hero h1 { margin: 0 0 20px; font-size: clamp(44px, 7vw, 80px); line-height: 1.0; }
 
 /* the one signature element: the Irish gradient lives only here */
 .hero h1 em,
@@ -384,13 +446,13 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   -webkit-text-fill-color: transparent;
 }
 
-.hero .lede { margin: 0 0 38px; }
+.hero .lede { margin: 0 0 26px; }
 
 .hero-actions { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
 
 /* centered hero, CareerFoundry style */
 
-.hero-center { padding: clamp(56px, 8vw, 112px) 0 clamp(56px, 8vw, 100px); text-align: center; }
+.hero-center { padding: clamp(36px, 5vw, 72px) 0 clamp(32px, 4vw, 60px); text-align: center; }
 
 .hero-center .label { justify-content: center; }
 .hero-center .label::before { display: none; }
@@ -408,7 +470,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   justify-content: center;
   border-top: 0;
   padding-top: 0;
-  margin-top: 40px;
+  margin-top: 26px;
 }
 
 .hero-center .hero-proof p { flex: 0 1 auto; text-align: left; max-width: 24em; }
@@ -425,7 +487,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   gap: 14px 18px;
   margin-top: 46px;
   padding-top: 30px;
-  border-top: 1px solid var(--cream-line);
 }
 
 .avatar-stack { display: flex; }
@@ -443,6 +504,16 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .hero-proof p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted); max-width: 32em; flex: 1 1 220px; min-width: 200px; }
 .hero-proof strong { color: var(--ink); }
 
+.tp-link {
+  color: #00b77f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+.tp-link:hover { opacity: 0.75; }
+
+.hero-proof .stars { color: #00b77f; }
+
 .stars { display: inline-flex; gap: 3px; color: var(--olive); }
 .stars svg { width: 14px; height: 14px; fill: currentColor; }
 .score-block .stars svg { width: 20px; height: 20px; }
@@ -450,12 +521,11 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 /* -------------------------------------------------- logo strip */
 
 .logos-belt {
-  padding: clamp(30px, 4vw, 48px) 0;
-  border-top: 1px solid var(--cream-line-soft);
+  padding: clamp(28px, 4vw, 44px) 0;
   border-bottom: 1px solid var(--cream-line-soft);
 }
 
-.logos-belt .label { justify-content: center; margin-bottom: 26px; }
+.logos-belt .label { justify-content: center; margin-bottom: 22px; }
 .logos-belt .label::before { display: none; }
 
 .marquee {
@@ -479,7 +549,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .marquee-track img {
-  height: 40px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   margin-inline-end: clamp(48px, 7vw, 96px);
@@ -765,6 +835,81 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .tp-verified { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 12px; font-weight: 600; color: var(--tp-green); }
 .tp-verified::before { content: "\2713"; }
 
+/* --------------------------------------------- testimonial wall (homepage) */
+/* Two rows of dark, Trustpilot-green cards drifting in opposite directions.
+   Built from the site's own marquee mechanics (data-marquee doubles the
+   set in JS) so it inherits the same seamless-loop math as the logo belt. */
+
+.tp-wall {
+  overflow: hidden;
+  background: transparent;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  margin-top: 18px;
+}
+.tp-wall + .tp-wall { margin-top: 20px; }
+
+.tp-row {
+  display: flex;
+  width: max-content;
+  padding: 6px 0;
+  animation: belt 68s linear infinite;
+  will-change: transform;
+}
+.tp-row.rev { animation-direction: reverse; animation-duration: 78s; }
+.tp-wall:hover .tp-row { animation-play-state: paused; }
+
+.tp-card2 {
+  flex: 0 0 clamp(300px, 32vw, 380px);
+  margin-right: 20px;
+  padding: 26px 26px 24px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #0a3d2c 0%, var(--tp-green) 46%, #06563c 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tp-card2-top { display: flex; align-items: center; gap: 12px; }
+.tp-card2-top img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+.tp-card2-top b {
+  font-family: var(--display);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: #fff;
+  flex: 1;
+}
+.tp-card2-top .tp-stars-lg { flex-shrink: 0; color: #7fe6bd; }
+.tp-card2-top .tp-stars-lg svg { width: 84px; height: 16px; fill: currentColor; }
+
+.tp-card2 blockquote {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.002em;
+  color: rgba(255, 255, 255, 0.92);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .tp-card2 { flex: 0 0 82vw; padding: 22px 22px 20px; }
+  .tp-card2-top { flex-wrap: wrap; }
+}
+
 /* ------------------------------------------------------- video */
 
 .film { position: relative; }
@@ -919,10 +1064,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .comm-points li::before {
-  content: counter(pts, decimal-leading-zero);
-  font-family: var(--display);
-  font-size: 13px;
-  color: var(--orange-soft);
+  content: none;
 }
 
 .comm-collage {
@@ -1306,6 +1448,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .hero .rv { transition: none; }
   .js-anim .hero .rv,
   .js-anim .hero .rv-blur { opacity: 1; transform: none; filter: none; }
+  .site-head, .nav { transition: none; }
 }
 
 /* -------------------------------------------------- responsive */
