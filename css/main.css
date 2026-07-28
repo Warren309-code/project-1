@@ -901,6 +901,30 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 @media (max-width: 640px) {
   .tp-card2 { flex: 0 0 82vw; padding: 22px 22px 20px; }
   .tp-card2-top { flex-wrap: wrap; }
+  /* one scrolling row only on phones: drop the second row so the
+     section below rises into the freed space */
+  .tp-wall + .tp-wall { display: none; }
+
+  /* Safari on iOS blanks a mask over a composited/scrolling child, so
+     replace the edge fade with plain overlay strips on the section's
+     own background colour. Same look, no mask to fight the paint. */
+  .tp-wall {
+    -webkit-mask-image: none;
+    mask-image: none;
+    position: relative;
+  }
+  .tp-wall::before,
+  .tp-wall::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 7%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .tp-wall::before { left: 0; background: linear-gradient(90deg, var(--paper-warm), transparent); }
+  .tp-wall::after { right: 0; background: linear-gradient(270deg, var(--paper-warm), transparent); }
 }
 
 /* ------------------------------------------------------- video */
