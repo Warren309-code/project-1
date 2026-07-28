@@ -517,7 +517,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .logos-belt {
   padding: clamp(28px, 4vw, 44px) 0;
-  border-bottom: 1px solid var(--cream-line-soft);
 }
 
 .logos-belt .label { justify-content: center; margin-bottom: 22px; }
@@ -593,7 +592,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 /* ------------------------------------------------ trust section */
 
-.trust { background: var(--paper-warm); border-block: 1px solid var(--cream-line-soft); }
+.trust { background: var(--paper-warm); }
 
 .trust-cols {
   display: grid;
@@ -676,7 +675,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin-top: clamp(48px, 6vw, 80px);
-  border-top: 1px solid var(--cream-line);
 }
 
 .stat {
@@ -1041,6 +1039,11 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
    Person-cards / .panel keep their own light bg and float on the
    dark band; everything else inherits the paper colour. */
 .band-dark { background: var(--forest-deep); color: var(--paper); }
+/* Panels keep their own light bg and float on the dark band, so their text
+   must reset to ink — otherwise the band's paper colour cascades in and
+   the light text vanishes on the light card. */
+.band-dark .panel { color: var(--ink); }
+.band-dark .panel p { color: var(--muted); }
 .band-dark .row-ed p,
 .band-dark .disc p { color: var(--muted-on-dark); }
 .band-dark .row-ed .num,
@@ -1195,7 +1198,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .apply {
   background: var(--paper-warm);
-  border-top: 1px solid var(--cream-line-soft);
 }
 
 .apply-inner {
@@ -1283,7 +1285,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
    than left to overflow. */
 .foot-word {
   overflow: hidden;
-  border-top: 1px solid rgba(250, 244, 235, 0.12);
 }
 
 .foot-word span {
@@ -1306,7 +1307,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   align-items: center;
   gap: 14px;
   padding: 22px 0 26px;
-  border-top: 1px solid rgba(250, 244, 235, 0.12);
   font-size: 12px;
   color: rgba(250, 244, 235, 0.42);
 }
