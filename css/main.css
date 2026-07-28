@@ -1039,6 +1039,56 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 .cta-note { margin-top: 18px; font-size: 13px; color: var(--muted); }
 
+/* --------------------------------------------- apply / typeform embed */
+/* A clean bottom section: short copy on the left, the embedded
+   Typeform application form on the right in a white card that matches
+   the rest of the system (cream paper, forest ink, soft shadow). */
+
+.apply {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--cream-line-soft);
+}
+
+.apply-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.apply-copy .lede { margin: 22px 0 32px; }
+
+.apply-meta { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.apply-meta li {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+.apply-meta li b { color: var(--ink); font-weight: 600; }
+.apply-meta li a { color: var(--orange); border-bottom: 1px solid var(--orange-soft); }
+
+.tf-card {
+  background: #ffffff;
+  border: 1px solid var(--cream-line-soft);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lift);
+  padding: clamp(10px, 1.4vw, 18px);
+}
+
+/* the Typeform SDK renders an iframe inside [data-tf-widget]; make it
+   fill the card and round its corners to sit inside the chrome */
+.tf-card [data-tf-widget],
+.tf-card iframe {
+  width: 100% !important;
+  border: 0;
+  display: block;
+  border-radius: calc(var(--r) - 6px);
+  min-height: 680px;
+}
+
 /* ------------------------------------------------------ footer */
 
 .site-foot {
@@ -1345,7 +1395,8 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .nav-cta .btn { display: none; }
   .mob-toggle { display: flex; }
 
-  .hero-grid, .trust-cols, .comm-grid, .page-hero-grid, .cta-inner { grid-template-columns: 1fr; }
+  .hero-grid, .trust-cols, .comm-grid, .page-hero-grid, .cta-inner,
+  .apply-inner { grid-template-columns: 1fr; }
 
   .hero-visual { max-width: 460px; }
   .score-block { position: static; }
@@ -1371,6 +1422,8 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .foot-word { display: none; }
 
   .cta-inner img { max-width: 360px; }
+  .apply-meta li { grid-template-columns: 116px 1fr; }
+  .tf-card [data-tf-widget], .tf-card iframe { min-height: 760px; }
 }
 
 @media (max-width: 640px) {
