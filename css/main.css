@@ -44,6 +44,7 @@
 
   --wrap: 1240px;
   --gutter: clamp(20px, 4.5vw, 64px);
+  --header-h: 76px; /* at-rest .nav min-height; the sticky header is in-flow, so the homepage hero fills 100svh - this */
   --sect: clamp(88px, 11vw, 160px);
 
   --r: 14px;
@@ -448,14 +449,26 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 /* centered hero, CareerFoundry style */
 
 .hero-center {
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: clamp(36px, 5vw, 72px) 0 clamp(32px, 4vw, 60px);
   text-align: center;
 }
+
+/* the headline block grows to fill the viewport minus the logo strip,
+   so it stays optically centered while the marquee pins to the bottom */
+.hero-center .wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-logos { margin-top: clamp(24px, 4vw, 40px); }
+.hero-logos .label { justify-content: center; margin-bottom: 16px; }
+.hero-logos .marquee-track img { height: clamp(40px, 5vw, 56px); }
 
 .hero-center .label { justify-content: center; }
 .hero-center .label::before { display: none; }
@@ -522,13 +535,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .score-block .stars svg { width: 20px; height: 20px; }
 
 /* -------------------------------------------------- logo strip */
-
-.logos-belt {
-  padding: clamp(28px, 4vw, 44px) 0;
-}
-
-.logos-belt .label { justify-content: center; margin-bottom: 22px; }
-.logos-belt .label::before { display: none; }
 
 .marquee {
   overflow: hidden;
