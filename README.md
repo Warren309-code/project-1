@@ -7,7 +7,6 @@ Static, framework-free build. No dependencies, no build step. HTML, CSS and vani
 - `index.html` - homepage
 - `graduates.html` - graduate stories, outcomes and Trustpilot quotes
 - `programmes.html` - programme catalogue and upcoming pathways
-- `mentors.html` - coaching model and mentor team
 - `how-it-works.html` - curriculum stages, disciplines and placement
 
 ## Design system
@@ -22,7 +21,7 @@ Defined entirely in `css/main.css`.
 
 - `assets/brand-mark.png` - the Affinity mark, background removed.
 - `assets/photos/` - photography cropped from the recruitment deck and current site (events, workshops, trips).
-- `assets/portraits/` - graduate photos from the deck plus placeholder human portraits (from randomuser.me) used in review cards, avatar stacks and mentor cards until real photos arrive.
+- `assets/portraits/` - graduate photos from the deck plus placeholder human portraits (from randomuser.me) used in review cards and avatar stacks until real photos arrive.
 
 ## Replacing media later
 
