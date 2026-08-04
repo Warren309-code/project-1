@@ -1591,6 +1591,22 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .nav-cta .btn { display: none; }
   .mob-toggle { display: flex; }
 
+  /* while the drawer is open, force a solid full-width header bar so the
+     page never shows through the top — even if a stray scroll re-applies
+     .scrolled (iOS touch-scrolls behind the overlay despite html
+     overflow:hidden). Reverts the floating pill to a flush bar. */
+  body.nav-open .site-head,
+  body.nav-open .site-head.scrolled { background: rgba(250, 244, 235, 1); }
+  body.nav-open .site-head.scrolled .nav {
+    margin-top: 0;
+    padding: 0;
+    min-height: 68px;
+    width: auto;
+    background: rgba(255, 253, 250, 0);
+    border-color: rgba(209, 196, 178, 0);
+    box-shadow: none;
+  }
+
   .hero-grid, .trust-cols, .comm-grid, .page-hero-grid, .cta-inner,
   .apply-inner { grid-template-columns: 1fr; }
 

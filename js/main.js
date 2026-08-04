@@ -144,6 +144,11 @@
   if (head) {
     var threshold = head.offsetHeight;
     var syncHead = function () {
+      /* while the mobile drawer is open the JS forces the at-rest header
+         bar; don't fight it here — iOS touch-scrolls behind the overlay
+         even with html{overflow:hidden}, and re-adding .scrolled would
+         make the header transparent so the page shows through it */
+      if (body.classList.contains("nav-open")) return;
       head.classList.toggle("scrolled", window.scrollY > threshold);
     };
     syncHead();
