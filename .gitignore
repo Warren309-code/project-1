@@ -1,7 +1,10 @@
 # local reference material, keep out of the public repo
 *.pdf
 CareerFoundry*
+*CareerFoundry*
 Affinity Institute - Ireland*
+# Parents form responses contain real people's names + personal answers (PII)
+Affinity Institute Parents Form*
 screenshots/
 
 # OS noise

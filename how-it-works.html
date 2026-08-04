@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How it works · Affinity Institute</title>
-  <meta name="description" content="How the Affinity Institute curriculum works: 90-day bootcamp, a 12-month curriculum, six commercial disciplines and a route to placement.">
+  <meta name="description" content="How the Affinity Institute curriculum works: a 12-stage training journey with modules, live calls, tutor support, AI roleplay, assessments and credits building toward graduation and Placement Clearance.">
   <link rel="icon" type="image/webp" href="assets/brand-mark.webp">
   <link rel="apple-touch-icon" href="assets/brand-mark.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&amp;display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -21,6 +21,7 @@
       <a class="brand" href="index.html" aria-label="Affinity Institute home">
         <img src="assets/brand-mark.webp" alt="Affinity Institute">
       </a>
+
       <nav class="menu" aria-label="Primary">
         <div class="menu-item">
           <button class="menu-btn" data-drop type="button">Courses
@@ -30,7 +31,8 @@
             <a href="programmes.html#sales"><strong>Digital Sales Programme</strong><span>The core pathway. Remote sales, coached to a professional standard.</span></a>
             <a href="programmes.html#women"><strong>Affinity for Women</strong><span>Flexible digital careers with a community behind you.</span></a>
             <a href="programmes.html#graduate"><strong>Graduate Accelerator</strong><span>The bridge between education and the work you actually want.</span></a>
-            <a href="programmes.html#reset"><strong>Career Reset</strong><span>For people ready to rebuild direction and earning power.</span></a>
+            <a href="programmes.html#tech-sales"><strong>Digital Tech Sales Programme</strong><span>Enterprise &amp; B2B sales, coached to a professional standard.</span></a>
+            <a href="programmes.html#ai"><strong>AI Programme</strong><span>Practical AI literacy for the work that comes next.</span></a>
           </div>
         </div>
         <div class="menu-item">
@@ -38,7 +40,7 @@
             <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
           <div class="drop cols">
-            <a href="how-it-works.html"><strong>How the curriculum works</strong><span>Bootcamp, twelve months of depth, and market readiness.</span></a>
+            <a href="how-it-works.html"><strong>How the curriculum works</strong><span>A 12-stage journey from first login to graduation.</span></a>
             <a href="index.html#community"><strong>Community &amp; events</strong><span>Trips, dinners, roadshows. The room around the work.</span></a>
             <a href="#placement"><strong>The placement pathway</strong><span>How students move from practice into real roles.</span></a>
           </div>
@@ -54,6 +56,7 @@
         </div>
         <div class="menu-cta"><a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a></div>
       </nav>
+
       <div class="nav-cta">
         <a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a>
         <button class="mob-toggle" data-mob-toggle type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
@@ -67,77 +70,495 @@
       <div class="wrap page-hero-grid">
         <div class="rv">
           <p class="label">How it works</p>
-          <h1 class="d-xl">A route, not just <em>a course</em></h1>
-          <p class="lede">Affinity is a structured development environment. You build foundations fast, deepen them over a year, and stay inside a rhythm of live coaching and accountability until readiness stops being a question.</p>
+          <h1 class="d-xl">How the Affinity <em>curriculum works</em></h1>
+          <p class="lede">Students do not just get access to resources. They move through a 12-stage training journey with modules, live cohort calls, personal tutor support, student support, AI roleplay, practical assessments and credits that build toward graduation and Placement Clearance.</p>
         </div>
         <img class="rv" data-rv-delay="140" src="assets/photos/joshua.webp" alt="An Affinity mentor on stage at a live coaching session">
       </div>
     </section>
 
-    <section class="sect trust">
+    <!-- ============== 12-stage roadmap (switchable Sales / AI) ============== -->
+    <section class="sect trust roadmap-sect">
+      <div class="wrap">
+        <div class="sect-head split">
+          <div class="rv">
+            <p class="label">The journey</p>
+            <h2 class="d-lg">From first login to <em>graduation</em></h2>
+            <p class="lede">Each stage has a clear learning focus, a live support rhythm and a practical checkpoint. Students progress by proving competence, not by passively watching content.</p>
+          </div>
+          <div class="roadmap-head-tools rv">
+            <div class="prog-switch" role="tablist" aria-label="Programme timeline">
+              <button class="prog-tab active" role="tab" id="pt-sales" aria-selected="true" data-prog="sales" type="button">Sales Programme</button>
+              <button class="prog-tab" role="tab" id="pt-ai" aria-selected="false" data-prog="ai" type="button">AI Programme</button>
+              <span class="prog-switch-thumb" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Sales Programme roadmap (default) ===== -->
+        <div class="roadmap active" data-prog-panel="sales" role="tabpanel" aria-labelledby="pt-sales">
+          <div class="vt-grid">
+
+            <ol class="vt-rail">
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2 4 2 4H6"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 01</span>
+                  <h3>Orientation, standards &amp; setup</h3>
+                  <p>Access the campus, join the right channels, meet the expectations and understand how credits, calls and assessments work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5.5 20c1-3.6 3.6-5.5 6.5-5.5s5.5 1.9 6.5 5.5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 02</span>
+                  <h3>Professional identity &amp; mindset</h3>
+                  <p>Build the behaviour, routine, confidence and coachability needed before the technical training gets heavier.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4z"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 03</span>
+                  <h3>Remote sales foundations</h3>
+                  <p>Understand sales roles, digital work, offer types, buyer journeys and the standards expected in remote commercial teams.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-6.5-4.2-6.5-9A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 6.5 3c0 4.8-6.5 9-6.5 9z"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 04</span>
+                  <h3>Buyer psychology &amp; ethical sales</h3>
+                  <p>Learn why people buy, how trust is built and how to sell without pressure, manipulation or robotic scripts.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-3.5-3.5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 05</span>
+                  <h3>Discovery foundations</h3>
+                  <p>Practise clean questioning, listening, tonality and qualification so students can diagnose before they pitch.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 12.5l2 2 4-4"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 06</span>
+                  <h3>Discovery assessment</h3>
+                  <p>Submit discovery practice, receive tutor feedback and pass the first meaningful practical checkpoint.</p>
+                </div>
+              </li>
+            <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10v4h4l9 5V5L7 10H3z"/><path d="M17 8c1 1 1 7 0 8"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 07</span>
+                  <h3>Pitch, offer &amp; closing</h3>
+                  <p>Learn how to transition, explain value, structure the offer and guide a conversation to a professional next step.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 08</span>
+                  <h3>Objections &amp; frame control</h3>
+                  <p>Handle resistance calmly, identify the real concern and respond with structure instead of pressure.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 09</span>
+                  <h3>Mock-call practicum &amp; AI roleplay</h3>
+                  <p>Use mock calls, AI/Krios simulations and call reviews to build confidence before speaking to real buyers.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M8 10l2 2 4-4"/><path d="M8 16l2 2 4-4"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 10</span>
+                  <h3>Sales readiness checkpoint</h3>
+                  <p>Review modules, mocks, AI roleplay, submissions and tutor notes before moving into career-readiness work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 11</span>
+                  <h3>CV, Loom &amp; interview readiness</h3>
+                  <p>Build the assets needed for the market: CV/profile, Loom or intro video, application habits and interview practice.</p>
+                </div>
+              </li>
+              <li class="vt-stage vt-stage--end">
+                <span class="vt-node vt-node--end" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 12</span>
+                  <h3>Final assessment &amp; graduation</h3>
+                  <p>Complete the final assessment, receive a graduate decision and move into the placement plan if cleared.</p>
+                </div>
+              </li>
+            </ol>
+
+          </div>
+        </div>
+
+        <!-- ===== AI Programme roadmap ===== -->
+        <div class="roadmap" data-prog-panel="ai" role="tabpanel" aria-labelledby="pt-ai" hidden>
+          <div class="vt-grid">
+
+            <ol class="vt-rail">
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2 4 2 4H6"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 01</span>
+                  <h3>Orientation, standards &amp; setup</h3>
+                  <p>Access the campus, join the right channels, meet the expectations and understand how credits, calls and assessments work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.2"/><path d="M5.5 20c1-3.6 3.6-5.5 6.5-5.5s5.5 1.9 6.5 5.5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 02</span>
+                  <h3>Professional identity &amp; mindset</h3>
+                  <p>Build the behaviour, routine, curiosity and coachability needed before the technical training gets heavier.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 03</span>
+                  <h3>AI foundations &amp; literacy</h3>
+                  <p>Understand what AI is, how models learn, where they fail and the landscape of tools shaping modern work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 04</span>
+                  <h3>Prompting &amp; instruction design</h3>
+                  <p>Learn to write clear, structured prompts, control outputs and iterate toward reliable, useful results.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13"/><path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 05</span>
+                  <h3>Working with data</h3>
+                  <p>Practise structuring, cleaning and feeding data to models so outputs are grounded instead of guessed.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 12.5l2 2 4-4"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 06</span>
+                  <h3>Prompting assessment</h3>
+                  <p>Submit prompt-work, receive tutor feedback and pass the first meaningful practical checkpoint.</p>
+                </div>
+              </li>
+            <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2 2M17.5 17.5l2 2M19.5 4.5l-2 2M6.5 17.5l-2 2"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 07</span>
+                  <h3>Automation &amp; workflows</h3>
+                  <p>Learn how to chain models, tools and APIs to automate real tasks and remove repetitive work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 08</span>
+                  <h3>AI ethics, risk &amp; governance</h3>
+                  <p>Handle hallucinations, bias, privacy and the standards expected when deploying AI in a real business.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M10 9l5 3-5 3z"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 09</span>
+                  <h3>AI roleplay &amp; simulation practicum</h3>
+                  <p>Use AI/Krios simulations and project reviews to build confidence before applying AI on real work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M8 10l2 2 4-4"/><path d="M8 16l2 2 4-4"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 10</span>
+                  <h3>AI readiness checkpoint</h3>
+                  <p>Review modules, projects, AI roleplay, submissions and tutor notes before moving into career-readiness work.</p>
+                </div>
+              </li>
+              <li class="vt-stage">
+                <span class="vt-node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 11</span>
+                  <h3>CV, Loom &amp; interview readiness</h3>
+                  <p>Build the assets needed for the market: CV/profile, Loom or intro video, application habits and interview practice.</p>
+                </div>
+              </li>
+              <li class="vt-stage vt-stage--end">
+                <span class="vt-node vt-node--end" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>
+                <div class="vt-card">
+                  <span class="stage-num">Stage 12</span>
+                  <h3>Final assessment &amp; graduation</h3>
+                  <p>Complete the final assessment, receive a graduate decision and move into the placement plan if cleared.</p>
+                </div>
+              </li>
+            </ol>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============== Learning support ============== -->
+    <section class="sect support-sect">
       <div class="wrap">
         <div class="sect-head rv">
-          <p class="label">The journey</p>
-          <h2 class="d-lg">Three stages, <em>one standard</em></h2>
+          <p class="label">The support layer</p>
+          <h2 class="d-lg">What sits around <em>every stage</em></h2>
+          <p class="lede">Affinity is a supported training environment, not a folder of videos you learn from. Every stage is wrapped in live coaching, tutor oversight and the structure that keeps students moving.</p>
         </div>
-        <div class="steps" data-stagger>
-          <article class="step">
-            <h3>90-day bootcamp</h3>
-            <p>Intensive preparation before you enter the market. Confidence, communication and sales fundamentals, practised until they hold under pressure.</p>
+        <div class="support-grid" data-stagger>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+            </div>
+            <h3>Modules &amp; resources</h3>
+            <p>Students complete structured campus lessons, homework and resource work before each checkpoint.</p>
           </article>
-          <article class="step">
-            <h3>12-month curriculum</h3>
-            <p>The longer runway. A rigorous sales development curriculum built for lasting commercial capability, not a quick certificate.</p>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>
+            </div>
+            <h3>Weekly live calls</h3>
+            <p>Each cohort has a live training rhythm for teaching, Q&amp;A, call breakdowns, roleplay and accountability.</p>
           </article>
-          <article class="step" id="placement">
-            <h3>Operational readiness</h3>
-            <p>Trained, prepared and market-ready before placement, so employers absorb less foundation work and you arrive already moving.</p>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.8-3.2 3-4.8 6-4.8s5.2 1.6 6 4.8"/><path d="M16 8l2 2 4-4"/></svg>
+            </div>
+            <h3>Personal tutor / coach</h3>
+            <p>A named coach guides progress, reviews blockers, gives feedback and decides whether standards are being met.</p>
+          </article>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2.8"/><path d="M2.5 19c.7-3 3-4.5 5.5-4.5s4.8 1.5 5.5 4.5"/><circle cx="16" cy="9" r="2.3"/><path d="M14 19c.5-2.4 2.3-4 4.3-4"/></svg>
+            </div>
+            <h3>Student support team</h3>
+            <p>Students have support around access, attendance, deadlines, submissions and staying on track through the pathway.</p>
+          </article>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+            </div>
+            <h3>AI training &amp; roleplay</h3>
+            <p>AI/Krios practice gives students safe repetitions, realistic scenarios and feedback before real calls or interviews.</p>
+          </article>
+
+          <article class="support">
+            <div class="support-ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M9 12.5L7 21l5-3 5 3-2-8.5"/></svg>
+            </div>
+            <h3>Assessments &amp; credits</h3>
+            <p>Credits build as students pass stage requirements, submit evidence and clear coach-reviewed practical gates.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== Credit system ============== -->
+    <section class="sect band-dark on-dark credit-sect">
+      <div class="wrap">
+        <div class="sect-head split">
+          <div class="rv">
+            <p class="label">The credit system</p>
+            <h2 class="d-lg">Progress should feel <em>measurable</em>.</h2>
+            <p class="lede">Each stage contributes toward graduation credits. Credits are not just for watching lessons: they come from completed modules, practical assessments, AI/Krios roleplay, mock-call submissions, CV/interview assets and coach-approved readiness gates.</p>
+          </div>
+          <img class="cred-head-img rv" src="assets/7.jpg" alt="A graduate flanked by the founders at graduation" loading="lazy">
+        </div>
+
+        <div class="cred-grid rv">
+          <article class="cred-item">
+            <b>01</b>
+            <h3>Campus work</h3>
+            <p>prepares students for the checkpoint.</p>
+          </article>
+          <article class="cred-item">
+            <b>02</b>
+            <h3>Assessments</h3>
+            <p>prove they can apply the skill.</p>
+          </article>
+          <article class="cred-item">
+            <b>03</b>
+            <h3>Coach clearance</h3>
+            <p>protects the graduation standard.</p>
+          </article>
+          <article class="cred-item">
+            <b>04</b>
+            <h3>Credits</h3>
+            <p>show how close they are to graduation &amp; placement readiness.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="sect band-dark on-dark">
+    <!-- ============== Capability focus ============== -->
+    <section class="sect trust capability-sect">
       <div class="wrap">
         <div class="sect-head split">
           <div class="rv">
             <p class="label">Capability focus</p>
             <h2 class="d-lg">Six disciplines that make you <em>worth hiring</em></h2>
           </div>
-          <p class="lede rv">The curriculum develops the exact commercial behaviours companies need from the people they trust with revenue.</p>
+          <p class="lede rv">This should read as curriculum, not a motivational list. These are the employable behaviours students train, practise and evidence.</p>
         </div>
 
         <div class="disc-rows">
           <div class="disc rv">
             <span class="disc-num">No. 01</span>
-            <h3>Sales communication</h3>
-            <p>Speak clearly, listen properly and guide a conversation without ever sounding scripted.</p>
+            <h3>Commercial communication</h3>
+            <p>Clear speech, active listening, tonality, follow-up and the ability to guide a professional conversation without sounding scripted.</p>
           </div>
           <div class="disc rv">
             <span class="disc-num">No. 02</span>
             <h3>Discovery &amp; qualification</h3>
-            <p>Learn whether there's a real fit before you try to move anyone anywhere.</p>
+            <p>Asking better questions, identifying fit, understanding pain, budget, urgency and decision-making before trying to pitch.</p>
           </div>
           <div class="disc rv">
             <span class="disc-num">No. 03</span>
-            <h3>Objection handling</h3>
-            <p>Stay calm when resistance shows up, and answer with structure instead of pressure.</p>
+            <h3>Buyer psychology</h3>
+            <p>Understanding trust, emotion, resistance, motivation and the reasons people move from interest to decision.</p>
           </div>
           <div class="disc rv">
             <span class="disc-num">No. 04</span>
-            <h3>Closing frameworks</h3>
-            <p>Guide strong conversations to a clear next step without forcing a thing.</p>
+            <h3>Pitching, closing &amp; next steps</h3>
+            <p>Explaining value, structuring the offer, recognising buying questions and agreeing the right next action professionally.</p>
           </div>
           <div class="disc rv">
             <span class="disc-num">No. 05</span>
-            <h3>Professional development</h3>
-            <p>Reliability, presence, communication and daily output. The quiet standards that compound.</p>
+            <h3>Objection handling &amp; frame control</h3>
+            <p>Staying calm under pressure, separating real concerns from surface objections and responding without becoming pushy.</p>
           </div>
           <div class="disc rv">
             <span class="disc-num">No. 06</span>
-            <h3>Accountability</h3>
-            <p>Track progress, take feedback and keep moving on the days motivation doesn't show up.</p>
+            <h3>Professional standards &amp; accountability</h3>
+            <p>Attendance, preparation, deadlines, coachability, daily output and the ability to be trusted by a company without constant supervision.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== Placement pathway ============== -->
+    <section class="sect band-dark on-dark placement-sect" id="placement">
+      <div class="wrap">
+        <div class="sect-head split">
+          <div class="rv">
+            <p class="label">Placement pathway</p>
+            <h2 class="d-lg">What happens <em>after graduation</em></h2>
+          </div>
+          <p class="lede rv">Graduation should lead into a clear market-readiness pathway, not a dead end.</p>
+        </div>
+
+        <div class="place-grid" data-stagger>
+          <article class="place-card rv">
+            <div class="place-media">
+              <svg class="place-art" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A clean CV profile document">
+                <rect width="400" height="300" fill="#f2e8d9"/>
+                <circle cx="312" cy="74" r="92" fill="#ede2d2"/>
+                <rect x="116" y="48" width="168" height="204" rx="12" fill="#fdf9f3" stroke="#22322a" stroke-width="2"/>
+                <circle cx="156" cy="96" r="22" fill="none" stroke="#d96d2b" stroke-width="2.6"/>
+                <circle cx="156" cy="88" r="7.5" fill="none" stroke="#d96d2b" stroke-width="2.6"/>
+                <path d="M139 110a17 17 0 0 1 34 0" fill="none" stroke="#d96d2b" stroke-width="2.6" stroke-linecap="round"/>
+                <rect x="190" y="80" width="68" height="7" rx="3.5" fill="#22322a"/>
+                <rect x="190" y="94" width="46" height="7" rx="3.5" fill="#7d8f78"/>
+                <line x1="138" y1="134" x2="262" y2="134" stroke="#e5d8c5" stroke-width="2"/>
+                <rect x="138" y="150" width="104" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="138" y="168" width="84" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="138" y="186" width="118" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="138" y="204" width="72" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="138" y="222" width="94" height="7" rx="3.5" fill="#5e6448"/>
+              </svg>
+            </div>
+            <div class="place-body">
+              <h3>CV &amp; profile build</h3>
+              <p>Students package their training, strengths, experience and readiness into a clean CV/profile.</p>
+            </div>
+          </article>
+          <article class="place-card rv">
+            <div class="place-media">
+              <svg class="place-art" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A recorded video with a play button and camera">
+                <rect width="400" height="300" fill="#f2e8d9"/>
+                <circle cx="316" cy="78" r="88" fill="#ede2d2"/>
+                <rect x="86" y="74" width="184" height="124" rx="12" fill="#fdf9f3" stroke="#22322a" stroke-width="2"/>
+                <circle cx="178" cy="136" r="28" fill="#d96d2b"/>
+                <path d="M170 122l22 14l-22 14z" fill="#fdf9f3"/>
+                <rect x="168" y="198" width="20" height="14" fill="#22322a"/>
+                <line x1="138" y1="212" x2="218" y2="212" stroke="#22322a" stroke-width="3" stroke-linecap="round"/>
+                <rect x="288" y="118" width="48" height="38" rx="8" fill="#fdf9f3" stroke="#22322a" stroke-width="2"/>
+                <circle cx="312" cy="137" r="10" fill="none" stroke="#7d8f78" stroke-width="2.4"/>
+                <circle cx="312" cy="137" r="4" fill="#d96d2b"/>
+                <rect x="298" y="164" width="28" height="6" rx="3" fill="#5e6448"/>
+              </svg>
+            </div>
+            <div class="place-body">
+              <h3>Loom &amp; interview training</h3>
+              <p>Students practise presenting themselves, answering questions and explaining why they are ready.</p>
+            </div>
+          </article>
+          <article class="place-card rv">
+            <div class="place-media">
+              <svg class="place-art" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A checklist confirming readiness">
+                <rect width="400" height="300" fill="#f2e8d9"/>
+                <circle cx="306" cy="220" r="92" fill="#ede2d2"/>
+                <rect x="128" y="58" width="144" height="184" rx="12" fill="#fdf9f3" stroke="#22322a" stroke-width="2"/>
+                <rect x="172" y="48" width="56" height="20" rx="6" fill="#22322a"/>
+                <line x1="148" y1="100" x2="252" y2="100" stroke="#e5d8c5" stroke-width="2"/>
+                <rect x="148" y="116" width="16" height="16" rx="4" fill="none" stroke="#22322a" stroke-width="2"/>
+                <path d="M152 124l4 4l7-9" fill="none" stroke="#d96d2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="174" y="120" width="62" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="148" y="146" width="16" height="16" rx="4" fill="none" stroke="#22322a" stroke-width="2"/>
+                <path d="M152 154l4 4l7-9" fill="none" stroke="#d96d2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="174" y="150" width="50" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="148" y="176" width="16" height="16" rx="4" fill="none" stroke="#22322a" stroke-width="2"/>
+                <path d="M152 184l4 4l7-9" fill="none" stroke="#d96d2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="174" y="180" width="66" height="7" rx="3.5" fill="#5e6448"/>
+                <rect x="148" y="206" width="16" height="16" rx="4" fill="none" stroke="#22322a" stroke-width="2"/>
+                <path d="M152 214l4 4l7-9" fill="none" stroke="#d96d2b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="174" y="210" width="44" height="7" rx="3.5" fill="#5e6448"/>
+              </svg>
+            </div>
+            <div class="place-body">
+              <h3>Placement readiness review</h3>
+              <p>Coach and support teams check the graduate has met the standard before introductions happen.</p>
+            </div>
+          </article>
+          <article class="place-card rv">
+            <div class="place-media">
+              <svg class="place-art" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A graduate supported into a new role">
+                <rect width="400" height="300" fill="#f2e8d9"/>
+                <circle cx="312" cy="78" r="92" fill="#ede2d2"/>
+                <circle cx="116" cy="150" r="13" fill="#22322a"/>
+                <path d="M92 188a24 24 0 0 1 48 0z" fill="#22322a"/>
+                <path d="M150 158 C 180 110, 210 132, 248 160" fill="none" stroke="#d96d2b" stroke-width="3" stroke-linecap="round"/>
+                <path d="M248 154l12 6l-12 6z" fill="#d96d2b"/>
+                <path d="M262 150V140Q262 128 292 128Q322 128 322 140V150" fill="none" stroke="#22322a" stroke-width="2" stroke-linejoin="round"/>
+                <rect x="232" y="150" width="120" height="84" rx="10" fill="#fdf9f3" stroke="#22322a" stroke-width="2"/>
+                <line x1="232" y1="178" x2="352" y2="178" stroke="#22322a" stroke-width="1.6" opacity="0.25"/>
+                <rect x="286" y="173" width="12" height="10" rx="2" fill="#d96d2b"/>
+              </svg>
+            </div>
+            <div class="place-body">
+              <h3>Recruitment support</h3>
+              <p>Cleared graduates get help applying, tracking opportunities, preparing for interviews and moving toward real roles.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -170,7 +591,8 @@
           <a href="programmes.html#sales">Digital Sales Programme</a>
           <a href="programmes.html#women">Affinity for Women</a>
           <a href="programmes.html#graduate">Graduate Accelerator</a>
-          <a href="programmes.html#reset">Career Reset</a>
+          <a href="programmes.html#tech-sales">Digital Tech Sales Programme</a>
+          <a href="programmes.html#ai">AI Programme</a>
         </div>
         <div class="foot-col">
           <h4>Learn with us</h4>
@@ -188,7 +610,7 @@
     </div>
     <div class="foot-word" aria-hidden="true"><span>Affinity Institute</span></div>
     <div class="wrap foot-legal">
-      <span>&copy; 2026 Affinity Institute. All rights reserved.</span>
+      <span>&amp;copy; 2026 Affinity Institute. All rights reserved.</span>
       <a class="foot-credit" href="https://kelvodesign.com" target="_blank" rel="noopener" aria-label="Web design by Kelvo Design">
         <img src="assets/kelvodesign-logo.png" alt="Kelvo Design" height="30">
       </a>

@@ -1656,3 +1656,587 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 /* keep long words/URLs from blowing out the column on small screens */
 blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; word-break: break-word; }
+
+/* ----------------------------------------------------------- new components
+   Added for the programmes + how-it-works rebuild:
+   - small / ghost buttons (course-card CTAs)
+   - wide (feature) course card + 4-up coming-next grid
+   - 12-stage horizontal zigzag roadmap with a Sales/AI switcher
+   - learning-support grid, credit / placement flow
+   -------------------------------------------------------------- */
+
+/* small + ghost button variants for in-card secondary CTAs */
+.btn.sm { padding: 10px 20px; font-size: 13.5px; }
+
+.btn.ghost {
+  background: transparent;
+  color: var(--forest);
+  border: 1px solid var(--forest);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease, color 0.3s ease,
+              box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.btn.ghost:hover {
+  background: var(--forest);
+  color: var(--paper);
+  border-color: var(--forest);
+  box-shadow: 0 14px 30px -14px rgba(26, 39, 33, 0.45);
+}
+
+/* a card that holds a CTA needs breathing room above the button */
+.panel .btn { margin-top: 26px; }
+
+/* cards without a pill: the heading sits flush at the top */
+.panel > h3:first-child { margin-top: 0; }
+
+/* 4-up grid for the "coming next" pathways */
+.cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+
+/* wide feature course card (AI programme) — spans both columns of .cards-2 */
+.panel.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.panel.wide .wide-main h3 { margin-top: 0; }
+.panel.wide .wide-main .btn { margin-top: 22px; }
+.panel.wide .wide-body p { margin: 0 0 8px; }
+
+/* ------------------------------------------------ 12-stage roadmap */
+
+.roadmap-head-tools {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* programme switcher — a sliding-pill toggle */
+.prog-switch {
+  position: relative;
+  display: inline-flex;
+  padding: 5px;
+  background: var(--paper);
+  border: 1px solid var(--cream-line);
+  border-radius: 100px;
+}
+.prog-tab {
+  position: relative;
+  z-index: 1;
+  padding: 10px 22px;
+  border: 0;
+  background: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.35s ease;
+}
+.prog-tab.active { color: #fff; }
+.prog-switch-thumb {
+  position: absolute;
+  z-index: 0;
+  top: 5px;
+  left: 0;
+  height: calc(100% - 10px);
+  border-radius: 100px;
+  background: var(--forest);
+  /* default sits under the first tab; JS measures + refines on load/resize */
+  width: 144px;
+  transform: translateX(5px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* panels — only the active one is shown; entrance animates on activate */
+.roadmap { display: none; }
+.roadmap.active { display: block; animation: rm-in 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+.roadmap.rm-leave { animation: rm-out 0.26s ease forwards; }
+
+@keyframes rm-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes rm-out { to { opacity: 0; transform: translateY(-10px); } }
+
+/* 12 stages as an alternating vertical timeline — a centre spine down
+   each column with nodes; cards alternate left/right of the spine and
+   step down a row, so stage 2 sits a little lower than stage 1 (its own
+   row, on the opposite side) — a proper staggered timeline. Tighter
+   within-pair spacing groups them as (1,2) / (3,4) / (5,6). Stage 12
+   spans full width as the graduation finale. Small screens collapse to
+   a single left-spine column. */
+.vt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.vt-rail {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+/* the spine — centred down the single column */
+.vt-rail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--cream-line);
+}
+
+.vt-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  margin-top: 22px;
+}
+.vt-stage:first-child { margin-top: 0; }
+
+/* odd stages land left of the spine, even stages right of it */
+.vt-stage:nth-child(odd) .vt-card { grid-column: 1; margin-right: 44px; text-align: right; }
+.vt-stage:nth-child(even) .vt-card { grid-column: 2; margin-left: 44px; }
+
+/* node centred on the spine */
+.vt-node {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: 46px;
+  height: 46px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--paper-warm);
+  border: 2px solid var(--cream-line);
+  box-shadow: 0 0 0 6px var(--paper-warm);
+  color: var(--forest);
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.vt-node svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.vt-stage:hover .vt-node { border-color: var(--orange); color: var(--orange); }
+
+/* the graduation node is filled orange as the destination */
+.vt-node--end { background: var(--orange); border-color: var(--orange); color: #fff; box-shadow: 0 0 0 6px var(--paper-warm), 0 8px 20px -8px rgba(217, 109, 43, 0.6); }
+
+.vt-card {
+  background: var(--paper);
+  border: 1px solid var(--cream-line-soft);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.vt-stage:hover .vt-card { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+
+.stage-num {
+  display: block;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.vt-card h3 {
+  margin: 6px 0 8px;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.vt-card p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+
+/* ------------------------------------------------ learning support */
+
+.support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+.support {
+  padding: 30px 28px;
+  background: var(--paper);
+  border: 1px solid var(--cream-line-soft);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.support:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+
+.support-ic {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(217, 109, 43, 0.1);
+  color: var(--orange);
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+.support-ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.support h3 { margin: 0 0 8px; font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.support p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* ----------------------------------------- credit system
+   Simple, clean: four green statement cards on the dark band, each
+   pairing a numbered marker with a short statement of how credits
+   work. A small image sits beside the section header. Distinct from
+   the journey (vertical timeline) and placement (photo cards). */
+.credit-sect .sect-head { gap: clamp(32px, 4vw, 56px); }
+.credit-sect .sect-head .cred-head-img {
+  flex: 0 0 auto;
+  width: clamp(280px, 32vw, 420px);
+  aspect-ratio: 4 / 3.2;
+  object-fit: cover;
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lift);
+}
+
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.cred-item {
+  background: var(--forest);
+  border: 1px solid rgba(125, 143, 120, 0.3);
+  color: var(--paper);
+  border-radius: var(--r);
+  padding: 26px 24px 24px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.cred-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); border-color: rgba(195, 211, 144, 0.6); }
+.cred-item b {
+  display: block;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--orange-soft);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.cred-item h3 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+.cred-item p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--muted-on-dark); }
+
+/* ------------------------------------------- placement image cards
+   Four photo cards in a row, each with a step badge over the image
+   and copy below — a tangible "pathway" read, distinct from the
+   credit pipeline's abstract progress bar. */
+
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.place-card {
+  background: var(--paper-warm);
+  border: 1px solid rgba(250, 244, 235, 0.16);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.place-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+
+.place-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.place-media img,
+.place-media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.place-card:hover .place-media img,
+.place-card:hover .place-media svg { transform: scale(1.05); }
+
+.place-body { padding: 22px 22px 26px; }
+.place-body h3 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.place-body p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* -------------------------------------------------- parents testimonials
+   "Letters from home." Each response is an editorial note on warm paper:
+   a decorative quote glyph, the parent's avatar and name with their star
+   rating, the single observation that mattered most set as an italic pull
+   quote, then the rest as a clean labelled footer. Phones get a single
+   column; tablets/touch get a 2-up grid; fine-pointer wide screens get
+   the fanned card deck (see the deck block below). */
+.parents-sect { background: var(--paper-warm); }
+
+/* shared star row — same orange star used across the site */
+.parent-stars { display: inline-flex; gap: 3px; color: var(--orange); }
+.parent-stars svg { width: 13px; height: 13px; fill: currentColor; }
+
+/* base: a calm vertical column, centred */
+.pr-stack {
+  display: grid;
+  gap: 20px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.pr-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--cream-line-soft);
+  border-radius: 18px;
+  padding: 30px 30px 28px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s ease;
+}
+.pr-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+
+/* decorative opening quote, parked top-right and faded out. z-index:0
+   pins it behind the head/pull content (lifted to z-index:1 below) */
+.pr-mark {
+  position: absolute;
+  top: -22px;
+  right: 22px;
+  z-index: 0;
+  font-family: var(--display);
+  font-size: 128px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--orange);
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* head: avatar + (name above stars) */
+.pr-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+.pr-avatar {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--cream-line);
+}
+/* initials avatar for parents without a photo — keeps the deck balanced */
+.pr-avatar--initials {
+  display: grid;
+  place-items: center;
+  background: var(--forest);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.pr-id { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pr-head h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+/* the observation that mattered most — set as the pull quote */
+.pr-pull {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--display);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.004em;
+  color: var(--ink);
+}
+
+/* footer: the remaining answers as a quiet labelled list */
+.pr-meta {
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--cream-line-soft);
+  display: grid;
+  gap: 15px;
+}
+.pr-meta > div { display: grid; gap: 5px; }
+.pr-meta dt {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.pr-meta dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ---- touch / tablet fallback: 2-up grid --------------------------------
+   The fanned deck needs a fine pointer — touch has no reliable hover, so
+   a pile those devices could never spread would just hide cards. Tablets
+   and touch laptops (and narrow desktop windows) get a plain 2-up grid
+   instead. */
+@media (min-width: 640px) {
+  .pr-stack {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    max-width: 880px;
+  }
+}
+
+/* ---- desktop: fanned card deck -----------------------------------------
+   Fine-pointer wide screens only (overrides the 2-up grid above). The
+   four cards overlap into a tidy pile via negative margins. On hover the
+   pack splits: cards before the hovered one slide left, cards after it
+   slide right, the hovered card lifts to the front. De-hover eases them
+   all back together on one cubic-bezier.
+   z-index is deliberately NOT transitioned — it snaps instantly. A
+   de-hovering card drops back to DOM-order stacking (under the card to
+   its right) the moment the cursor leaves, so it tucks into the pile
+   with the right card already on top: no delayed flip where it floats
+   above the right card for a beat then pops under. */
+@media (hover: hover) and (pointer: fine) and (min-width: 960px) {
+  .pr-stack {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    max-width: none;
+    margin: 0;
+    height: clamp(420px, 46vw, 480px);
+    --spread: 150px;
+    --overlap: 150px;
+  }
+
+  .pr-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(300px, 26vw, 380px);
+    height: 100%;
+    margin-left: calc(-1 * var(--overlap));
+    /* Each card is its own stacking context. Without this, the .pr-head /
+       .pr-pull (position:relative; z-index:1, there to sit above the quote
+       glyph) would paint above auto-positioned siblings — so a card's text
+       would leak on top of the card to its right. isolate keeps a card's
+       whole context behind the next card's context, so the next card's
+       background cleanly covers it. z-index:100 on :hover still lifts the
+       hovered card to the front. */
+    isolation: isolate;
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* first card starts the row, no pull-back */
+  .pr-card:first-child { margin-left: 0; }
+
+  /* hovered card: lift and come straight to the front (z snaps, no delay) */
+  .pr-card:hover {
+    transform: translateY(-18px);
+    z-index: 100;
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* cards before the hovered one slide left → opens a gap on its left */
+  .pr-card:has(~ .pr-card:hover) {
+    transform: translateX(calc(-1 * var(--spread)));
+  }
+  /* cards after the hovered one slide right → opens a gap on its right */
+  .pr-card:hover ~ .pr-card {
+    transform: translateX(var(--spread));
+  }
+}
+
+/* ----------------------------------------------- new components responsive */
+
+@media (max-width: 960px) {
+  .cards-4 { grid-template-columns: 1fr 1fr; }
+  .support-grid { grid-template-columns: 1fr 1fr; }
+  .panel.wide { grid-template-columns: 1fr; gap: 24px; }
+
+  /* journey cards tighten on smaller screens */
+  .vt-card { padding: 16px 18px; }
+  .vt-card h3 { font-size: 17px; }
+  .vt-card p { font-size: 13.5px; }
+  .stage-num { font-size: 12.5px; }
+  .vt-node { width: 40px; height: 40px; top: 14px; }
+  .vt-node svg { width: 19px; height: 19px; }
+  .vt-stage { margin-top: 18px; }
+  .vt-stage:nth-child(odd) .vt-card { margin-right: 32px; }
+  .vt-stage:nth-child(even) .vt-card { margin-left: 32px; }
+
+  /* placement + credit cards drop to 2×2 */
+  .place-grid { grid-template-columns: 1fr 1fr; }
+  .cred-grid { grid-template-columns: 1fr 1fr; }
+
+  /* credit section header stacks so the larger image doesn't squeeze the copy */
+  .credit-sect .sect-head { flex-direction: column; align-items: flex-start; }
+  .credit-sect .sect-head .cred-head-img { width: clamp(240px, 40vw, 360px); }
+}
+
+@media (max-width: 640px) {
+  .cards-4 { grid-template-columns: 1fr; }
+  .support-grid { grid-template-columns: 1fr; }
+
+  /* journey: collapse the centered alternating spine to a single left-spine column */
+  .vt-rail::before { left: 20px; transform: none; }
+  .vt-stage {
+    grid-template-columns: 1fr;
+    padding-left: 52px;
+    margin-top: 16px;
+  }
+  .vt-stage:nth-child(odd) .vt-card,
+  .vt-stage:nth-child(even) .vt-card { grid-column: 1; margin: 0; text-align: left; }
+  .vt-node { left: 20px; top: 16px; width: 38px; height: 38px; }
+  .vt-node svg { width: 18px; height: 18px; }
+  .vt-card { padding: 14px 16px; }
+  .vt-card h3 { font-size: 16px; }
+  .vt-card p { font-size: 13px; line-height: 1.5; }
+
+  .prog-tab { padding: 9px 16px; font-size: 13px; }
+  .roadmap-head-tools { gap: 12px; }
+
+  .place-grid { grid-template-columns: 1fr; }
+  .cred-grid { grid-template-columns: 1fr; }
+}

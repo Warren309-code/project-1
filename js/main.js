@@ -165,4 +165,65 @@
      orchestrated entrance (handled above). Everything else simply
      appears — no scroll parallax, no side-entrance transforms. The
      .rv class is a no-op outside .hero by design (see main.css). */
+
+  /* ============ 12-stage roadmap: programme switcher + arrows ============ */
+
+  /* slide the forest thumb under the active tab. Measured rather than
+     hard-coded so it stays glued to the label at any font/zoom size.
+     animate=false snaps instantly (load/resize); a tab click animates. */
+  function moveThumb(sw, tab, animate) {
+    var thumb = sw.querySelector(".prog-switch-thumb");
+    if (!thumb || !tab) return;
+    if (!animate) {
+      thumb.style.transition = "none";
+    }
+    thumb.style.width = tab.offsetWidth + "px";
+    thumb.style.transform = "translateX(" + tab.offsetLeft + "px)";
+    if (!animate) {
+      /* re-enable the transition on the next frame */
+      void thumb.offsetWidth;
+      thumb.style.transition = "";
+    }
+  }
+
+  document.querySelectorAll(".prog-switch").forEach(function (sw) {
+    var tabs = sw.querySelectorAll(".prog-tab");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        if (tab.classList.contains("active")) return;
+        var prog = tab.getAttribute("data-prog");
+
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle("active", on);
+          t.setAttribute("aria-selected", String(on));
+        });
+        moveThumb(sw, tab, true);
+
+        var cur = document.querySelector(".roadmap.active");
+        var next = document.querySelector('[data-prog-panel="' + prog + '"]');
+        if (!next || next === cur) return;
+
+        /* fade the current panel out, then swap and fade the new one in —
+           sequential so the section never holds two panels at once. */
+        cur.classList.add("rm-leave");
+        setTimeout(function () {
+          cur.classList.remove("active", "rm-leave");
+          cur.hidden = true;
+          next.hidden = false;
+          /* force reflow so the .active entrance animation replays */
+          void next.offsetWidth;
+          next.classList.add("active");
+        }, 260);
+      });
+    });
+
+    /* park the thumb under the default (Sales) tab on load + resize */
+    var active = sw.querySelector(".prog-tab.active");
+    if (active) moveThumb(sw, active, false);
+    window.addEventListener("resize", function () {
+      var a = sw.querySelector(".prog-tab.active");
+      if (a) moveThumb(sw, a, false);
+    });
+  });
 })();
