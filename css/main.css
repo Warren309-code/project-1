@@ -150,7 +150,10 @@ button { font: inherit; color: inherit; }
 .site-head {
   position: sticky;
   top: 0;
-  z-index: 90;
+  /* sits above lifted content — e.g. the parents deck hovered card (z 100)
+     and the sticky detached nav pill, so a card fanned out under the
+     header never overlaps it */
+  z-index: 200;
   background: rgba(250, 244, 235, 1);
   /* flow-root establishes a BFC so the .nav's top margin (the float gap)
      is contained instead of collapsing out the top of the sticky header. */
