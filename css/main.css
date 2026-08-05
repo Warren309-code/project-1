@@ -1379,23 +1379,13 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .cards-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 
-/* courses page: three programme cards on the left, the AI Programme as a
-   tall feature card on the right (instead of a full-width row underneath). */
+/* courses page: four programme cards in a 2x2 grid */
 .courses-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.15fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
   gap: 22px;
   align-items: stretch;
 }
-.courses-grid > #sales      { grid-column: 1; grid-row: 1; }
-.courses-grid > #women      { grid-column: 2; grid-row: 1; }
-.courses-grid > #tech-sales { grid-column: 1 / span 2; grid-row: 2; }
-.courses-grid > #ai {
-  grid-column: 3; grid-row: 1 / span 2;
-  display: flex; flex-direction: column;
-}
-.courses-grid > #ai .btn { margin-top: auto; }
 
 .panel {
   padding: clamp(28px, 4vw, 44px);
@@ -1672,15 +1662,6 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .cta-inner img { max-width: 360px; }
   .apply-meta li { grid-template-columns: 116px 1fr; }
   .tf-card [data-tf-widget], .tf-card iframe { min-height: 760px; }
-
-  /* courses page: drop the tall-AI-sidebar layout to a plain 2x2 grid */
-  .courses-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .courses-grid > #sales,
-  .courses-grid > #women,
-  .courses-grid > #tech-sales,
-  .courses-grid > #ai { grid-column: auto; grid-row: auto; }
-  .courses-grid > #ai { display: block; }
-  .courses-grid > #ai .btn { margin-top: 26px; }
 }
 
 @media (max-width: 640px) {
