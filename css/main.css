@@ -3,13 +3,31 @@
    Type: Cabinet Grotesk (display/headings) + Manrope (body/UI)
    Palette: cream paper, forest ink, sage, warm orange
    ---------------------------------------------------------------
-   Fonts are preconnected and loaded via <link> in each page <head>
-   (not @import here) so they don't block first paint or reflow.
-   Cabinet Grotesk is a variable Fontshare face (ITF); Manrope is
-   variable from Google. Only four weights are used anywhere in the
-   system — 400 / 500 / 600 / 700 — so every weight resolves exactly
-   on both families. No odd tuned values.
+   Fonts are self-hosted (woff2 in /assets/fonts) and declared here
+   with font-display: block, so the correct face renders on first
+   paint — no flash of fallback, no third-party request. Cabinet
+   Grotesk is a variable Fontshare face (ITF, 100–900 in one file);
+   Manrope is variable from Google (latin subset). Only four weights
+   are used anywhere in the system — 400 / 500 / 600 / 700 — so every
+   weight resolves exactly on both families. No odd tuned values.
    --------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/cabinet-grotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/assets/fonts/manrope-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: block;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
   --paper: #faf4eb;
@@ -39,8 +57,8 @@
      Everything else uses solid orange — restraint over decoration. */
   --grad-irish: linear-gradient(110deg, var(--orange) 0%, var(--irish-green) 95%);
 
-  --display: "Cabinet Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --display: "Cabinet Grotesk", sans-serif;
+  --sans: "Manrope", sans-serif;
 
   --wrap: 1240px;
   --gutter: clamp(20px, 4.5vw, 64px);
