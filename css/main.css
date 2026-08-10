@@ -2339,15 +2339,6 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
   font-size: 17px; font-weight: 500; color: var(--gf-text);
   letter-spacing: -0.005em;
 }
-.gf-resp-meta {
-  margin-left: auto;
-  display: inline-flex; align-items: baseline; gap: 6px;
-  font-size: 13px; color: var(--gf-muted);
-}
-.gf-resp-meta b {
-  font-size: 13px; font-weight: 600; color: var(--gf-green);
-  letter-spacing: 0;
-}
 
 /* ---- individual response cards -------------------------------- */
 .gf-body {
