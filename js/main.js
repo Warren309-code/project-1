@@ -231,4 +231,13 @@
       if (a) moveThumb(sw, a, false);
     });
   });
+
+  /* deep-link a programme tab from the URL hash (e.g. how-it-works.html#ai),
+     so "Explore the programme" links land on the right roadmap instead of
+     always defaulting to Sales. Reuses the tab's click handler for the swap. */
+  var hashProg = (location.hash || "").replace(/^#/, "");
+  if (hashProg) {
+    var deepTab = document.querySelector('.prog-tab[data-prog="' + hashProg + '"]');
+    if (deepTab && !deepTab.classList.contains("active")) deepTab.click();
+  }
 })();
