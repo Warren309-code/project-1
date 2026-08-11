@@ -1877,10 +1877,15 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
 .vt-node--end { background: var(--orange); border-color: var(--orange); color: #fff; box-shadow: 0 0 0 6px var(--paper-warm), 0 8px 20px -8px rgba(217, 109, 43, 0.6); }
 
 /* the generic hover turns the icon orange, which vanishes against the orange
-   fill of the graduation node. Keep its white icon and lift it up instead.
-   Applies to :hover and the scroll-spy .is-active state alike. */
+   fill of the graduation node. Keep its white icon and make it visibly pop
+   instead — a bigger lift and a brighter orange glow ring. Applies to :hover
+   and the scroll-spy .is-active state alike. */
 .vt-stage:hover .vt-node--end,
-.vt-stage.is-active .vt-node--end { color: #fff; transform: translateX(-50%) translateY(-6px); }
+.vt-stage.is-active .vt-node--end {
+  color: #fff;
+  transform: translateX(-50%) translateY(-10px);
+  box-shadow: 0 0 0 6px var(--paper-warm), 0 0 0 2px var(--orange), 0 14px 28px -8px rgba(217, 109, 43, 0.75);
+}
 
 .vt-card {
   background: var(--paper);
