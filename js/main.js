@@ -240,4 +240,54 @@
     var deepTab = document.querySelector('.prog-tab[data-prog="' + hashProg + '"]');
     if (deepTab && !deepTab.classList.contains("active")) deepTab.click();
   }
+
+  /* ============ 12-stage roadmap: scroll-spy step highlight ============ */
+  /* As the visitor scrolls, the stage closest to the middle of the viewport
+     picks up the same .is-active orange highlight as :hover, so the timeline
+     reads 1 → 2 → 3 … 12. Inactive panels are display:none (no layout), so
+     their stages never intersect and only the visible panel is tracked.
+     When nothing intersects (e.g. scrolled away from the timeline) the last
+     active stage is kept, so the highlight doesn't blink out between steps. */
+  var stageEls = document.querySelectorAll(".vt-stage");
+  if (stageEls.length) {
+    var stageRatios = new Map();
+    var activeStage = null;
+
+    function pickActiveStage() {
+      var best = null, bestDist = Infinity;
+      var half = window.innerHeight / 2;
+      stageRatios.forEach(function (r, el) {
+        if (r <= 0) return;
+        var rect = el.getBoundingClientRect();
+        var d = Math.abs(rect.top + rect.height / 2 - half);
+        if (d < bestDist) { bestDist = d; best = el; }
+      });
+      if (best === activeStage) return;
+      /* nothing in view: keep the last active stage highlighted */
+      if (!best) return;
+      if (activeStage) activeStage.classList.remove("is-active");
+      best.classList.add("is-active");
+      activeStage = best;
+    }
+
+    var stageObs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          stageRatios.set(e.target, e.isIntersecting ? e.intersectionRatio : 0);
+        });
+        pickActiveStage();
+      },
+      { rootMargin: "-25% 0px -25% 0px", threshold: [0, 0.15, 0.3, 0.5, 0.75, 1] }
+    );
+    stageEls.forEach(function (s) { stageObs.observe(s); });
+
+    /* when the visitor switches programme tabs, drop any stale highlight so
+       the new panel's first visible stage is tracked cleanly from scratch */
+    document.querySelectorAll(".prog-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        stageRatios.forEach(function (_, el) { stageRatios.set(el, 0); });
+        if (activeStage) { activeStage.classList.remove("is-active"); activeStage = null; }
+      });
+    });
+  }
 })();

@@ -1869,14 +1869,18 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
   transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 .vt-node svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.vt-stage:hover .vt-node { border-color: var(--orange); color: var(--orange); }
+/* :hover and .is-active (scroll-spy) share the same orange highlight. */
+.vt-stage:hover .vt-node,
+.vt-stage.is-active .vt-node { border-color: var(--orange); color: var(--orange); }
 
 /* the graduation node is filled orange as the destination */
 .vt-node--end { background: var(--orange); border-color: var(--orange); color: #fff; box-shadow: 0 0 0 6px var(--paper-warm), 0 8px 20px -8px rgba(217, 109, 43, 0.6); }
 
 /* the generic hover turns the icon orange, which vanishes against the orange
-   fill of the graduation node. Keep its white icon and lift it up instead. */
-.vt-stage:hover .vt-node--end { color: #fff; transform: translateX(-50%) translateY(-6px); }
+   fill of the graduation node. Keep its white icon and lift it up instead.
+   Applies to :hover and the scroll-spy .is-active state alike. */
+.vt-stage:hover .vt-node--end,
+.vt-stage.is-active .vt-node--end { color: #fff; transform: translateX(-50%) translateY(-6px); }
 
 .vt-card {
   background: var(--paper);
@@ -1886,7 +1890,8 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
   box-shadow: var(--shadow-soft);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.vt-stage:hover .vt-card { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.vt-stage:hover .vt-card,
+.vt-stage.is-active .vt-card { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
 
 .stage-num {
   display: block;
