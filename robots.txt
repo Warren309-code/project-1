@@ -2,6 +2,6 @@ User-agent: *
 Allow: /
 
 # Affinity Institute — site favicon (square webp)
-# Favicon: https://affinitysalestraining.com/assets/favicon.webp
+# Favicon: https://www.affinityinstitute.io/assets/favicon.webp
 
-Sitemap: https://affinitysalestraining.com/sitemap.xml
+Sitemap: https://www.affinityinstitute.io/sitemap.xml
