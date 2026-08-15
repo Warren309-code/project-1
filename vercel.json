@@ -1,4 +1,7 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/virtual-open-day", "destination": "/register", "permanent": true }
+  ]
 }
