@@ -1755,6 +1755,8 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .page-hero.vot-hero-full .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; }
   .page-hero.vot-hero-full .hero-actions .btn { width: 100%; justify-content: center; }
   .vot-hero-logos .marquee-track img { height: 22px; }
+  /* give the full-width video breathing room above the foot logo strip */
+  .vot-hero-logos { padding-top: 28px; }
 
   /* brochure form: stack the country prefix above the number on phones
      so the long "Country Name +prefix" labels don't crowd the input */
