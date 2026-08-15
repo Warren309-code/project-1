@@ -127,10 +127,18 @@
   document.querySelectorAll("[data-marquee]").forEach(function (track) {
     var original = track.innerHTML;
     track.innerHTML = original;
-    var guard = 0;
-    while (track.scrollWidth < window.innerWidth && guard < 20) {
-      track.innerHTML += original;
-      guard++;
+    /* A track whose ancestor is display:none (e.g. the second testimonial
+       wall on phones) reports scrollWidth 0, so the viewport-span loop below
+       would pad it up to the guard limit and then double that — bloating the
+       hidden row with hundreds of unused cards and lazy images. Only pad to
+       viewport width when the track is actually rendered; the final double
+       still runs so the seamless loop works if the track is later shown. */
+    if (track.offsetParent !== null) {
+      var guard = 0;
+      while (track.scrollWidth < window.innerWidth && guard < 20) {
+        track.innerHTML += original;
+        guard++;
+      }
     }
     track.innerHTML += track.innerHTML;
     track.querySelectorAll("img").forEach(function (img) { img.decoding = "async"; });

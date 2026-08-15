@@ -1,17 +1,2 @@
-# local reference material, keep out of the public repo
-*.pdf
-CareerFoundry*
-*CareerFoundry*
-Affinity Institute - Ireland*
-# source artwork already exported to assets/affinity-social.webp
-affinitylogo.jpeg
-# Parents form responses contain real people's names + personal answers (PII)
-Affinity Institute Parents Form*
-screenshots/
-
-# OS noise
-Thumbs.db
-.DS_Store
-
-# local tool config
-.claude/
+# local scratch / probe artifacts (screenshots, throwaway scripts)
+.scratch/
