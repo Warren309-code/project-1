@@ -1298,6 +1298,9 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .apply {
   background: var(--paper-warm);
 }
+/* when the "Your next step" CTA directly follows the Trustpilot wall,
+   pull it closer so the two sections read as one tighter unit */
+.trust + .apply { padding-top: clamp(48px, 6vw, 80px); }
 
 .apply-inner {
   display: grid;
