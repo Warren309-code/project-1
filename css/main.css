@@ -1227,6 +1227,22 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   box-shadow: var(--shadow-lift);
 }
 
+/* the Virtual Open Day landing hero fills the viewport (minus the sticky
+   header) and vertically centres its content, so the headline + lede +
+   brochure button all sit above the fold. The heading is sized down from
+   .d-xl so the long copy doesn't push the button below the fold. */
+.page-hero.vot-hero-full {
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  align-items: center;
+  padding: clamp(28px, 4vw, 48px) 0;
+}
+.page-hero.vot-hero-full h1 {
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.06;
+  max-width: 16em;
+}
+
 /* ---------------------------------------------------- CTA band */
 
 .cta-band { background: var(--paper-deep); }
@@ -1249,6 +1265,13 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 }
 
 .cta-note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+/* the homepage VOD promo uses a landscape photo on the right, not the
+   portrait pill .cta-inner img defaults to, so override aspect + radius. */
+.cta-inner img.vod-promo-img {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-photo);
+}
 
 /* --------------------------------------------- apply / typeform embed */
 /* A clean bottom section: short copy on the left, the embedded
@@ -1523,7 +1546,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 .js-anim .hero .rv-blur { transform: none; filter: blur(8px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track, .ticker-track { animation: none; }
+  .marquee-track, .ticker-track, .vot-track, .vot-gallery-track { animation: none; }
   .hero .rv { transition: none; }
   .js-anim .hero .rv,
   .js-anim .hero .rv-blur { opacity: 1; transform: none; filter: none; }
@@ -2416,4 +2439,391 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
 
 @media (prefers-reduced-motion: no-preference) {
   .gf.rv { transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+}
+
+/* ---------------------------------------------------------------
+   Virtual Open Day · landing + on-demand pages
+   Reuses every token above — no new colours, radii, spacing or
+   button styles. The only genuinely new surface is the brochure
+   modal (the site's existing forms are Typeform embeds, so a native
+   form needs minimal input chrome built from the same tokens).
+   --------------------------------------------------------------- */
+
+/* a centred section header used on the open-day pages */
+.ctr-head { text-align: center; }
+.ctr-head .label { justify-content: center; }
+.ctr-head .lede { margin-inline: auto; text-align: center; }
+
+/* ---- landing hero ----------------------------------------------------
+   Centred, but not full-viewport like .hero-center — the open-day
+   landing hero carries a long headline, the video and the CTA, so it
+   breathes with the standard section padding. */
+.vot-hero { padding: clamp(56px, 8vw, 104px) 0 clamp(40px, 6vw, 72px); text-align: center; }
+.vot-hero .wrap { display: grid; gap: clamp(28px, 4vw, 44px); justify-items: center; }
+.vot-hero-h { max-width: 18em; margin-inline: auto; }
+
+/* the Wistia frame already caps itself at 16:9; just centre + width it */
+.vot-hero .film-frame { width: 100%; max-width: 920px; }
+
+/* the CTA stack: full-width-ish pill, then the small subtext line */
+.vot-cta { display: grid; gap: 16px; justify-items: center; width: 100%; }
+.vot-cta .btn { width: min(100%, 520px); justify-content: center; }
+.vot-sub { margin: 0; max-width: 40em; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+
+/* ---- trust bar (press logos + live Trustpilot widget) ---------------
+   Fewer than ~6 logos, so a static centred row (no marquee). The
+   Trustpilot TrustBox widget is the official embeddable snippet — it
+   pulls the live score and avoids a static reproduction of their mark. */
+.vot-trust { padding: clamp(40px, 5vw, 64px) 0; background: var(--paper-warm); border-top: 1px solid var(--cream-line-soft); border-bottom: 1px solid var(--cream-line-soft); }
+.vot-trust .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: clamp(28px, 5vw, 64px); }
+.vot-trust .wordmark { font-size: 19px; }
+.vot-trust .tp-widget { display: inline-flex; align-items: center; min-height: 24px; }
+
+/* ---- testimonials grid ----------------------------------------------
+   Flex-wrap centred: 3 across on desktop, 2 centred on the last row,
+   1 across on phones. Reuses the .quote-card surface values. */
+.vot-reviews { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+.vot-card {
+  position: relative;
+  flex: 0 0 clamp(290px, 30vw, 360px);
+  padding: 30px 30px 26px;
+  background: var(--paper);
+  border: 1px solid var(--cream-line-soft);
+  border-radius: var(--r);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.3s ease;
+}
+.vot-card:hover { transform: translateY(-4px); }
+
+.vot-q {
+  font-family: var(--display);
+  font-size: 44px;
+  line-height: 0.7;
+  font-weight: 700;
+  color: var(--orange);
+}
+.vot-card blockquote {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+.vot-who { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.vot-who b { font-size: 15px; font-weight: 700; color: var(--forest); }
+/* reuse the site's star path; orange fill matches the accent colour */
+.vot-stars { display: inline-flex; gap: 3px; color: var(--orange); }
+.vot-stars svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ---- "From Previous Events" gallery --------------------------------
+   Horizontal overflow row of equally-sized cropped photos. */
+.vot-gallery-head { margin-bottom: 26px; }
+.vot-gallery { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.vot-gallery::-webkit-scrollbar { height: 8px; }
+.vot-gallery::-webkit-scrollbar-thumb { background: var(--cream-line); border-radius: 100px; }
+.vot-gallery img {
+  flex: 0 0 auto;
+  width: clamp(220px, 26vw, 300px);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-photo);
+  scroll-snap-align: start;
+}
+
+/* the events gallery as an auto-scrolling photo marquee. Built from the
+   site's own belt keyframe + data-marquee duplication, so the loop is
+   seamless; pauses on hover. Distinct track class so the logo image
+   rules in .marquee-track img don't shrink these photos. */
+.vot-gallery-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.vot-gallery-track {
+  display: flex;
+  width: max-content;
+  animation: belt 60s linear infinite;
+  will-change: transform;
+}
+.vot-gallery-marquee:hover .vot-gallery-track { animation-play-state: paused; }
+.vot-gallery-track img {
+  flex: 0 0 auto;
+  width: clamp(240px, 28vw, 320px);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-photo);
+  margin-right: 16px;
+}
+
+/* ---- home-page "Missed the Open Day" promo band -------------------- */
+.vot-promo { text-align: center; }
+.vot-promo .wrap { display: grid; gap: 18px; justify-items: center; max-width: 720px; }
+.vot-promo .label { justify-content: center; }
+.vot-promo .lede { margin-inline: auto; text-align: center; }
+
+/* ---------------------------------------------------- brochure modal
+   Centred overlay dialog, dimmed backdrop, close × top corner. Built
+   from existing tokens only. Accessible: focus-trapped, Escape +
+   backdrop close, focus returned to the trigger on close. */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  background: rgba(26, 39, 33, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open { display: flex; opacity: 1; }
+
+.modal {
+  position: relative;
+  width: min(100%, 540px);
+  max-height: calc(100svh - (var(--gutter) * 2));
+  overflow-y: auto;
+  padding: clamp(28px, 4vw, 44px);
+  background: var(--paper-warm);
+  border: 1px solid var(--cream-line-soft);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(16px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.open .modal { transform: none; }
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--cream-line);
+  border-radius: 50%;
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--forest);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.modal-close:hover { background: var(--forest); color: var(--paper); }
+
+.modal h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.modal .modal-sub { margin: 0 0 26px; font-size: 14.5px; color: var(--muted); }
+
+/* native form chrome — the site's forms are Typeform embeds, so this
+   is the one new surface; values borrow the token scale, not new ones. */
+.field { display: grid; gap: 7px; margin-bottom: 18px; }
+.field label { font-size: 13px; font-weight: 600; color: var(--ink); }
+.field input, .field select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--cream-line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field input:focus, .field select:focus {
+  outline: 0;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(217, 109, 43, 0.16);
+}
+.field .err { display: none; font-size: 12.5px; color: var(--orange); }
+.field.invalid .err { display: block; }
+.field.invalid input, .field.invalid select { border-color: var(--orange); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-check { display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 22px; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+.field-check input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--orange); }
+.field-check.invalid { color: var(--orange); }
+.field-check a { color: var(--orange); border-bottom: 1px solid var(--orange-soft); }
+
+.modal .btn { width: 100%; justify-content: center; }
+.modal-error { display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 10px; background: rgba(217, 109, 43, 0.1); color: #a04d15; font-size: 13.5px; }
+.modal-error.show { display: block; }
+
+@media (max-width: 560px) {
+  .field-row { grid-template-columns: 1fr; }
+  .vot-card { flex: 0 0 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay, .modal { transition: none; }
+  .vot-card, .modal-close { transition: none; }
+}
+
+/* ---------------------------------------------------------------
+   Virtual Open Day · on-demand programme switcher + "why come" row
+   (open-day.html). Reuses every token above; the only new surfaces are
+   the video/selector grid, the programme tabs and the emoji bullet list.
+   --------------------------------------------------------------- */
+
+/* on-demand: video pinned left, programme selector + copy on the right.
+   Each programme has its own Virtual Open Day; for now every panel
+   shares the placeholder Wistia embed on the left — swap the media-id
+   per panel when real per-programme clips land. */
+.vod-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.vod-video .film-caption { text-align: left; margin-top: 14px; }
+
+.vod-side { display: grid; gap: 22px; align-content: start; }
+.vod-side .label { margin: 0; }
+
+/* programme tabs — a wrapping pill row (distinct from the 2-tab roadmap
+   switcher, which is inline-only). The active tab takes the solid
+   forest fill so it reads as the selected programme's open day. */
+.vod-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 5px;
+  background: var(--paper);
+  border: 1px solid var(--cream-line);
+  border-radius: 100px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.vod-tabs::-webkit-scrollbar { display: none; }
+.vod-tab {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border: 0;
+  background: none;
+  border-radius: 100px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.vod-tab:hover { background: rgba(34, 50, 42, 0.06); color: var(--ink); }
+.vod-tab.active { background: var(--forest); color: #fff; }
+
+/* programme copy panels — only the active one shows; entrance fades it in */
+.vod-panel { display: none; }
+.vod-panel.active {
+  display: grid;
+  gap: 14px;
+  animation: rm-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vod-prog-name {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--ink);
+}
+.vod-prog-desc { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 32em; }
+.vod-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(125, 143, 120, 0.14);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--forest);
+}
+.vod-note b { font-weight: 700; }
+
+/* "Why come to the Virtual Open Day" — bullets left, picture right
+   (mirrors the Open University structure). Sits in a .row-ed. */
+.vod-why-copy .label { margin: 0 0 22px; } /* beat .row-ed p's generic margin */
+.vod-bullets { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.vod-bullets li {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-top: 1px solid var(--cream-line-soft);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.vod-bullets li:last-child { border-bottom: 1px solid var(--cream-line-soft); }
+.vod-bullets .vod-emoji { flex: 0 0 auto; font-size: 20px; line-height: 1; }
+
+/* the open-day testimonials are real Trustpilot reviews — give the star
+   rating the Trustpilot green and a verified marker so the section reads
+   unmistakably as Trustpilot. */
+.vot-stars { color: var(--tp-green); }
+.vot-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tp-green);
+}
+.vot-verified::before { content: "\2713"; }
+
+/* a small centred Trustpilot wordmark + link under the section head */
+.vod-tp-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 20px;
+}
+.vod-tp-badge .tp-logo { font-size: 18px; }
+.vod-tp-badge .tp-logo .tp-mark { width: 22px; height: 22px; }
+
+/* ---- reviews as a single-row marquee scroller -------------------------
+   All five Trustpilot reviews sit on one row; if they don't all fit the
+   viewport the track auto-scrolls (and pauses on hover). Built from the
+   site's own marquee mechanics (data-marquee doubles the set in JS) so
+   the loop is seamless. Reuses .vot-card above unchanged. */
+.vot-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.vot-track {
+  display: flex;
+  width: max-content;
+  padding: 4px 0 10px;
+  animation: belt 52s linear infinite;
+  will-change: transform;
+}
+.vot-marquee:hover .vot-track { animation-play-state: paused; }
+/* margin-right (not gap) keeps the loop seamless once JS duplicates the set */
+.vot-track .vot-card { margin-right: 22px; }
+
+/* ---- press logo strip under the page-1 hero video --------------------- */
+.vot-logos { background: var(--paper-warm); border-top: 1px solid var(--cream-line-soft); border-bottom: 1px solid var(--cream-line-soft); }
+.vot-logos .marquee-track img { height: clamp(40px, 5vw, 54px); }
+
+@media (max-width: 960px) {
+  .vod-grid { grid-template-columns: 1fr; gap: 36px; }
 }
