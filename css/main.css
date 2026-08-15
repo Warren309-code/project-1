@@ -1254,11 +1254,11 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
    logos run all the way to the screen edge before looping back. */
 .vot-hero-logos {
   width: 100%;
-  padding: clamp(10px, 1.6vw, 20px) 0 0;
+  padding: clamp(6px, 1vw, 12px) 0 0;
 }
 .vot-hero-logos .marquee { -webkit-mask-image: none; mask-image: none; }
 .vot-hero-logos .marquee-track { animation-duration: 80s; }
-.vot-hero-logos .marquee-track img { height: clamp(36px, 4.2vw, 52px); }
+.vot-hero-logos .marquee-track img { height: clamp(22px, 2.6vw, 32px); }
 
 /* ---------------------------------------------------- CTA band */
 
@@ -1750,7 +1750,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .page-hero.vot-hero-full .film-frame { width: 100%; }
   .page-hero.vot-hero-full .hero-actions { flex-direction: column; align-items: stretch; gap: 14px; }
   .page-hero.vot-hero-full .hero-actions .btn { width: 100%; justify-content: center; }
-  .vot-hero-logos .marquee-track img { height: 34px; }
+  .vot-hero-logos .marquee-track img { height: 22px; }
 
   /* Trustpilot header collapses to a stacked block on phones */
   .tp-head { gap: 12px 18px; margin-bottom: 36px; }
