@@ -1254,7 +1254,7 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
    logos run all the way to the screen edge before looping back. */
 .vot-hero-logos {
   width: 100%;
-  padding: clamp(6px, 1vw, 12px) 0 0;
+  padding: clamp(6px, 1vw, 12px) 0 clamp(28px, 5vw, 64px);
 }
 .vot-hero-logos .marquee { -webkit-mask-image: none; mask-image: none; }
 .vot-hero-logos .marquee-track { animation-duration: 80s; }
