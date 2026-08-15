@@ -1229,19 +1229,37 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 /* the Virtual Open Day landing hero fills the viewport (minus the sticky
    header) and vertically centres its content, so the headline + lede +
-   brochure button all sit above the fold. The heading is sized down from
-   .d-xl so the long copy doesn't push the button below the fold. */
+   brochure button all sit above the fold. The logo strip sits full-bleed
+   at the foot of the hero. */
 .page-hero.vot-hero-full {
   min-height: calc(100svh - var(--header-h));
   display: flex;
-  align-items: center;
-  padding: clamp(28px, 4vw, 48px) 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 48px) 0 0;
 }
-.page-hero.vot-hero-full h1 {
-  font-size: clamp(28px, 3.4vw, 42px);
-  line-height: 1.06;
-  max-width: 16em;
+.page-hero.vot-hero-full .wrap.page-hero-grid { flex: 1; align-items: center; }
+
+/* desktop: bigger hero copy + a bigger video column */
+@media (min-width: 961px) {
+  .page-hero.vot-hero-full h1 { font-size: clamp(36px, 4vw, 52px); max-width: 13em; }
+  .page-hero.vot-hero-full .lede { font-size: clamp(17px, 1.6vw, 20px); max-width: 36em; }
+  /* give the video column more room and cap it generously so it stays large
+     but never swamps the copy on very wide screens */
+  .page-hero.vot-hero-full .page-hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .page-hero.vot-hero-full .film-frame { max-width: none; }
 }
+
+/* the press logo strip at the foot of the hero — full-bleed, slower drift,
+   logos run all the way to the screen edge before looping back. */
+.vot-hero-logos {
+  width: 100%;
+  padding: clamp(16px, 2.4vw, 28px) 0;
+  border-top: 1px solid var(--cream-line-soft);
+}
+.vot-hero-logos .marquee { -webkit-mask-image: none; mask-image: none; }
+.vot-hero-logos .marquee-track { animation-duration: 80s; }
+.vot-hero-logos .marquee-track img { height: clamp(36px, 4.2vw, 52px); }
 
 /* ---------------------------------------------------- CTA band */
 
@@ -1679,6 +1697,12 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
      off the right edge between 641–960px. */
   .review-flow .row.offset { transform: none; }
 
+  /* register hero: stack copy over video, centre the CTA row, and keep the
+     foot-logo strip tidy on tablet/narrow viewports */
+  .page-hero.vot-hero-full .page-hero-grid { gap: clamp(28px, 6vw, 48px); }
+  .page-hero.vot-hero-full .film-caption { text-align: left; }
+  .page-hero.vot-hero-full .hero-actions { justify-content: flex-start; }
+
   /* the ghost wordmark is desktop ornament only */
   .foot-word { display: none; }
 
@@ -1716,6 +1740,15 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
   .disc p { grid-column: 1; }
 
   .hero-actions { gap: 18px; }
+
+  /* register hero on phones: tight heading so copy + button fit above the
+     foot-logo strip, video full-width, logos spaced evenly */
+  .page-hero.vot-hero-full h1 { font-size: clamp(26px, 7.4vw, 34px); }
+  .page-hero.vot-hero-full { padding-top: clamp(20px, 6vw, 32px); }
+  .page-hero.vot-hero-full .film-frame { width: 100%; }
+  .page-hero.vot-hero-full .hero-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+  .page-hero.vot-hero-full .hero-actions .btn { width: 100%; justify-content: center; }
+  .vot-hero-logos .marquee-track img { height: 34px; }
 
   /* Trustpilot header collapses to a stacked block on phones */
   .tp-head { gap: 12px 18px; margin-bottom: 36px; }
@@ -2535,25 +2568,26 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
   scroll-snap-align: start;
 }
 
-/* the events gallery as an auto-scrolling photo marquee. Built from the
-   site's own belt keyframe + data-marquee duplication, so the loop is
-   seamless; pauses on hover. Distinct track class so the logo image
-   rules in .marquee-track img don't shrink these photos. */
+/* the events gallery as an auto-scrolling photo marquee. Full-bleed: the
+   track sits outside .wrap, so photos run all the way to the screen edge
+   before looping back. Built from the site's own belt keyframe + the
+   data-marquee duplication, so the loop is seamless; pauses on hover.
+   Distinct track class so the logo image rules in .marquee-track img
+   don't shrink these photos. No edge mask: edge-to-edge means no fade. */
 .vot-gallery-marquee {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 .vot-gallery-track {
   display: flex;
   width: max-content;
-  animation: belt 60s linear infinite;
+  padding: 4px 0;
+  animation: belt 95s linear infinite;
   will-change: transform;
 }
 .vot-gallery-marquee:hover .vot-gallery-track { animation-play-state: paused; }
 .vot-gallery-track img {
   flex: 0 0 auto;
-  width: clamp(240px, 28vw, 320px);
+  width: clamp(240px, 28vw, 340px);
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--r-photo);
@@ -2655,6 +2689,10 @@ blockquote, .lede, .stat > span, .comm-points li { overflow-wrap: break-word; wo
 .field.invalid input, .field.invalid select { border-color: var(--orange); }
 
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+/* phone field: country-code prefix select sits beside the number input */
+.phone-row { display: flex; gap: 10px; }
+.phone-row select { flex: 0 0 auto; width: auto; min-width: 118px; padding-right: 10px; }
+.phone-row input { flex: 1 1 auto; min-width: 0; }
 .field-check { display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 22px; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
 .field-check input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--orange); }
 .field-check.invalid { color: var(--orange); }
