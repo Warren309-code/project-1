@@ -19,6 +19,32 @@
   <meta name="twitter:description" content="Join our Virtual Open Day and see how Irish people are building AI-proof skills to get hired for work-from-home jobs.">
   <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/leads.js"></script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '24777890648508922');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=24777890648508922&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- Hyros Script -->
+  <script>
+  var head = document.head;
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = "https://211802.t.hyros.com/v1/lst/universal-script?ph=ea91d31611494e1cd3fa34e35c839dc1bb747ca4c0b2be671be1377ea8356133&tag=!clicked&ref_url=" + encodeURI(document.URL) ;
+  head.appendChild(script);
+  </script>
 </head>
 <body>
 
@@ -60,6 +86,7 @@
             <a href="graduates.html#employers"><strong>Hire our graduates</strong><span>Candidates developed before they reach your team.</span></a>
           </div>
         </div>
+        <a class="menu-btn" href="https://affinityapparel.co/" target="_blank" rel="noopener">Apparel</a>
         <div class="menu-cta"><a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a></div>
       </nav>
 
@@ -599,7 +626,7 @@
        personalise. A non-2xx shows an inline error and keeps the
        entered values.
        ============================================================ */
-    var LEAD_ENDPOINT = "https://hook.eu2.make.com/sys2bv5uns1euadohupgjv8a6h23tuf1";
+    var LEAD_ENDPOINT = "https://hook.eu2.make.com/fgtoz24rfm2gm2yoqprv99qc5hld7s3b";
     var REDIRECT_URL = "open-day.html";
 
     var overlay = document.getElementById("brochure-modal");
@@ -718,14 +745,21 @@
       var local = rawPhone.replace(/^0+/, "");
       var fullPhone = prefix + " " + local;
 
+      var first = form.firstName.value.trim();
+      var last = form.lastName.value.trim();
       var payload = {
-        firstName: form.firstName.value.trim(),
-        lastName: form.lastName.value.trim(),
+        fullName: (first + " " + last).trim(),
+        firstName: first,
+        lastName: last,
         email: form.email.value.trim(),
         phone: fullPhone,
         prefix: prefix,
         localPhone: local
       };
+      /* Attach first-touch UTM attribution captured by js/leads.js. */
+      try {
+        if (window.AffinityLeads) Object.assign(payload, window.AffinityLeads.getUtmPayload());
+      } catch (e) {}
 
       /* POST the lead as JSON to the webhook. On success we forward the
          visitor to the on-demand page (name + email passed through). On
