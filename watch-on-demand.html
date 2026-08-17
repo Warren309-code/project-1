@@ -111,17 +111,16 @@
     </section>
 
     <!-- ============================================ on-demand video -->
-    <section class="sect tight film" id="video">
+    <section class="sect tight film" id="video" style="padding-top:clamp(20px,3vw,32px)">
       <div class="wrap">
-        <!-- PLACEHOLDER: same Wistia embed for every programme for now.
-             Swap the media-id below for each programme's real recording
-             when available (the #vod-prog-name + ?prog= param already
-             drives the heading, so only the media-id needs changing). -->
-        <div class="film-frame rv rv-scale" data-rv-delay="120" style="max-width:1000px;margin-inline:auto">
-          <script src="https://fast.wistia.com/player.js" async></script>
-          <script src="https://fast.wistia.com/embed/h90wm5sa0j.js" async type="module"></script>
-          <style>wistia-player[media-id='h90wm5sa0j']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h90wm5sa0j/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
-          <wistia-player media-id="h90wm5sa0j" aspect="1.7777777777777777" player-color="#22322a"></wistia-player>
+        <!-- Placeholder until the first Virtual Open Day is recorded.
+             Swap this block for the per-programme Wistia embed when the
+             recordings land. The ?prog= param already drives the heading. -->
+        <div class="film-frame rv rv-scale" data-rv-delay="120" style="max-width:1000px;margin-inline:auto;position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--forest)">
+          <div style="text-align:center;padding:24px;max-width:32em">
+            <p style="font-family:var(--display);font-size:clamp(20px,3.4vw,30px);font-weight:500;color:var(--paper);line-height:1.25;margin:0 0 10px">The video will be available after the first open day.</p>
+            <p style="margin:0;font-size:15px;color:rgba(250,244,235,0.7);line-height:1.5">Check back soon — the full recording for this programme lands here once it's run.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -204,45 +203,36 @@
   <script src="js/main.js"></script>
   <script>
   (function () {
-    /* Each programme has its own Virtual Open Day recording. The heading +
-       <title> are driven by ?prog=, and the Wistia media-id is looked up in
-       PROGS below. For now every programme points at the same placeholder
-       recording (h90wm5sa0j); when a real per-programme clip lands, just
-       change its media value here — renderVideo() rebuilds the embed. */
+    /* Heading + <title> are driven by ?prog= so each programme's
+       "Watch on demand" link lands on a page titled for that programme.
+       When real per-programme recordings land, swap the placeholder block
+       in #video for the per-programme Wistia embed keyed off `key`. */
     var PROGS = {
-      "sales":      { name: "Digital Sales Programme",      media: "h90wm5sa0j" },
-      "women":      { name: "Affinity for Women",           media: "h90wm5sa0j" },
-      "tech-sales": { name: "Digital Tech Sales Programme", media: "h90wm5sa0j" },
-      "ai":         { name: "AI Programme",                 media: "h90wm5sa0j" }
+      "sales":      "Digital Sales Programme",
+      "women":      "Affinity for Women",
+      "tech-sales": "Digital Tech Sales Programme",
+      "ai":         "AI Programme"
     };
-    var DEFAULT_MEDIA = "h90wm5sa0j";
 
     var key = (new URLSearchParams(location.search).get("prog") || "").toLowerCase();
-    var prog = PROGS[key];
+    var name = PROGS[key];
 
-    if (prog) {
+    if (name) {
       var h1 = document.getElementById("vod-prog-name");
-      h1.innerHTML = "Watch the <em>" + prog.name + "</em> Virtual Open Day";
-      document.title = prog.name + " · Watch on demand · Affinity Institute";
+      h1.innerHTML = "Watch the <em>" + name + "</em> Virtual Open Day";
+      document.title = name + " · Watch on demand · Affinity Institute";
     }
 
-    /* Swap the Wistia embed to the programme's recording. Only runs when the
-       programme's media-id differs from the default placeholder currently
-       baked into the markup — so today this is a no-op and the page keeps
-       its working static embed, but real per-programme recordings drop in
-       with a one-line PROGS edit above. */
-    function renderVideo(mediaId) {
-      if (!mediaId || mediaId === DEFAULT_MEDIA) return;
-      var frame = document.querySelector(".film-frame");
-      if (!frame) return;
-      frame.innerHTML =
-        '<script src="https://fast.wistia.com/player.js" async><\/script>' +
-        '<script src="https://fast.wistia.com/embed/' + mediaId + '.js" async type="module"><\/script>' +
-        '<style>wistia-player[media-id=\'' + mediaId + '\']:not(:defined) { background: center / contain no-repeat url(\'https://fast.wistia.com/embed/medias/' + mediaId + '/swatch\'); display: block; filter: blur(5px); padding-top:56.25%; }</style>' +
-        '<wistia-player media-id="' + mediaId + '" aspect="1.7777777777777777" player-color="#22322a"></wistia-player>';
-    }
-
-    if (prog) renderVideo(prog.media);
+    /* Personalise the greeting from the sign-up, if we have it. Name/email
+       are passed via localStorage by the brochure form — never the URL —
+       so the address bar stays clean. */
+    try {
+      var who = localStorage.getItem("affinityName");
+      if (who) {
+        var sub = document.querySelector("#video + section .lede, .page-hero .lede");
+        if (sub) sub.insertAdjacentHTML("afterbegin", "<strong>Welcome, " + who + ".</strong> ");
+      }
+    } catch (e) {}
   })();
   </script>
 </body>

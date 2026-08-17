@@ -20,6 +20,19 @@
   <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
   <link rel="stylesheet" href="css/main.css">
   <script src="js/leads.js"></script>
+  <script>
+  /* "Secure your seat" buttons on other pages send visitors here with
+     ?autoopen=1 so the form pops open straight away. But if this visitor
+     already signed up earlier in the session, skip the form entirely and
+     drop them on the open-day hub — the session carries on. */
+  (function () {
+    try {
+      if (localStorage.getItem("affinityVodSignup") === "1") {
+        window.location.replace("open-day.html");
+      }
+    } catch (e) {}
+  })();
+  </script>
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -87,11 +100,11 @@
           </div>
         </div>
         <a class="menu-btn" href="https://affinityapparel.co/" target="_blank" rel="noopener">Apparel</a>
-        <div class="menu-cta"><button class="btn orange" data-brochure-open type="button">Get your free brochure</button></div>
+        <div class="menu-cta"><button class="btn orange" data-brochure-open type="button" style="white-space:nowrap">Free brochure</button></div>
       </nav>
 
       <div class="nav-cta">
-        <button class="btn orange" data-brochure-open type="button">Get your free brochure</button>
+        <button class="btn orange" data-brochure-open type="button" style="white-space:nowrap">Free brochure</button>
         <button class="mob-toggle" data-mob-toggle type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
       </div>
     </div>
@@ -678,6 +691,14 @@
     overlay.querySelector(".modal-close").addEventListener("click", closeModal);
     overlay.addEventListener("click", function (e) { if (e.target === overlay) closeModal(); });
 
+    /* Auto-open the form when a "Secure your seat" button on another page
+       sent the visitor here with ?autoopen=1, so they don't have to click again. */
+    try {
+      if (new URLSearchParams(location.search).get("autoopen") === "1") {
+        openModal(null);
+      }
+    } catch (e) {}
+
     /* ---------- validation ----------
        Returns true only if every required field is valid. Marks
        .invalid on failing fields and shows their .err message. */
@@ -780,13 +801,16 @@
 
       function forward() {
         /* Remember this visitor has filled + sent the form so the open-day
-           page lets them in on this and future visits. */
-        try { localStorage.setItem("affinityVodSignup", "1"); } catch (e) {}
-        var params = new URLSearchParams({
-          name: payload.firstName,
-          email: payload.email
-        }).toString();
-        window.location.href = REDIRECT_URL + "?" + params;
+           page lets them in on this and future visits. Name/email are passed
+           via localStorage — never the URL — so the address bar stays clean
+           (no name/email/utm exposed). */
+        try {
+          localStorage.setItem("affinityVodSignup", "1");
+          localStorage.setItem("affinityName", payload.firstName);
+          localStorage.setItem("affinityEmail", payload.email);
+          localStorage.setItem("affinityLead", JSON.stringify(payload));
+        } catch (e) {}
+        window.location.href = REDIRECT_URL;
       }
     });
   })();
