@@ -19,6 +19,20 @@
   <meta name="twitter:description" content="Watch the Affinity Institute Virtual Open Day on demand. See the programmes, hear from people who've done it, and find out if a remote digital career is right for you.">
   <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
   <link rel="stylesheet" href="css/main.css">
+  <script>
+  /* Gate: only visitors who've already signed up (filled + sent the
+     brochure form) can reach the Virtual Open Day. That form sets
+     "affinityVodSignup" in localStorage on a successful submit; without
+     it, bounce to the register page. Runs in <head> so nothing renders
+     first. */
+  (function () {
+    try {
+      if (localStorage.getItem("affinityVodSignup") !== "1") {
+        location.replace("register.html");
+      }
+    } catch (e) { /* localStorage blocked — allow through rather than trap */ }
+  })();
+  </script>
 </head>
 <body>
 
@@ -80,7 +94,7 @@
           <h1 class="d-xl">Join From Home. <em>See If This Is Right For You.</em></h1>
           <p class="lede">An on-demand walk-through of our digital remote-work programmes. The skills we train, how the 12-stage curriculum works, real stories from people who've done it, and a clear picture of where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
-            <a class="btn orange" href="register.html">Secure your seat <span class="arr">&rarr;</span></a>
+            <a class="btn orange" href="#video">Secure your seat <span class="arr">&rarr;</span></a>
             <a class="arrow-link" href="#video">Watch on demand <span class="arr">&rarr;</span></a>
           </div>
         </div>
@@ -349,7 +363,7 @@
           <h2 class="d-lg">Ready to <em>start?</em></h2>
           <p class="lede">If the open day made sense, the next move is a short application. An honest conversation about where you are, and a clear picture of where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
-            <a class="btn orange" href="register.html">Secure your seat <span class="arr">&rarr;</span></a>
+            <a class="btn orange" href="#video">Secure your seat <span class="arr">&rarr;</span></a>
           </div>
         </div>
       </div>

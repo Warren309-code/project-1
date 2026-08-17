@@ -668,6 +668,9 @@
       });
 
       function forward() {
+        /* Remember this visitor has filled + sent the form so the open-day
+           page lets them in on this and future visits. */
+        try { localStorage.setItem("affinityVodSignup", "1"); } catch (e) {}
         var target = currentProg
           ? "watch-on-demand.html?prog=" + currentProg
           : "open-day.html";
