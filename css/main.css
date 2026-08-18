@@ -184,20 +184,49 @@ button { font: inherit; color: inherit; }
 }
 
 /* Centered logo-only header for funnel pages (register, open-day-brochure).
-   Mirrors the navbar band — same 76px height, same sticky paper background —
-   but shows only the brand mark, centered, with no nav and no link home
-   (the logo was a funnel leak, so it stays non-interactive here). */
+   Mirrors the navbar's behaviour: at rest a solid flush 76px band; on scroll
+   it detaches and condenses into the same floating pill the real .nav
+   becomes — only smaller, since it holds just the logo. The logo itself is
+   non-interactive (the mark linked to home = a funnel leak, so it stays a
+   plain img here). */
 .site-head.logo-only .wrap.logo-bar {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 76px;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid rgba(209, 196, 178, 0);
+  border-radius: 18px;
+  background: rgba(255, 253, 250, 0);
+  transition: background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s ease,
+              border-color 0.45s ease,
+              border-radius 0.45s ease,
+              margin-top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              padding 0.45s ease,
+              min-height 0.45s ease;
 }
 .site-head.logo-only .logo-mark { width: 40px; height: auto; }
-/* the default band goes transparent on scroll (the floating .nav pill
-   normally carries the visible background then); keep it solid here. */
-.site-head.logo-only,
-.site-head.logo-only.scrolled { background: rgba(250, 244, 235, 1); }
+/* the band itself is the visible surface at rest (there's no .nav pill to
+   carry it like on the full nav), so it goes solid here and transparent on
+   scroll — mirroring how the real header band yields to its floating pill. */
+.site-head.logo-only { background: rgba(250, 244, 235, 1); }
+.site-head.logo-only.scrolled { background: rgba(250, 244, 235, 0); }
+/* the floating island — same treatment as .site-head.scrolled .nav, only
+   smaller (a touch less height, tighter padding, shrunk logo). */
+.site-head.logo-only.scrolled .wrap.logo-bar {
+  margin-top: 16px;
+  padding: 0 18px;
+  min-height: 52px;
+  background: rgba(255, 253, 250, 1);
+  border-color: rgba(209, 196, 178, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+              0 14px 40px -14px rgba(34, 42, 34, 0.5),
+              0 2px 8px -2px rgba(34, 42, 34, 0.18);
+}
+.site-head.logo-only.scrolled .logo-mark { width: 30px; }
 
 .nav {
   display: grid;
