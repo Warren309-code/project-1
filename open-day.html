@@ -87,11 +87,11 @@
           </div>
         </div>
         <a class="menu-btn" href="https://affinityapparel.co/" target="_blank" rel="noopener">Apparel</a>
-        <div class="menu-cta"><a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a></div>
+        <div class="menu-cta"><button class="btn orange" type="button" data-book-seat>Secure your seat</button></div>
       </nav>
 
       <div class="nav-cta">
-        <a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a>
+        <button class="btn orange" type="button" data-book-seat>Secure your seat</button>
         <button class="mob-toggle" data-mob-toggle type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
       </div>
     </div>
@@ -108,7 +108,7 @@
           <p class="lede">An on-demand walk-through of our digital remote-work programmes. The skills we train, how the 12-stage curriculum works, real stories from people who've done it, and a clear picture of where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
             <button class="btn orange" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
-            <a class="arrow-link" href="#what-to-expect">What's in the open day <span class="arr">&rarr;</span></a>
+            <a class="arrow-link" href="#video">Watch on demand <span class="arr">&rarr;</span></a>
           </div>
         </div>
       </div>
@@ -389,6 +389,7 @@
           <p class="lede">Secure your seat for the next Virtual Open Day. A walk-through of the programmes, the curriculum, and where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
             <button class="btn orange" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
+            <a class="arrow-link" href="#video">Watch on demand <span class="arr">&rarr;</span></a>
           </div>
         </div>
       </div>
@@ -490,9 +491,7 @@
 
   /* "Secure your seat" on this page opens the WebinarJam booking modal
      instead of navigating away. The embed script is injected on first
-     open so the third-party form only loads when it's actually needed.
-     ?book=1 in the URL (set by "Secure your seat" buttons on other
-     pages) opens it automatically on arrival. */
+     open so the third-party form only loads when it's actually needed. */
   (function () {
     var overlay = document.getElementById("book-modal");
     if (!overlay) return;
@@ -513,6 +512,7 @@
       lastFocus = document.activeElement;
       overlay.classList.add("open");
       overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.remove("nav-open"); /* close mobile menu if open */
       document.documentElement.classList.add("nav-open"); /* locks scroll */
       injectEmbed();
       var close = overlay.querySelector(".modal-close");
@@ -535,14 +535,6 @@
     document.querySelectorAll("[data-book-seat]").forEach(function (btn) {
       btn.addEventListener("click", openModal);
     });
-
-    /* auto-open when a "Secure your seat" button on another page sent
-       the visitor here with ?book=1, so they don't have to click again. */
-    try {
-      if (new URLSearchParams(location.search).get("book") === "1") {
-        openModal();
-      }
-    } catch (e) {}
   })();
   </script>
 </body>
