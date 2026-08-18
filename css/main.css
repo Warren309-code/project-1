@@ -209,10 +209,10 @@ button { font: inherit; color: inherit; }
               width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .site-head.logo-only .logo-mark { width: 40px; height: auto; }
-/* the band itself is the visible surface at rest (there's no .nav pill to
-   carry it like on the full nav), so it goes solid here and transparent on
-   scroll — mirroring how the real header band yields to its floating pill. */
-.site-head.logo-only { background: rgba(250, 244, 235, 1); }
+/* the band is invisible at rest (just the logo on the page background, no
+   box) and stays transparent on scroll — the floating .logo-bar pill carries
+   the visible surface, exactly like the real navbar yields to its .nav pill. */
+.site-head.logo-only,
 .site-head.logo-only.scrolled { background: rgba(250, 244, 235, 0); }
 /* the floating island — same treatment as .site-head.scrolled .nav, only
    smaller (a touch less height, tighter padding, shrunk logo). */
