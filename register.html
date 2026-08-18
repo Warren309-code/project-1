@@ -28,7 +28,7 @@
   (function () {
     try {
       if (localStorage.getItem("affinityVodSignup") === "1") {
-        window.location.replace("open-day.html");
+        window.location.replace("open-day-brochure.html");
       }
     } catch (e) {}
   })();
@@ -60,56 +60,6 @@
   </script>
 </head>
 <body>
-
-  <header class="site-head">
-    <div class="wrap nav">
-      <a class="brand" href="index.html" aria-label="Affinity Institute home">
-        <img src="assets/brand-mark.webp" alt="Affinity Institute">
-      </a>
-
-      <nav class="menu" aria-label="Primary">
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Courses
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop cols">
-            <a href="programmes.html#sales"><strong>Digital Sales Programme</strong><span>The core pathway. Remote sales, coached to a professional standard.</span></a>
-            <a href="programmes.html#women"><strong>Affinity for Women</strong><span>Flexible digital careers with a community behind you.</span></a>
-            <a href="programmes.html#tech-sales"><strong>Digital Tech Sales Programme</strong><span>Enterprise & B2B sales, coached to a professional standard.</span></a>
-            <a href="programmes.html#ai"><strong>AI Programme</strong><span>Practical AI literacy for the work that comes next.</span></a>
-          </div>
-        </div>
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Learn with us
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop cols">
-            <a href="how-it-works.html"><strong>How the curriculum works</strong><span>A 12-stage journey from first login to graduation.</span></a>
-            <a href="index.html#community"><strong>Community & events</strong><span>Trips, dinners, roadshows. The room around the work.</span></a>
-            <a href="open-day.html"><strong>Virtual Open Day</strong><span>Watch on demand. See if this is right for you.</span></a>
-            <a href="how-it-works.html#placement"><strong>The placement pathway</strong><span>How students move from practice into real roles.</span></a>
-          </div>
-        </div>
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Our graduates
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop">
-            <a href="graduates.html"><strong>Graduate stories</strong><span>The people, the numbers and the words behind them.</span></a>
-            <a href="graduates.html#employers"><strong>Hire our graduates</strong><span>Candidates developed before they reach your team.</span></a>
-          </div>
-        </div>
-        <a class="menu-btn" href="https://affinityapparel.co/" target="_blank" rel="noopener">Apparel</a>
-        <div class="menu-cta"><button class="btn orange" data-brochure-open type="button" style="white-space:nowrap">Free brochure</button></div>
-      </nav>
-
-      <div class="nav-cta">
-        <button class="btn orange" data-brochure-open type="button" style="white-space:nowrap">Free brochure</button>
-        <button class="mob-toggle" data-mob-toggle type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
-      </div>
-    </div>
-  </header>
-
   <main>
 
     <!-- ======================================================= hero -->
@@ -311,26 +261,6 @@
         <div class="foot-brand">
           <img class="foot-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
           <p>Ireland's home for digital remote work. Verified skills, honest mentorship and a community built around people, not just programmes.</p>
-        </div>
-        <div class="foot-col">
-          <h4>Courses</h4>
-          <a href="programmes.html#sales">Digital Sales Programme</a>
-          <a href="programmes.html#women">Affinity for Women</a>
-          <a href="programmes.html#tech-sales">Digital Tech Sales Programme</a>
-          <a href="programmes.html#ai">AI Programme</a>
-        </div>
-        <div class="foot-col">
-          <h4>Learn with us</h4>
-          <a href="how-it-works.html">How it works</a>
-          <a href="open-day.html">Virtual Open Day</a>
-          <a href="graduates.html">Graduate stories</a>
-          <a href="https://www.trustpilot.com/review/affinitysalestraining.com">Trustpilot reviews</a>
-        </div>
-        <div class="foot-col">
-          <h4>Connect</h4>
-          <a href="https://form.typeform.com/to/mUzyHsig">Apply here</a>
-          <a href="mailto:newsletter@affinitysalestraining.com">Email the team</a>
-          <a href="graduates.html#employers">Hire our graduates</a>
         </div>
       </div>
     </div>
@@ -627,193 +557,6 @@
   </div>
 
   <script src="js/main.js"></script>
-  <script>
-  (function () {
-    /* ============================================================
-       Brochure modal: accessible dialog + lead capture.
-       LEAD_ENDPOINT is the single place to point this at your real
-       CRM/email tool (HubSpot, Mailchimp, Zapier webhook, custom API).
-       It posts JSON {firstName,lastName,email,phone}; a 2xx response
-       closes the modal and forwards to the on-demand open-day page,
-       passing name + email through as query params so that page can
-       personalise. A non-2xx shows an inline error and keeps the
-       entered values.
-       ============================================================ */
-    var LEAD_ENDPOINT = "https://hook.eu2.make.com/fgtoz24rfm2gm2yoqprv99qc5hld7s3b";
-    var REDIRECT_URL = "open-day.html";
-
-    var overlay = document.getElementById("brochure-modal");
-    var form = document.getElementById("brochure-form");
-    var errorBox = document.getElementById("brochure-error");
-    var lastFocus = null;
-    var focusables = [];
-
-    function getFocusables() {
-      return Array.prototype.slice.call(
-        overlay.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')
-      ).filter(function (el) { return el.offsetParent !== null; });
-    }
-
-    function openModal(trigger) {
-      lastFocus = trigger || document.activeElement;
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-      document.documentElement.classList.add("nav-open"); /* locks scroll */
-      focusables = getFocusables();
-      if (focusables.length) focusables[0].focus();
-      document.addEventListener("keydown", onKeydown);
-    }
-
-    function closeModal() {
-      overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden", "true");
-      document.documentElement.classList.remove("nav-open");
-      document.removeEventListener("keydown", onKeydown);
-      if (lastFocus) lastFocus.focus();
-    }
-
-    function onKeydown(e) {
-      if (e.key === "Escape") { e.preventDefault(); closeModal(); return; }
-      if (e.key === "Tab") {
-        focusables = getFocusables();
-        if (!focusables.length) return;
-        var first = focusables[0], last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-    }
-
-    /* open triggers: every [data-brochure-open] button */
-    document.querySelectorAll("[data-brochure-open]").forEach(function (btn) {
-      btn.addEventListener("click", function () { openModal(btn); });
-    });
-    /* close: × and backdrop click */
-    overlay.querySelector(".modal-close").addEventListener("click", closeModal);
-    overlay.addEventListener("click", function (e) { if (e.target === overlay) closeModal(); });
-
-    /* Auto-open the form when a "Secure your seat" button on another page
-       sent the visitor here with ?autoopen=1, so they don't have to click again. */
-    try {
-      if (new URLSearchParams(location.search).get("autoopen") === "1") {
-        openModal(null);
-      }
-    } catch (e) {}
-
-    /* ---------- validation ----------
-       Returns true only if every required field is valid. Marks
-       .invalid on failing fields and shows their .err message. */
-    function emailOk(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-    /* phone: strip spaces/dashes/dots/parens, keep digits. Valid once it
-       has at least 6 digits and only phone-friendly characters remain. */
-    function phoneOk(v) {
-      var cleaned = v.replace(/[\s().-]/g, "");
-      return /^[0-9]{6,15}$/.test(cleaned);
-    }
-
-    function validate() {
-      var ok = true;
-      var first = form.firstName, last = form.lastName, email = form.email, phone = form.phone;
-      var consent = form.consent, consentWrap = document.getElementById("bf-consent-wrap");
-
-      [[first, !!first.value.trim()], [last, !!last.value.trim()],
-       [email, emailOk(email.value.trim())], [phone, phoneOk(phone.value.trim())]]
-        .forEach(function (pair) {
-          var field = pair[0], valid = pair[1];
-          var wrap = field.closest(".field");
-          if (!valid) { wrap.classList.add("invalid"); ok = false; }
-          else wrap.classList.remove("invalid");
-        });
-
-      if (!consent.checked) { consentWrap.classList.add("invalid"); ok = false; }
-      else consentWrap.classList.remove("invalid");
-
-      return ok;
-    }
-
-    /* clear the error state as the user corrects a field */
-    form.querySelectorAll("input, select").forEach(function (el) {
-      el.addEventListener("input", function () {
-        var wrap = el.closest(".field");
-        if (wrap) wrap.classList.remove("invalid");
-        var cw = document.getElementById("bf-consent-wrap");
-        if (cw) cw.classList.remove("invalid");
-        errorBox.classList.remove("show");
-      });
-    });
-    /* prefix <select> fires "change", not "input" */
-    var prefixSel = document.getElementById("bf-prefix");
-    if (prefixSel) prefixSel.addEventListener("change", function () {
-      var wrap = prefixSel.closest(".field");
-      if (wrap) wrap.classList.remove("invalid");
-      errorBox.classList.remove("show");
-    });
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      errorBox.classList.remove("show");
-      if (!validate()) return;
-
-      var btn = form.querySelector('button[type="submit"]');
-      var originalLabel = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = "Sending…";
-
-      var prefixSel = form.prefix;
-      var prefix = prefixSel.value;
-      var rawPhone = form.phone.value.trim();
-      /* drop a leading 0 from local numbers (e.g. 086...) when an int'l
-         prefix is selected, then combine into one E.164-ish string. */
-      var local = rawPhone.replace(/^0+/, "");
-      var fullPhone = prefix + " " + local;
-
-      var first = form.firstName.value.trim();
-      var last = form.lastName.value.trim();
-      var payload = {
-        fullName: (first + " " + last).trim(),
-        firstName: first,
-        lastName: last,
-        email: form.email.value.trim(),
-        phone: fullPhone,
-        prefix: prefix,
-        localPhone: local
-      };
-      /* Attach first-touch UTM attribution captured by js/leads.js. */
-      try {
-        if (window.AffinityLeads) Object.assign(payload, window.AffinityLeads.getUtmPayload());
-      } catch (e) {}
-
-      /* POST the lead as JSON to the webhook. On success we forward the
-         visitor to the on-demand page (name + email passed through). On
-         failure we show an inline error and restore the submit button so
-         the user can retry without losing their details. */
-      fetch(LEAD_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }).then(function (res) {
-        if (!res.ok) throw new Error("lead failed");
-        forward();
-      }).catch(function () {
-        errorBox.classList.add("show");
-        btn.disabled = false;
-        btn.textContent = originalLabel;
-      });
-
-      function forward() {
-        /* Remember this visitor has filled + sent the form so the open-day
-           page lets them in on this and future visits. Name/email are passed
-           via localStorage — never the URL — so the address bar stays clean
-           (no name/email/utm exposed). */
-        try {
-          localStorage.setItem("affinityVodSignup", "1");
-          localStorage.setItem("affinityName", payload.firstName);
-          localStorage.setItem("affinityEmail", payload.email);
-          localStorage.setItem("affinityLead", JSON.stringify(payload));
-        } catch (e) {}
-        window.location.href = REDIRECT_URL;
-      }
-    });
-  })();
-  </script>
+  <script src="js/brochure-modal.js"></script>
 </body>
 </html>
