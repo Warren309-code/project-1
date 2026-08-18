@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/virtual-open-day", "destination": "/register", "permanent": true }
+    { "source": "/virtual-open-day", "destination": "/register", "permanent": true },
+    { "source": "/open-day", "destination": "/open-day-brochure", "permanent": true }
   ]
 }
