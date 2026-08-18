@@ -205,7 +205,8 @@ button { font: inherit; color: inherit; }
               border-radius 0.45s ease,
               margin-top 0.45s cubic-bezier(0.22, 1, 0.36, 1),
               padding 0.45s ease,
-              min-height 0.45s ease;
+              min-height 0.45s ease,
+              width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .site-head.logo-only .logo-mark { width: 40px; height: auto; }
 /* the band itself is the visible surface at rest (there's no .nav pill to
@@ -219,6 +220,9 @@ button { font: inherit; color: inherit; }
   margin-top: 16px;
   padding: 0 18px;
   min-height: 52px;
+  /* shrink to just the logo — overrides .wrap's full content width so the
+     floating island hugs the mark instead of spanning the page */
+  width: fit-content;
   background: rgba(255, 253, 250, 1);
   border-color: rgba(209, 196, 178, 0.85);
   border-radius: 16px;
