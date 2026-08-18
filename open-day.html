@@ -19,20 +19,6 @@
   <meta name="twitter:description" content="Watch the Affinity Institute Virtual Open Day on demand. See the programmes, hear from people who've done it, and find out if a remote digital career is right for you.">
   <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
   <link rel="stylesheet" href="css/main.css">
-  <script>
-  /* Gate: only visitors who've already signed up (filled + sent the
-     brochure form) can reach the Virtual Open Day. That form sets
-     "affinityVodSignup" in localStorage on a successful submit; without
-     it, bounce to the register page. Runs in <head> so nothing renders
-     first. */
-  (function () {
-    try {
-      if (localStorage.getItem("affinityVodSignup") !== "1") {
-        location.replace("register.html");
-      }
-    } catch (e) { /* localStorage blocked — allow through rather than trap */ }
-  })();
-  </script>
   <script src="js/leads.js"></script>
   <!-- Meta Pixel Code -->
   <script>
@@ -87,7 +73,7 @@
           <div class="drop cols">
             <a href="how-it-works.html"><strong>How the curriculum works</strong><span>A 12-stage journey from first login to graduation.</span></a>
             <a href="index.html#community"><strong>Community & events</strong><span>Trips, dinners, roadshows. The room around the work.</span></a>
-            <a href="register.html"><strong>Virtual Open Day</strong><span>Watch on demand. See if this is right for you.</span></a>
+            <a href="open-day.html"><strong>Virtual Open Day</strong><span>Watch on demand. See if this is right for you.</span></a>
             <a href="how-it-works.html#placement"><strong>The placement pathway</strong><span>How students move from practice into real roles.</span></a>
           </div>
         </div>
@@ -121,7 +107,7 @@
           <h1 class="d-xl">Join From Home. <em>See If This Is Right For You.</em></h1>
           <p class="lede">An on-demand walk-through of our digital remote-work programmes. The skills we train, how the 12-stage curriculum works, real stories from people who've done it, and a clear picture of where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
-            <a class="btn orange" href="#video">Secure your seat <span class="arr">&rarr;</span></a>
+            <button class="btn orange" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
             <a class="arrow-link" href="#what-to-expect">What's in the open day <span class="arr">&rarr;</span></a>
           </div>
         </div>
@@ -160,7 +146,7 @@
               <h3 class="vod-prog-name">Digital Sales Programme</h3>
               <p class="vod-prog-desc">The core pathway. Remote sales coached to a professional standard. The skills, the pipeline, and how students move from practice into real work-from-home roles.</p>
               <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-top:6px">
-                <a class="btn orange sm" href="watch-on-demand.html?prog=sales">Secure your seat <span class="arr">&rarr;</span></a>
+                <button class="btn orange sm" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
                 <a class="arrow-link" href="watch-on-demand.html?prog=sales" style="color:var(--forest);border-color:var(--forest)">Watch on demand <span class="arr">&rarr;</span></a>
               </div>
             </div>
@@ -168,7 +154,7 @@
               <h3 class="vod-prog-name">Affinity for Women</h3>
               <p class="vod-prog-desc">Flexible digital careers with a community behind you. How the programme fits around family and work, and the support that keeps students moving.</p>
               <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-top:6px">
-                <a class="btn orange sm" href="watch-on-demand.html?prog=women">Secure your seat <span class="arr">&rarr;</span></a>
+                <button class="btn orange sm" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
                 <a class="arrow-link" href="watch-on-demand.html?prog=women" style="color:var(--forest);border-color:var(--forest)">Watch on demand <span class="arr">&rarr;</span></a>
               </div>
             </div>
@@ -176,7 +162,7 @@
               <h3 class="vod-prog-name">Digital Tech Sales Programme</h3>
               <p class="vod-prog-desc">Enterprise and B2B sales, coached to a professional standard. The deal cycle, the tooling, and where graduates land inside tech companies.</p>
               <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-top:6px">
-                <a class="btn orange sm" href="watch-on-demand.html?prog=tech-sales">Secure your seat <span class="arr">&rarr;</span></a>
+                <button class="btn orange sm" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
                 <a class="arrow-link" href="watch-on-demand.html?prog=tech-sales" style="color:var(--forest);border-color:var(--forest)">Watch on demand <span class="arr">&rarr;</span></a>
               </div>
             </div>
@@ -184,7 +170,7 @@
               <h3 class="vod-prog-name">AI Programme</h3>
               <p class="vod-prog-desc">Practical AI literacy for the work that comes next. The tools, the workflows, and how students use AI to do better work rather than be replaced by it.</p>
               <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;margin-top:6px">
-                <a class="btn orange sm" href="watch-on-demand.html?prog=ai">Secure your seat <span class="arr">&rarr;</span></a>
+                <button class="btn orange sm" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
                 <a class="arrow-link" href="watch-on-demand.html?prog=ai" style="color:var(--forest);border-color:var(--forest)">Watch on demand <span class="arr">&rarr;</span></a>
               </div>
             </div>
@@ -402,7 +388,7 @@
           <h2 class="d-lg">Grab a seat, <em>join us for a virtual open day</em></h2>
           <p class="lede">Secure your seat for the next Virtual Open Day. A walk-through of the programmes, the curriculum, and where six focused months could take you.</p>
           <div class="hero-actions" style="justify-content:center;margin-top:30px">
-            <a class="btn orange" href="#video">Secure your seat <span class="arr">&rarr;</span></a>
+            <button class="btn orange" type="button" data-book-seat>Secure your seat <span class="arr">&rarr;</span></button>
           </div>
         </div>
       </div>
@@ -428,7 +414,7 @@
         <div class="foot-col">
           <h4>Learn with us</h4>
           <a href="how-it-works.html">How it works</a>
-          <a href="register.html">Virtual Open Day</a>
+          <a href="open-day.html">Virtual Open Day</a>
           <a href="graduates.html">Graduate stories</a>
           <a href="https://www.trustpilot.com/review/affinitysalestraining.com">Trustpilot reviews</a>
         </div>
@@ -451,6 +437,15 @@
       </a>
     </div>
   </footer>
+
+  <!-- ============================================ book-your-seat modal -->
+  <div class="modal-overlay" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-title" aria-hidden="true">
+    <div class="modal" role="document">
+      <button class="modal-close" type="button" aria-label="Close">&times;</button>
+      <h3 id="book-title">Book your seat!</h3>
+      <div class="wj-embed-wrapper" data-webinar-hash="6mno2xu0"></div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
   <script>
@@ -491,6 +486,63 @@
       var deep = document.querySelector('.vod-tab[data-prog="' + hashProg + '"]');
       if (deep && !deep.classList.contains("active")) deep.click();
     }
+  })();
+
+  /* "Secure your seat" on this page opens the WebinarJam booking modal
+     instead of navigating away. The embed script is injected on first
+     open so the third-party form only loads when it's actually needed.
+     ?book=1 in the URL (set by "Secure your seat" buttons on other
+     pages) opens it automatically on arrival. */
+  (function () {
+    var overlay = document.getElementById("book-modal");
+    if (!overlay) return;
+    var wrapper = overlay.querySelector(".wj-embed-wrapper");
+    var injected = false;
+    var lastFocus = null;
+
+    function injectEmbed() {
+      if (injected) return;
+      injected = true;
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://event.webinarjam.com/register/6mno2xu0/embed-form?formButtonText=Register&formAccentColor=%2329b6f6&formAccentOpacity=0.95&formBgColor=%23ffffff&formBgOpacity=1";
+      wrapper.appendChild(s);
+    }
+
+    function openModal() {
+      lastFocus = document.activeElement;
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.documentElement.classList.add("nav-open"); /* locks scroll */
+      injectEmbed();
+      var close = overlay.querySelector(".modal-close");
+      if (close) close.focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.documentElement.classList.remove("nav-open");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    overlay.querySelector(".modal-close").addEventListener("click", closeModal);
+    overlay.addEventListener("click", function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+    });
+
+    document.querySelectorAll("[data-book-seat]").forEach(function (btn) {
+      btn.addEventListener("click", openModal);
+    });
+
+    /* auto-open when a "Secure your seat" button on another page sent
+       the visitor here with ?book=1, so they don't have to click again. */
+    try {
+      if (new URLSearchParams(location.search).get("book") === "1") {
+        openModal();
+      }
+    } catch (e) {}
   })();
   </script>
 </body>
