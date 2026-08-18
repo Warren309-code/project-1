@@ -183,6 +183,22 @@ button { font: inherit; color: inherit; }
   background: rgba(250, 244, 235, 0);
 }
 
+/* Centered logo-only header for funnel pages (register, open-day-brochure).
+   Mirrors the navbar band — same 76px height, same sticky paper background —
+   but shows only the brand mark, centered, with no nav and no link home
+   (the logo was a funnel leak, so it stays non-interactive here). */
+.site-head.logo-only .wrap.logo-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 76px;
+}
+.site-head.logo-only .logo-mark { width: 40px; height: auto; }
+/* the default band goes transparent on scroll (the floating .nav pill
+   normally carries the visible background then); keep it solid here. */
+.site-head.logo-only,
+.site-head.logo-only.scrolled { background: rgba(250, 244, 235, 1); }
+
 .nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
