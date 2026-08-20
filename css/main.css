@@ -807,6 +807,10 @@ body.nav-open .mob-toggle i:nth-child(3) { transform: translateY(-6.6px) rotate(
 
 /* shared embed wrapper (Endors testimonial widgets) */
 .endors-embed { margin-top: 0; }
+/* full-bleed Endors embed — sits directly in the section (no .wrap cap, no
+   gutter) so it spans the full viewport edge-to-edge, same as the old tp-wall
+   card grids did */
+.endors-embed.full-bleed { padding-inline: 0; }
 
 /* the Trustpilot sections sit the embed right under the header — pull
    the headers' bottom margins in so there's no large air gap */
