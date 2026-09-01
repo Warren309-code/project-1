@@ -155,6 +155,22 @@
 
 .wr-btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
+/* ---- Header override (deliberate exception to this file's .wr- scoping) -----
+   main.css's .site-head is `position: sticky; top: 0` sitewide, so its
+   floating logo pill can dock at the top of the viewport once you scroll
+   past it — see main.css's own comment above .site-head. On every other
+   page that's harmless because nothing else competes for that same top:0
+   slot. Here it is: .wr-urgency-strip (below) is ALSO sticky at top: 0, so
+   without this override the two would stack on top of each other the
+   moment you scroll — the transparent .logo-only header (z-index: 200)
+   would paint its logo image over/through the opaque urgency strip
+   (z-index: 40), which is exactly the "logo gets mangled on scroll" bug.
+   This funnel's design only needs ONE persistent element pinned to the
+   top — the urgency strip, which is what actually needs to stay visible
+   for scarcity/urgency — so the logo header is simply let scroll away
+   normally instead of being forced to share that slot. */
+.site-head { position: static; }
+
 /* ---- Sticky urgency strip --------------------------------------------------- */
 .wr-urgency-strip {
   background: var(--forest-deep);
