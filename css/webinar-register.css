@@ -155,27 +155,23 @@
 
 .wr-btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-/* ---- Header + urgency strip: one sticky unit (deliberate exception to this
-   file's .wr- scoping — it has to reach into main.css's .site-head) --------
-   main.css's .site-head is `position: sticky; top: 0` sitewide, so its
-   floating logo pill can dock at the top of the viewport once you scroll
-   past it — see main.css's own comment above .site-head. On every other
-   page that's harmless because nothing else competes for that same top:0
-   slot. Here, .wr-urgency-strip also needs to stay pinned to the top (it's
-   the scarcity bar) — two independent `position: sticky; top: 0` siblings
-   would fight over the same slot the moment you scroll, which is exactly
-   what caused the "logo gets mangled on scroll" bug.
-
-   Fix: .wr-sticky-top (wraps both, in the HTML) is the ONE sticky element;
-   the header and the strip are normal, non-sticky children stacked inside
-   it. They now move as a single 2-tier bar with no overlap, and the header
-   keeps its real .scrolled floating-pill behavior (toggled in
-   webinar-register.js, mirroring main.js's sitewide scroll listener) since
-   nothing about .site-head itself has to change. */
-.wr-sticky-top { position: sticky; top: 0; z-index: 200; }
-.wr-sticky-top .site-head { position: static; }
+/* ---- Header: static, not sticky (deliberate exception to this file's
+   .wr- scoping — it has to reach into main.css's .site-head) --------------
+   main.css makes .site-head `position: sticky; top: 0` sitewide so the
+   logo can dock into a floating pill once you scroll past it — see
+   main.css's own comment above .site-head. On this page the client wants
+   the opposite: the logo scrolls away with the page like normal content,
+   and only .wr-urgency-strip (below) stays pinned to the top edge as the
+   page's scarcity bar. Two independent `position: sticky; top: 0`
+   siblings previously fought over that same slot ("logo gets mangled on
+   scroll"); overriding .site-head back to static removes it from the
+   sticky picture entirely, so there's nothing left to fight with. */
+.site-head.logo-only { position: static; }
 
 .wr-urgency-strip {
+  position: sticky;
+  top: 0;
+  z-index: 200;
   background: var(--forest-deep);
   color: var(--paper);
   text-align: center;
@@ -196,14 +192,15 @@
 /* #wr-register (this section's own id) is a same-page anchor target — the
    head script's page URL and any external links can land here directly.
    Native fragment scrolling puts the target's top flush at viewport y:0
-   with no awareness that .wr-sticky-top is sitting sticky in that exact
-   spot; without this the header+urgency bar (measured ~94-97px across
-   breakpoints) lands on top of the H1 the instant the page opens on the
-   anchor. scroll-margin-top reserves that space so the browser's own
-   fragment-scroll (and any in-page anchor click) stops below the bar
-   instead of under it — 104px is the tallest measured bar height plus a
-   small buffer, not tied to a specific breakpoint. */
-.wr-hero { padding-block: var(--wr-space-lg) var(--wr-space-xl); text-align: center; scroll-margin-top: 104px; }
+   with no awareness that .wr-urgency-strip is sticky in that exact spot;
+   without this the strip lands on top of the H1 the instant the page
+   opens on the anchor. scroll-margin-top reserves that space so the
+   browser's own fragment-scroll (and any in-page anchor click) stops
+   below the strip instead of under it — 28px is the tallest measured
+   strip height (~21px) plus a small buffer, not tied to a specific
+   breakpoint. The logo header isn't sticky (see above), so it never
+   competes for this space. */
+.wr-hero { padding-block: var(--wr-space-lg) var(--wr-space-xl); text-align: center; scroll-margin-top: 28px; }
 .wr-hero__inner { max-width: 800px; margin-inline: auto; }
 .wr-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.5rem); margin-bottom: var(--wr-space-sm); }
 .wr-hero__subhead {

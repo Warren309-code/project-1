@@ -99,25 +99,21 @@ head.appendChild(script);
 </head>
 <body>
 
-<!-- Header + urgency strip are wrapped together as ONE sticky unit
-     (.wr-sticky-top, in webinar-register.css) instead of each being
-     independently `position: sticky; top: 0`. Two siblings both pinned
-     to the same top:0 fight each other the moment you scroll past the
-     header's height — that was the "logo gets mangled on scroll" bug.
-     Stacked in normal flow inside a single sticky wrapper, they move as
-     one 2-tier bar with no overlap, and the header keeps its real
-     floating-pill scroll behavior (see the .scrolled toggle in
-     webinar-register.js) instead of losing it. -->
-<div class="wr-sticky-top">
-  <header class="site-head logo-only">
-    <div class="wrap logo-bar">
-      <img class="logo-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
-    </div>
-  </header>
-
-  <div class="wr-urgency-strip" role="note">
-    FREE LIVE SESSION <span class="wr-dot">·</span> <span id="wr-urgency-day">THIS WEDNESDAY</span> <span class="wr-dot">·</span> ONLINE
+<!-- Logo header is deliberately NOT sticky on this page (overridden below
+     in webinar-register.css, since main.css makes .site-head sticky
+     sitewide): it scrolls away with the page like normal content. Only
+     the urgency strip stays pinned to the top edge as you scroll — that's
+     the one piece of persistent scarcity messaging this page needs, and
+     it's now the page's only `position: sticky; top: 0` element, so
+     there's nothing left for it to fight over the same slot with. -->
+<header class="site-head logo-only">
+  <div class="wrap logo-bar">
+    <img class="logo-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
   </div>
+</header>
+
+<div class="wr-urgency-strip" role="note">
+  FREE LIVE SESSION <span class="wr-dot">·</span> <span id="wr-urgency-day">THIS WEDNESDAY</span> <span class="wr-dot">·</span> ONLINE
 </div>
 
 <div class="wr">
