@@ -79,6 +79,26 @@ document.querySelectorAll(".wr-faq-item").forEach((item, index) => {
   });
 });
 
+/* ---- Header floating-pill scroll behavior --------------------------------
+   js/main.js (the site's shared nav/marquee script) does this same thing
+   for .site-head sitewide, but main.js isn't loaded on this page — it also
+   drives the mobile nav drawer and homepage marquee, neither of which
+   exist here, so pulling in the whole file just for this one listener
+   isn't worth it. This is a direct, minimal port of main.js's own
+   threshold logic (scrollY past the header's own height = "scrolled"), so
+   the logo header floats into the same glass pill the rest of the site
+   uses instead of just sitting flat. */
+(function () {
+  var head = document.querySelector(".site-head");
+  if (!head) return;
+  var threshold = head.offsetHeight;
+  var syncHead = function () {
+    head.classList.toggle("scrolled", window.scrollY > threshold);
+  };
+  syncHead();
+  window.addEventListener("scroll", syncHead, { passive: true });
+})();
+
 /* ---- Scroll reveal (progressive enhancement only) --------------------------
    Content is visible by default in the HTML/CSS with no JS at all. Only once
    we get here — JS has loaded and run — do we opt sections into the hidden

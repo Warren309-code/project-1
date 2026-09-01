@@ -155,23 +155,26 @@
 
 .wr-btn[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-/* ---- Header override (deliberate exception to this file's .wr- scoping) -----
+/* ---- Header + urgency strip: one sticky unit (deliberate exception to this
+   file's .wr- scoping — it has to reach into main.css's .site-head) --------
    main.css's .site-head is `position: sticky; top: 0` sitewide, so its
    floating logo pill can dock at the top of the viewport once you scroll
    past it — see main.css's own comment above .site-head. On every other
    page that's harmless because nothing else competes for that same top:0
-   slot. Here it is: .wr-urgency-strip (below) is ALSO sticky at top: 0, so
-   without this override the two would stack on top of each other the
-   moment you scroll — the transparent .logo-only header (z-index: 200)
-   would paint its logo image over/through the opaque urgency strip
-   (z-index: 40), which is exactly the "logo gets mangled on scroll" bug.
-   This funnel's design only needs ONE persistent element pinned to the
-   top — the urgency strip, which is what actually needs to stay visible
-   for scarcity/urgency — so the logo header is simply let scroll away
-   normally instead of being forced to share that slot. */
-.site-head { position: static; }
+   slot. Here, .wr-urgency-strip also needs to stay pinned to the top (it's
+   the scarcity bar) — two independent `position: sticky; top: 0` siblings
+   would fight over the same slot the moment you scroll, which is exactly
+   what caused the "logo gets mangled on scroll" bug.
 
-/* ---- Sticky urgency strip --------------------------------------------------- */
+   Fix: .wr-sticky-top (wraps both, in the HTML) is the ONE sticky element;
+   the header and the strip are normal, non-sticky children stacked inside
+   it. They now move as a single 2-tier bar with no overlap, and the header
+   keeps its real .scrolled floating-pill behavior (toggled in
+   webinar-register.js, mirroring main.js's sitewide scroll listener) since
+   nothing about .site-head itself has to change. */
+.wr-sticky-top { position: sticky; top: 0; z-index: 200; }
+.wr-sticky-top .site-head { position: static; }
+
 .wr-urgency-strip {
   background: var(--forest-deep);
   color: var(--paper);
@@ -181,55 +184,31 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  position: sticky;
-  top: 0;
-  z-index: 40;
 }
 .wr-urgency-strip .wr-dot { color: var(--orange); margin-inline: var(--wr-space-2xs); }
 
-/* ---- Hero ------------------------------------------------------------------- */
-.wr-hero { padding-block: var(--wr-space-2xl) var(--wr-space-xl); text-align: center; }
+/* ---- Hero -------------------------------------------------------------------
+   Padding tightened from the original --wr-space-2xl/xl (72px/48px) — the
+   hero now carries the form directly (see webinar-register.html), so every
+   extra pixel here pushes the fields further down the page. Reduced
+   specifically as part of the "form above the fold" fix, not a general
+   section-spacing change. */
+.wr-hero { padding-block: var(--wr-space-lg) var(--wr-space-xl); text-align: center; }
 .wr-hero__inner { max-width: 800px; margin-inline: auto; }
-.wr-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.5rem); margin-bottom: var(--wr-space-md); }
+.wr-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.5rem); margin-bottom: var(--wr-space-sm); }
 .wr-hero__subhead {
   font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1875rem);
   color: var(--muted);
-  max-width: 620px;
-  margin: 0 auto var(--wr-space-lg);
-}
-
-/* ---- A/B variant toggle ------------------------------------------------------
-   Both hero variants are always in the DOM (see the inline script at the top
-   of <head>, which sets [data-wr-variant] on <html> before first paint — no
-   flash of the wrong copy). Default to variant A with no JS/no attribute, so
-   nothing breaks if JS is disabled. */
-.wr-hero__variant[data-variant="b"] { display: none; }
-html[data-wr-variant="b"] .wr-hero__variant[data-variant="a"] { display: none; }
-html[data-wr-variant="b"] .wr-hero__variant[data-variant="b"] { display: block; }
-
-.wr-stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--wr-space-sm);
   max-width: 560px;
-  margin: 0 auto var(--wr-space-lg);
-}
-.wr-stat-row__item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.wr-stat-row__item svg { width: 22px; height: 22px; color: var(--orange); }
-.wr-stat-row__label {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.wr-stat-row__value { font-family: var(--display); font-weight: 600; font-size: 1rem; }
-
-@media (max-width: 360px) {
-  .wr-stat-row { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+  margin: 0 auto var(--wr-space-sm);
 }
 
-.wr-hero__cta { margin-bottom: var(--wr-space-md); }
+/* .wr-hero__variant / [data-wr-variant] toggle rules, .wr-stat-row and
+   .wr-hero__cta were removed from here in the "70% shorter, form above the
+   fold" rework — variant B is a redirect now (see the head script in
+   webinar-register.html), so this page only ever renders variant A's
+   single hero, and the form sits directly in the hero instead of behind a
+   CTA button. */
 .wr-event-date-line { font-weight: 700; margin-bottom: var(--wr-space-sm); }
 
 .wr-countdown {
