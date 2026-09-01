@@ -19,12 +19,16 @@ window.__WEBINAR_CONFIG__ = {
   // ---- Form -----------------------------------------------------------
   // "built-in"  → use the page's own registration form (default)
   // "embedded"  → replace the form with EMBED_SNIPPET / EMBED_URL instead
-  FORM_MODE: "built-in",
+  FORM_MODE: "embedded",
 
   // Raw HTML/script markup for a third-party embed, used only when
   // FORM_MODE = "embedded". Provider-agnostic on purpose — drop in whatever
   // webinar platform is used (WebinarKit, EverWebinar, GHL, Zoom, etc).
-  EMBED_SNIPPET: "",
+  // Same WebinarJam registration ("6mno2xu0") used for the "Secure your
+  // seat" modal on open-day-brochure.html, so both funnels book into the
+  // same webinar.
+  EMBED_SNIPPET: '<div class="wj-embed-wrapper" data-webinar-hash="6mno2xu0"></div>' +
+    '<script async src="https://event.webinarjam.com/register/6mno2xu0/embed-form?formButtonText=Register&formAccentColor=%2329b6f6&formAccentOpacity=0.95&formBgColor=%23ffffff&formBgOpacity=1"><\/script>',
   // Alternative to EMBED_SNIPPET: if you only have a URL, this renders it in
   // an iframe instead. Leave blank if you're using EMBED_SNIPPET.
   EMBED_URL: "",
