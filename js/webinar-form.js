@@ -1,7 +1,7 @@
 /**
  * webinar-form.js — built-in registration form for the Free Live Webinar
- * funnel (webinar-register.html / webinar-register-b.html): validation,
- * attribution capture, and dual-webhook submission with fallback.
+ * funnel (webinar-register.html, single URL with a client-side A/B split):
+ * validation, attribution capture, and dual-webhook submission with fallback.
  *
  * Renamed from the standalone build's form.js to avoid colliding with the
  * site's existing js/main.js and to make it obvious at a glance which
@@ -200,7 +200,7 @@ function initBuiltInForm(config) {
       event_weekday: config.EVENT_WEEKDAY,
       event_hour: config.EVENT_HOUR,
       event_timezone: config.EVENT_TIMEZONE,
-      funnel: document.body.dataset.page || "",
+      variant: document.documentElement.dataset.wrVariant || "",
       submitted_at: new Date().toISOString(),
       ...attribution,
     };

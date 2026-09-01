@@ -182,6 +182,15 @@
   margin: 0 auto var(--wr-space-lg);
 }
 
+/* ---- A/B variant toggle ------------------------------------------------------
+   Both hero variants are always in the DOM (see the inline script at the top
+   of <head>, which sets [data-wr-variant] on <html> before first paint — no
+   flash of the wrong copy). Default to variant A with no JS/no attribute, so
+   nothing breaks if JS is disabled. */
+.wr-hero__variant[data-variant="b"] { display: none; }
+html[data-wr-variant="b"] .wr-hero__variant[data-variant="a"] { display: none; }
+html[data-wr-variant="b"] .wr-hero__variant[data-variant="b"] { display: block; }
+
 .wr-stat-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

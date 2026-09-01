@@ -37,9 +37,9 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <!-- webinar-register-b intentionally omitted: it's an A/B variant of
-         this page (noindexed, canonical points here) rather than a
-         distinct page to index. -->
+    <!-- Single URL for this funnel's A/B test — the variant is chosen
+         client-side (cookie-sticky, ?v=a/?v=b forceable), not a second
+         crawlable page. -->
     <loc>https://www.affinityinstitute.io/webinar-register</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>

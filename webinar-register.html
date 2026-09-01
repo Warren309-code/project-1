@@ -3,6 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- A/B split for this funnel — one URL only (per Razvan), 50/50 client-side,
+     sticky via a cookie so a visitor always sees the same variant on repeat
+     visits, forceable with ?v=a / ?v=b (e.g. a creative that should always
+     land on one specific variant). Runs synchronously as the very first
+     thing in <head>, before anything paints, so there is never a flash of
+     the wrong variant — see the matching [data-wr-variant] CSS rules in
+     webinar-register.css for how the choice is applied to the DOM. -->
+<script>
+(function () {
+  var COOKIE_NAME = "wr_variant";
+  var COOKIE_MAX_AGE_DAYS = 180;
+
+  function readCookie(name) {
+    var match = document.cookie.match(new RegExp("(?:^|; )" + name + "=(a|b)"));
+    return match ? match[1] : null;
+  }
+  function writeCookie(name, value, days) {
+    var maxAge = days * 24 * 60 * 60;
+    document.cookie = name + "=" + value + "; path=/; max-age=" + maxAge + "; SameSite=Lax";
+  }
+
+  var forced = new URLSearchParams(location.search).get("v");
+  var variant = (forced === "a" || forced === "b") ? forced : readCookie(COOKIE_NAME);
+  if (!variant) variant = Math.random() < 0.5 ? "a" : "b";
+
+  writeCookie(COOKIE_NAME, variant, COOKIE_MAX_AGE_DAYS);
+  document.documentElement.setAttribute("data-wr-variant", variant);
+})();
+</script>
 <title>Free Live Session: The Affinity Method | Affinity Institute</title>
 <!-- PLACEHOLDER: title/description below — real headline, host and
      testimonials are all still pending (see PR description / CONTENT-TODO
@@ -52,7 +81,7 @@ script.src = "https://211802.t.hyros.com/v1/lst/universal-script?ph=ea91d3161149
 head.appendChild(script);
 </script>
 </head>
-<body data-page="webinar-a">
+<body>
 <a class="skip-link" href="#wr-main">Skip to content</a>
 
 <header class="site-head logo-only">
@@ -74,8 +103,18 @@ head.appendChild(script);
       <div class="wr-hero__inner">
         <p class="wr-eyebrow">Free Live Webinar</p>
         <!-- PLACEHOLDER: headline/subhead pending real copy -->
-        <h1>The Career Pathway Professionals Are Using to <span class="wr-accent">Move Into Digital Work</span></h1>
-        <p class="wr-hero__subhead">No prior experience needed, no tech background required. Just the same structured, coached path our real students use — walked through live, free, in one session.</p>
+        <!-- Single-URL A/B split (per Razvan): both variants are rendered in the
+             DOM; the [data-wr-variant] rules in webinar-register.css show only
+             the one that matches <html data-wr-variant="a|b">, set by the inline
+             script at the top of <head> before first paint. -->
+        <div class="wr-hero__variant" data-variant="a">
+          <h1>The Career Pathway Professionals Are Using to <span class="wr-accent">Move Into Digital Work</span></h1>
+          <p class="wr-hero__subhead">No prior experience needed, no tech background required. Just the same structured, coached path our real students use — walked through live, free, in one session.</p>
+        </div>
+        <div class="wr-hero__variant" data-variant="b">
+          <h1>The Structured, Coached Way to Finally <span class="wr-accent">Move Into Digital Work</span></h1>
+          <p class="wr-hero__subhead">Skip the trial and error. See exactly how a 12-stage, live-coached pathway takes you from stuck to placement-ready — in one free session.</p>
+        </div>
 
         <div class="wr-stat-row">
           <div class="wr-stat-row__item">

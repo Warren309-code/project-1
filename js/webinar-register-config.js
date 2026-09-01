@@ -1,12 +1,13 @@
 /**
  * webinar-register-config.js — the single "env var" layer for the Free
- * Live Webinar funnel (webinar-register.html / webinar-register-b.html).
+ * Live Webinar funnel (webinar-register.html, single URL with a
+ * client-side A/B split).
  *
  * Renamed from the standalone build's config.js, and the global it sets
  * is __WEBINAR_CONFIG__ rather than __CONFIG__, so it can't collide with
  * anything the rest of the site (or a future page) defines under that
- * more generic name. Both funnel pages load this one file, so a change
- * here (e.g. filling in the real webhook URLs) applies to both variants
+ * more generic name. Both A/B variants render from this one file, so a
+ * change here (e.g. filling in the real webhook URLs) applies to both
  * at once.
  *
  * Meta Pixel (1550787015646145) and the Hyros script are loaded directly

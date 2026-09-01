@@ -1,12 +1,12 @@
 /**
  * webinar-register.js — page bootstrap for the Free Live Webinar funnel
- * (webinar-register.html / webinar-register-b.html): countdown render
- * loop, FAQ accordion, scroll-reveal, and form wiring.
+ * (webinar-register.html, single URL with a client-side A/B split):
+ * countdown render loop, FAQ accordion, scroll-reveal, and form wiring.
  *
  * Renamed from the standalone build's main.js to avoid colliding with the
- * site's existing js/main.js — both are loaded together on these two
- * pages (js/main.js for shared nav/marquee/etc. site behavior, this file
- * for funnel-specific behavior), so the names must not clash.
+ * site's existing js/main.js — both are loaded together on this page
+ * (js/main.js for shared nav/marquee/etc. site behavior, this file for
+ * funnel-specific behavior), so the names must not clash.
  */
 import { computeEventTarget, msUntilStart, isLiveNow, breakdown, formatEventDateLine, weekdayName } from "./webinar-countdown.js";
 import { initForm } from "./webinar-form.js";
