@@ -193,7 +193,17 @@
    extra pixel here pushes the fields further down the page. Reduced
    specifically as part of the "form above the fold" fix, not a general
    section-spacing change. */
-.wr-hero { padding-block: var(--wr-space-lg) var(--wr-space-xl); text-align: center; }
+/* #wr-register (this section's own id) is a same-page anchor target — the
+   head script's page URL and any external links can land here directly.
+   Native fragment scrolling puts the target's top flush at viewport y:0
+   with no awareness that .wr-sticky-top is sitting sticky in that exact
+   spot; without this the header+urgency bar (measured ~94-97px across
+   breakpoints) lands on top of the H1 the instant the page opens on the
+   anchor. scroll-margin-top reserves that space so the browser's own
+   fragment-scroll (and any in-page anchor click) stops below the bar
+   instead of under it — 104px is the tallest measured bar height plus a
+   small buffer, not tied to a specific breakpoint. */
+.wr-hero { padding-block: var(--wr-space-lg) var(--wr-space-xl); text-align: center; scroll-margin-top: 104px; }
 .wr-hero__inner { max-width: 800px; margin-inline: auto; }
 .wr-hero h1 { font-size: clamp(2rem, 1.3rem + 3.2vw, 3.5rem); margin-bottom: var(--wr-space-sm); }
 .wr-hero__subhead {
