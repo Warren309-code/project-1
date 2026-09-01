@@ -3,6 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Webinar funnel A/B split, entry point #2 — this page IS variant B
+       for the /webinar-register funnel (see the head script over there:
+       Razvan's instruction was to point at this existing page rather than
+       build/duplicate a second one). Some of the funnel's ad traffic is
+       sent straight here instead of through /webinar-register, carrying
+       the same ?v= param — so this page needs to honor that param too,
+       or a visitor forced into variant A would land on Programmes instead
+       of the webinar page.
+
+       Deliberately narrow: this only ever runs when ?v= is present in the
+       URL. A normal visitor who clicks "Programmes" in the site nav (no
+       ?v= param, ever) hits none of this — the page renders exactly as it
+       always has. Only traffic carrying the funnel's own tracking param
+       is affected.
+
+       v=a  -> redirect to /webinar-register (forwarding all params,
+               including v=a, so that page lands on variant A
+               deterministically rather than falling back to its cookie).
+       v=b  -> this page IS variant B already; no redirect, just persist
+               the same wr_variant cookie the other entry point uses, so
+               the assignment stays consistent if this visitor later
+               reaches /webinar-register directly with no param.
+       no v -> untouched; page behaves exactly as it did before this. -->
+  <script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var forced = params.get("v");
+    if (forced !== "a" && forced !== "b") return;
+
+    function writeCookie(name, value, days) {
+      var maxAge = days * 24 * 60 * 60;
+      document.cookie = name + "=" + value + "; path=/; max-age=" + maxAge + "; SameSite=Lax";
+    }
+    writeCookie("wr_variant", forced, 180);
+
+    if (forced === "a") {
+      var qs = params.toString();
+      location.replace("/webinar-register" + (qs ? "?" + qs : ""));
+    }
+  })();
+  </script>
   <title>Our Programmes · Affinity Institute</title>
   <meta name="description" content="Affinity Institute programmes: Digital Sales, Affinity for Women, Digital Tech Sales and the AI Programme. Practical pathways into the digital economy.">
   <link rel="canonical" href="https://www.affinityinstitute.io/our-programmes">
