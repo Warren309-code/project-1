@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- A/B split for this funnel — one entry URL (/webinar-register) only,
+     50/50, sticky via a cookie so a visitor always sees the same variant
+     on repeat visits, forceable with ?v=a / ?v=b.
+
+     Variant B is NOT a second built/duplicated page — per Razvan, it
+     points at the existing our-programmes.html page instead. So "B"
+     here means "redirect there", not "render different markup" — this
+     page's own content below is always variant A. Runs synchronously as
+     the very first thing in <head>, before anything paints, so a B
+     visitor never sees this page flash before being sent on. -->
+<script>
+(function () {
+  var COOKIE_NAME = "wr_variant";
+  var COOKIE_MAX_AGE_DAYS = 180;
+  var VARIANT_B_URL = "/our-programmes";
+
+  function readCookie(name) {
+    var match = document.cookie.match(new RegExp("(?:^|; )" + name + "=(a|b)"));
+    return match ? match[1] : null;
+  }
+  function writeCookie(name, value, days) {
+    var maxAge = days * 24 * 60 * 60;
+    document.cookie = name + "=" + value + "; path=/; max-age=" + maxAge + "; SameSite=Lax";
+  }
+
+  var params = new URLSearchParams(location.search);
+  var forced = params.get("v");
+  var variant = (forced === "a" || forced === "b") ? forced : readCookie(COOKIE_NAME);
+  if (!variant) variant = Math.random() < 0.5 ? "a" : "b";
+
+  writeCookie(COOKIE_NAME, variant, COOKIE_MAX_AGE_DAYS);
+
+  if (variant === "b") {
+    // Forward any query params (utm_*, click ids, etc.) except our own
+    // ?v= so attribution survives the hop. replace() so the redirect
+    // doesn't leave a dead /webinar-register entry in browser history.
+    params.delete("v");
+    var qs = params.toString();
+    location.replace(VARIANT_B_URL + (qs ? "?" + qs : ""));
+    return;
+  }
+
+  document.documentElement.setAttribute("data-wr-variant", variant);
+})();
+</script>
+<title>Free Live Session: The Affinity Method | Affinity Institute</title>
+<!-- PLACEHOLDER: title/description below — real headline, host and
+     testimonials are all still pending (see PR description / CONTENT-TODO
+     notes). Nothing here should be mistaken for a real person's claim. -->
+<meta name="description" content="A free live session on the career pathway Affinity Institute students use to move into remote-ready digital work — no experience required. Reserve your seat.">
+<link rel="canonical" href="https://www.affinityinstitute.io/webinar-register">
+<link rel="icon" type="image/webp" href="assets/favicon.webp">
+<link rel="apple-touch-icon" href="assets/favicon.webp">
+<meta name="theme-color" content="#1a2721">
+<meta property="og:site_name" content="Affinity Institute">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Live Session: The Affinity Method | Affinity Institute">
+<meta property="og:description" content="A free live session on the career pathway Affinity Institute students use to move into remote-ready digital work — no experience required.">
+<meta property="og:url" content="https://www.affinityinstitute.io/webinar-register">
+<meta property="og:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Live Session: The Affinity Method | Affinity Institute">
+<meta name="twitter:description" content="A free live session on the career pathway Affinity Institute students use to move into remote-ready digital work — no experience required.">
+<meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/webinar-register.css">
+<script src="js/leads.js"></script>
+<script src="js/webinar-register-config.js"></script>
+<!-- Meta Pixel Code — same pixel as the rest of the site -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1550787015646145');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1550787015646145&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Hyros Script -->
+<script>
+var head = document.head;
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://211802.t.hyros.com/v1/lst/universal-script?ph=ea91d31611494e1cd3fa34e35c839dc1bb747ca4c0b2be671be1377ea8356133&tag=!clicked&ref_url=" + encodeURI(document.URL) ;
+head.appendChild(script);
+</script>
+</head>
+<body>
+
+<!-- Logo header is deliberately NOT sticky on this page (overridden below
+     in webinar-register.css, since main.css makes .site-head sticky
+     sitewide): it scrolls away with the page like normal content. Only
+     the urgency strip stays pinned to the top edge as you scroll — that's
+     the one piece of persistent scarcity messaging this page needs, and
+     it's now the page's only `position: sticky; top: 0` element, so
+     there's nothing left for it to fight over the same slot with. -->
+<header class="site-head logo-only">
+  <div class="wrap logo-bar">
+    <img class="logo-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
+  </div>
+</header>
+
+<div class="wr-urgency-strip" role="note">
+  FREE LIVE SESSION <span class="wr-dot">·</span> <span id="wr-urgency-day">THIS WEDNESDAY</span> <span class="wr-dot">·</span> ONLINE
+</div>
+
+<div class="wr">
+
+  <main id="wr-main">
+
+    <!-- ============================ HERO + FORM ============================
+         Rebuilt per Razvan: ~70% shorter overall, and the form itself (not
+         just a CTA button that scrolls to it) is now the first thing after
+         the subhead, so it sits above the fold instead of several sections
+         down. Variant B no longer renders here at all — it's a redirect,
+         handled entirely by the head script above — so this section only
+         ever needs variant A's copy. -->
+    <section class="wr-hero wr-container" id="wr-register">
+      <div class="wr-hero__inner">
+        <p class="wr-eyebrow">Free Live Webinar</p>
+        <h1>The Career Pathway Professionals Are Using to <span class="wr-accent">Move Into Digital Work</span></h1>
+        <p class="wr-hero__subhead">No experience or tech background needed — the same structured, coached path our students use, walked through live and free.</p>
+
+        <div class="wr-form-panel" data-form-panel style="margin-top:var(--wr-space-sm);">
+          <p class="wr-form-panel__event-line" id="wr-form-event-line">This Wednesday · 7:00 PM UK Time · Online via Zoom</p>
+
+          <!-- Built-in form. When FORM_MODE = "embedded", the inline script
+               immediately below swaps this container's content for
+               config.EMBED_SNIPPET / EMBED_URL before it paints — see the
+               comment on that script for why this can't live in
+               webinar-form.js. -->
+          <form id="wr-registration-form" novalidate>
+            <div class="wr-form-banner" data-form-banner hidden></div>
+
+            <div class="wr-field-row">
+              <div class="wr-field" data-field>
+                <label for="wr-first-name">First name</label>
+                <input type="text" id="wr-first-name" name="first_name" autocomplete="given-name" required>
+                <p class="wr-field-error"></p>
+              </div>
+              <div class="wr-field" data-field>
+                <label for="wr-last-name">Last name</label>
+                <input type="text" id="wr-last-name" name="last_name" autocomplete="family-name" required>
+                <p class="wr-field-error"></p>
+              </div>
+            </div>
+
+            <div class="wr-field" data-field>
+              <label for="wr-email">Email address</label>
+              <input type="email" id="wr-email" name="email" autocomplete="email" required>
+              <p class="wr-field-error"></p>
+            </div>
+
+            <div class="wr-field" data-field>
+              <label for="wr-phone">Phone number</label>
+              <div class="wr-phone-field">
+                <select id="wr-phone-country" aria-label="Country code">
+                  <option value="+44" selected>🇬🇧 +44</option>
+                  <option value="+353">🇮🇪 +353</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+61">🇦🇺 +61</option>
+                </select>
+                <input type="tel" id="wr-phone" name="phone" autocomplete="tel-national" required>
+              </div>
+              <p class="wr-field-error"></p>
+            </div>
+
+            <!-- Honeypot — hidden from real visitors, often filled by bots -->
+            <div class="wr-honeypot-field" aria-hidden="true">
+              <label for="wr-company">Company</label>
+              <input type="text" id="wr-company" name="company" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="wr-btn wr-btn--primary" data-cta="form-submit">Reserve My Free Seat</button>
+            <p class="wr-form-disclaimer">We'll only use these details to send your session link and related reminders.</p>
+          </form>
+
+          <div class="wr-form-success" data-form-success hidden>
+            <div class="wr-form-success__icon">✓</div>
+            <h3>You're on the list!</h3>
+            <p>Check your inbox for your confirmation and join link.</p>
+          </div>
+        </div>
+        <script>
+          // Runs synchronously at this exact point in the DOM — before the rest
+          // of the page below it is parsed/painted — so an "embedded" mode swap
+          // never flashes the built-in form first. Deliberately NOT part of
+          // webinar-form.js (which loads as a deferred module) for that reason.
+          (function () {
+            var cfg = window.__WEBINAR_CONFIG__ || {};
+            if (cfg.FORM_MODE !== "embedded") return;
+            var container = document.getElementById("wr-registration-form");
+            if (!container) return;
+            if (cfg.EMBED_SNIPPET) {
+              container.outerHTML = cfg.EMBED_SNIPPET;
+            } else if (cfg.EMBED_URL) {
+              var iframe = document.createElement("iframe");
+              iframe.src = cfg.EMBED_URL;
+              iframe.style.width = "100%";
+              iframe.style.minHeight = "420px";
+              iframe.style.border = "0";
+              iframe.title = "Event registration";
+              container.replaceWith(iframe);
+            }
+            // If FORM_MODE is "embedded" but neither is configured, the built-in
+            // form is left in place on purpose — a working form beats a blank one.
+          })();
+        </script>
+
+        <p class="wr-event-date-line" id="wr-event-date-line" aria-live="polite">This Wednesday · 7:00 PM UK Time</p>
+
+        <div class="wr-countdown" id="wr-countdown" aria-live="off">
+          <p class="wr-countdown__label">Session starts in</p>
+          <div class="wr-countdown__box"><div class="wr-countdown__digits" id="wr-cd-days">00</div><div class="wr-countdown__unit">Days</div></div>
+          <div class="wr-countdown__box"><div class="wr-countdown__digits" id="wr-cd-hours">00</div><div class="wr-countdown__unit">Hours</div></div>
+          <div class="wr-countdown__box"><div class="wr-countdown__digits" id="wr-cd-minutes">00</div><div class="wr-countdown__unit">Mins</div></div>
+          <div class="wr-countdown__box"><div class="wr-countdown__digits" id="wr-cd-seconds">00</div><div class="wr-countdown__unit">Secs</div></div>
+        </div>
+        <p class="wr-countdown-live-banner" id="wr-live-banner">● Live now — join before the grace window closes</p>
+
+        <div class="wr-trust-row">
+          <!-- PLACEHOLDER: rating figure -->
+          <span class="wr-trust-badge"><span class="wr-stars">★★★★★</span> 4.9 Average Rating</span>
+          <span class="wr-trust-badge">500+ Applicants</span>
+          <span class="wr-trust-badge">12-Stage Curriculum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTE for maintainers: the live-training photo section, before/after,
+         who's-this-for, second photo section, testimonials, certificate
+         photo section, proof strip and final CTA that used to live here
+         were all cut in the "~70% shorter, form above the fold" rework
+         (per Razvan). Their images are still in assets/webinar/ — nothing
+         was deleted from disk, so they're easy to bring back piecemeal if
+         a future revision wants any of them. -->
+
+    <!-- ============================ HOW IT WORKS ============================ -->
+    <section class="wr-section wr-section--alt wr-reveal">
+      <div class="wr-container">
+        <div class="wr-center">
+          <p class="wr-eyebrow">How It Works</p>
+          <h2 class="wr-section-title">A 30-Second Explainer</h2>
+          <p class="wr-section-lede wr-center">The full breakdown happens live in the session. Here's the shape of it, so you know what you're walking into.</p>
+        </div>
+        <div class="wr-steps">
+          <div class="wr-step">
+            <div class="wr-step__number">1</div>
+            <h3>Pick the pathway that matches where you want to go</h3>
+            <p>Digital sales, tech sales, AI-enabled workflows, or a flexible operations track — you choose the direction, based on where you're starting from.</p>
+          </div>
+          <div class="wr-step">
+            <div class="wr-step__number">2</div>
+            <h3>Learn the skill live, with real coaching</h3>
+            <p>Structured modules, live calls, and one-to-one feedback — not a content library you work through alone.</p>
+          </div>
+          <div class="wr-step">
+            <div class="wr-step__number">3</div>
+            <h3>Leave with a placement-ready outcome</h3>
+            <p>A verified project or portfolio, career-readiness checkpoints, and support moving toward real opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="wr-section wr-section--alt wr-reveal">
+      <div class="wr-container">
+        <div class="wr-center">
+          <p class="wr-eyebrow">Questions People Always Ask</p>
+          <h2 class="wr-section-title">Frequently Asked Questions</h2>
+        </div>
+        <!-- PLACEHOLDER: answer copy — categories are realistic, wording needs admissions review -->
+        <div class="wr-faq" id="wr-faq">
+          <div class="wr-faq-item" data-open="false">
+            <button class="wr-faq-item__question" aria-expanded="false">
+              I have a full-time job and limited evenings. Can I actually fit this around my work?
+              <span class="wr-faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="wr-faq-item__answer"><div class="wr-faq-item__answer-inner"><p>Yes — the pathway is built around a few focused hours a week, with live sessions scheduled outside standard working hours. We'll cover exactly how this fits around a job in the session itself.</p></div></div>
+          </div>
+          <div class="wr-faq-item" data-open="false">
+            <button class="wr-faq-item__question" aria-expanded="false">
+              I've tried online courses before and didn't finish. How is this different?
+              <span class="wr-faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="wr-faq-item__answer"><div class="wr-faq-item__answer-inner"><p>This isn't a self-paced video library — it's live coaching, structured checkpoints, and a cohort around you. The structure is specifically designed to solve the "never finished it" problem.</p></div></div>
+          </div>
+          <div class="wr-faq-item" data-open="false">
+            <button class="wr-faq-item__question" aria-expanded="false">
+              Do I need money upfront to attend, or to be technical?
+              <span class="wr-faq-item__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="wr-faq-item__answer"><div class="wr-faq-item__answer-inner"><p>The live session itself is completely free, and no technical background is required. Programme pathways and any associated costs are only covered if you choose to explore them after the session.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Final CTA section (and the second #wr-event-date-line-2 it held) was
+         cut in the "70% shorter" rework — the form is already the first
+         thing on the page now, so a second CTA at the bottom was purely
+         redundant. webinar-register.js's renderEventDate() still safely
+         no-ops on the now-absent #wr-event-date-line-2 selector. -->
+
+  </main>
+
+</div><!-- /.wr -->
+
+<!-- ============================ FOOTER (shared site footer) ============================ -->
+<footer class="site-foot on-dark">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img class="foot-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
+        <p>Ireland's home for digital remote work. Verified skills, honest mentorship and a community built around people, not just programmes.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot-word" aria-hidden="true"><span>Affinity Institute</span></div>
+  <div class="wrap foot-legal">
+    <div>
+      <span>&copy; 2026 Affinity Institute. All rights reserved.</span>
+      <!-- This page talks about career outcomes (placement-ready, verified
+           skills), so the standard site footer disclaimer is extended with
+           an explicit no-guarantee line — same wording used on the
+           standalone build, still pending a legal review pass before this
+           goes live behind paid traffic. -->
+      <p style="margin:10px 0 0;max-width:54em;font-size:12px;color:rgba(250,244,235,0.42);line-height:1.5;">This free session is educational in nature and does not guarantee any specific career outcome, job offer, or income. Results discussed by past participants are individual experiences and are not typical or guaranteed for every attendee. Any programme referenced during or after the session is entirely optional to pursue. This site is not a part of the Facebook&trade; website or Facebook&trade; Inc. Additionally, this site is NOT endorsed by Facebook&trade; in any way. FACEBOOK&trade; is a trademark of FACEBOOK&trade;, Inc.</p>
+      <p style="margin:10px 0 0;max-width:54em;font-size:12px;color:rgba(250,244,235,0.42);line-height:1.5;">By registering, you agree to receive session-related communications by email and, if provided, by phone or SMS. You can unsubscribe at any time.</p>
+    </div>
+    <a class="foot-credit" href="https://kelvodesign.com" target="_blank" rel="noopener" aria-label="Web design by Kelvo Design">
+      <img src="assets/kelvodesign-logo.webp" alt="Kelvo Design" height="30" loading="lazy">
+    </a>
+  </div>
+</footer>
+
+<script type="module" src="js/webinar-register.js"></script>
+</body>
+</html>
