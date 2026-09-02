@@ -13,6 +13,15 @@
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/webinar-register.css">
 <script src="js/leads.js"></script>
+<!-- Vercel Web Analytics — script-tag setup (this is a static site, no
+     @vercel/analytics package). Web Analytics must be enabled for this
+     project in the Vercel dashboard for /_vercel/insights/script.js to
+     respond. Base pageview tracking only — the source-specific opt-in
+     event fires separately, near the bottom of this page. -->
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <!-- Meta Pixel Code — same pixel as the rest of the site -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -93,6 +102,30 @@ head.appendChild(script);
      unconditionally on load is the correct signal — no gating needed. -->
 <script>
 if (typeof window.fbq === "function") { window.fbq("track", "Lead"); }
+</script>
+
+<!-- Vercel Web Analytics — source-specific opt-in event. This one
+     thank-you URL is shared by every funnel that ends in a webinar
+     opt-in, so a plain pageview here can't tell them apart. Whatever
+     sends the visitor here must append ?src=<key> below so the opt-in
+     shows up as a distinct event per funnel in Vercel Analytics — e.g.
+     configure webinar-register.html's WebinarJam embed and the
+     open-day-brochure.html "Secure your seat" modal with their own
+     redirect/thank-you URL (registration-complete.html?src=webinar-a and
+     ?src=brochure respectively). Unknown or missing src still records a
+     conversion instead of being dropped, just not attributed to a funnel. -->
+<script>
+(function () {
+  var OPT_IN_SOURCES = {
+    "webinar-a": "Opt-in: Webinar (Variant A)",
+    "brochure": "Opt-in: Open Day Brochure",
+  };
+  var src = new URLSearchParams(window.location.search).get("src");
+  var eventName = OPT_IN_SOURCES[src] || "Opt-in: Unknown Source";
+  if (typeof window.va === "function") {
+    window.va("event", { name: eventName, data: { src: src || "" } });
+  }
+})();
 </script>
 
 </body>
