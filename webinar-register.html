@@ -71,6 +71,37 @@
 <link rel="stylesheet" href="css/webinar-register.css">
 <script src="js/leads.js"></script>
 <script src="js/webinar-register-config.js"></script>
+<!-- Vercel Web Analytics — script-tag setup (this is a static site, no
+     @vercel/analytics package). Placed after the variant-split script
+     above, so a variant-B visitor (already redirected to our-programmes
+     before this point) never fires a pageview here — every pageview
+     recorded on this URL is variant A. Web Analytics must be enabled for
+     this project in the Vercel dashboard for /_vercel/insights/script.js
+     to respond. -->
+<script>
+window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Opt-in submit tracking for the WebinarJam embed. The embed is a
+     cross-origin iframe, so we can't attach a submit listener to the form
+     itself — but on a successful registration, WebinarJam's own embed
+     script sends window.postMessage({func:'redirect', url:...}) to this
+     page to trigger the (WebinarJam-configured) post-signup redirect.
+     We piggyback on that same message, read-only, to fire a Vercel
+     Analytics event, so submits are counted here even if the WebinarJam
+     redirect URL is never pointed at registration-complete.html, or if
+     the same webinar hash ends up shared across funnels (making a
+     registration-complete.html ?src= param alone ambiguous). -->
+<script>
+window.addEventListener("message", function (event) {
+  if (typeof event.origin !== "string" || event.origin.indexOf("webinarjam.com") === -1) return;
+  var data = event.data;
+  if (!data || data.func !== "redirect") return;
+  if (typeof window.va === "function") {
+    window.va("event", { name: "Opt-in Submitted: Webinar (Variant A)" });
+  }
+});
+</script>
 <!-- Meta Pixel Code — same pixel as the rest of the site -->
 <script>
 !function(f,b,e,v,n,t,s)
