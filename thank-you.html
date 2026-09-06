@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank You · Affinity Institute</title>
+  <meta name="description" content="Your registration is complete. Watch the video for your next steps and add the Virtual Open Day to your calendar.">
+  <link rel="canonical" href="https://www.affinityinstitute.io/thank-you">
+  <link rel="icon" type="image/webp" href="assets/favicon.webp">
+  <link rel="apple-touch-icon" href="assets/favicon.webp">
+  <meta property="og:site_name" content="Affinity Institute">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thank You · Affinity Institute">
+  <meta property="og:description" content="Your registration is complete. Watch the video for your next steps and add the Virtual Open Day to your calendar.">
+  <meta property="og:url" content="https://www.affinityinstitute.io/thank-you">
+  <meta property="og:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thank You · Affinity Institute">
+  <meta name="twitter:description" content="Your registration is complete. Watch the video for your next steps and add the Virtual Open Day to your calendar.">
+  <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/leads.js"></script>
+
+  <!-- Page-specific styles: confirmation banner + numbered steps. Scoped
+       to this page only; main.css is untouched. -->
+  <style>
+    /* logo-only header: the whole bar is 60% of the default 76px (~46px)
+       on mobile and scales up linearly with viewport width to the full
+       76px at the desktop breakpoint (~960px). The logo tracks it. */
+    .site-head.logo-only .wrap.logo-bar {
+      min-height: clamp(46px, 5.13vw + 26.8px, 76px);
+    }
+    .site-head.logo-only .logo-mark {
+      width: clamp(24px, 2.73vw + 13.8px, 40px);
+      height: auto;
+    }
+    /* ---- confirmation banner ---- */
+    .ty-banner {
+      background: var(--forest-deep);
+      color: var(--paper);
+      padding: clamp(18px, 2.73vw, 33px) 0 clamp(15px, 2.27vw, 27px);
+      text-align: center;
+    }
+    .ty-banner .wrap { max-width: 820px; }
+    .ty-banner h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.04;
+      font-size: clamp(30px, 4.5vw, 48px);
+      text-wrap: balance;
+    }
+    .ty-banner .ty-complete {
+      margin: 26px 0 0;
+      font-size: clamp(11.25px, 1.35vw, 14.25px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--orange-soft);
+    }
+    .ty-banner .ty-sub {
+      margin: 12px 0 0;
+      font-size: clamp(11.25px, 1.35vw, 14.25px);
+      font-weight: 600;
+      color: var(--paper);
+    }
+    .ty-banner .ty-email {
+      margin: 0;
+      font-size: clamp(10.88px, 1.2vw, 12.75px);
+      color: var(--muted-on-dark);
+    }
+
+    /* ---- steps ---- */
+    .ty-steps { padding: clamp(20px, 2.8vw, 35px) 0; }
+    .ty-steps .wrap { max-width: 760px; }
+    .ty-steps-title {
+      margin: 0 0 clamp(10px, 1.3vw, 16px);
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(22px, 2.6vw, 30px);
+      letter-spacing: -0.01em;
+      text-align: center;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .ty-steps-intro {
+      margin: 0 0 clamp(12px, 1.6vw, 18px);
+      text-align: center;
+      font-size: clamp(15px, 1.7vw, 18px);
+      color: var(--muted);
+    }
+    .ty-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(18px, 2.4vw, 28px);
+      align-items: start;
+      padding: clamp(20px, 3vw, 28px) 0;
+      border-top: 1px solid var(--cream-line);
+    }
+    .ty-step:last-child { border-bottom: 1px solid var(--cream-line); }
+    .ty-step-num {
+      flex: 0 0 auto;
+      width: clamp(44px, 5vw, 56px);
+      height: clamp(44px, 5vw, 56px);
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1;
+    }
+    .ty-step-body { min-width: 0; }
+    .ty-step-body h3 {
+      margin: 4px 0 0;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(20px, 2.4vw, 26px);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .ty-step-body p {
+      margin: 12px 0 0;
+      font-size: clamp(14.5px, 1.6vw, 16.5px);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* step 1 video — the container holds a stable 16:9 box from first
+       paint (aspect-ratio), so the Wistia web component swapping from its
+       loading skeleton to the real player can't change the box height and
+       trigger a layout-shift / scroll jump. */
+    .ty-video {
+      margin-top: 22px;
+      border-radius: var(--r-photo);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: #000;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+    }
+    .ty-video wistia-player { display: block; width: 100%; height: 100%; }
+    wistia-player[media-id='h90wm5sa0j']:not(:defined) {
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h90wm5sa0j/swatch');
+      display: block; filter: blur(5px);
+      width: 100%; height: 100%;
+    }
+
+    /* step 2 image — matches the homepage VOD promo rendering exactly:
+       4/3 aspect, object-fit cover, photo radius, lift shadow. */
+    .ty-step-img {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--r-photo);
+      box-shadow: var(--shadow-lift);
+      margin-top: 22px;
+      display: block;
+    }
+
+    @media (max-width: 560px) {
+      .ty-step { grid-template-columns: 1fr; gap: 14px; }
+      .ty-step-num { width: 44px; height: 44px; font-size: 20px; }
+    }
+  </style>
+
+  <!-- Vercel Web Analytics — script-tag setup (this is a static site, no
+       @vercel/analytics package). Web Analytics must be enabled for this
+       project in the Vercel dashboard for /_vercel/insights/script.js to
+       respond. -->
+  <script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1550787015646145');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1550787015646145&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <script>
+  fbq('track', 'Lead');
+  </script>
+  <!-- Hyros Script -->
+  <script>
+  var head = document.head;
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = "https://211802.t.hyros.com/v1/lst/universal-script?ph=ea91d31611494e1cd3fa34e35c839dc1bb747ca4c0b2be671be1377ea8356133&tag=!clicked&ref_url=" + encodeURI(document.URL) ;
+  head.appendChild(script);
+  </script>
+</head>
+<body>
+  <header class="site-head logo-only">
+    <div class="wrap logo-bar">
+      <img class="logo-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================ confirmation banner -->
+    <section class="ty-banner">
+      <div class="wrap">
+        <h1>You're in. <em>See you at the Virtual Open Day.</em></h1>
+        <p class="ty-complete">Your registration is now complete</p>
+        <p class="ty-sub">Watch the video below for your next steps.</p>
+        <p class="ty-email">Check your email for your confirmation and calendar invite.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================== steps -->
+    <section class="ty-steps">
+      <div class="wrap">
+        <h2 class="ty-steps-title">Your checklist</h2>
+        <p class="ty-steps-intro">Follow these two steps to get the most out of the Virtual Open Day.</p>
+
+        <!-- step 1 -->
+        <div class="ty-step">
+          <div class="ty-step-num">1</div>
+          <div class="ty-step-body">
+            <h3>Watch this video</h3>
+            <p>A quick walk-through of what's coming and how to get ready before the Open Day begins.</p>
+            <div class="ty-video">
+              <script src="https://fast.wistia.com/player.js" async></script>
+              <script src="https://fast.wistia.com/embed/h90wm5sa0j.js" async type="module"></script>
+              <wistia-player media-id="h90wm5sa0j" aspect="1.7777777777777777" player-color="#22322a"></wistia-player>
+            </div>
+          </div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="ty-step">
+          <div class="ty-step-num">2</div>
+          <div class="ty-step-body">
+            <h3>Add the event to your calendar</h3>
+            <p>Check the email we sent you with the calendar invite, and add the Virtual Open Day to your calendar so you don't miss it.</p>
+            <img class="ty-step-img" src="assets/photos/event-crowd-2.webp" alt="Affinity members at a live event" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================== footer -->
+  <footer class="site-foot on-dark">
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <img class="foot-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
+          <p>Ireland's home for digital remote work. Verified skills, honest mentorship and a community built around people, not just programmes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot-word" aria-hidden="true"><span>Affinity Institute</span></div>
+    <div class="wrap foot-legal">
+      <div>
+        <span>&copy; 2026 Affinity Institute. All rights reserved.</span>
+        <p style="margin:10px 0 0;max-width:54em;font-size:12px;color:rgba(250,244,235,0.42);line-height:1.5;">This site is not a part of the Facebook&trade; website or Facebook&trade; Inc. Additionally, this site is NOT endorsed by Facebook&trade; in any way. FACEBOOK&trade; is a trademark of FACEBOOK&trade;, Inc.</p>
+      </div>
+      <a class="foot-credit" href="https://kelvodesign.com" target="_blank" rel="noopener" aria-label="Web design by Kelvo Design">
+        <img src="assets/kelvodesign-logo.webp" alt="Kelvo Design" height="30" loading="lazy">
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  /* Pin scroll to the top while the async Wistia scripts define the
+     <wistia-player> custom element. The player swap can change the
+     page height for a frame and nudge the scroll position; restoring
+     scrollY to the top during that window keeps the page from jumping. */
+  (function () {
+    var player = document.querySelector(".ty-video wistia-player");
+    if (!player) return;
+    function defined() { return customElements && customElements.get("wistia-player"); }
+    if (defined()) return;
+    var stop = function () { if (window.scrollY > 0 && !defined()) window.scrollTo(0, 0); };
+    window.addEventListener("scroll", stop, { passive: true });
+    var t = setInterval(function () {
+      if (defined()) { clearInterval(t); window.removeEventListener("scroll", stop); }
+    }, 50);
+    setTimeout(function () { clearInterval(t); window.removeEventListener("scroll", stop); }, 4000);
+  })();
+  </script>
+</body>
+</html>

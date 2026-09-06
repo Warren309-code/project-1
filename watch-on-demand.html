@@ -19,6 +19,21 @@
   <meta name="twitter:description" content="Watch the Affinity Institute Virtual Open Day on demand, then secure your seat or talk to an enrollment advisor.">
   <meta name="twitter:image" content="https://www.affinityinstitute.io/assets/affinity-social.webp">
   <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* scoped spacing tweaks for this page only; main.css untouched. */
+    /* bring the heading up: less top padding above the hero heading. */
+    .page-hero { padding-top: clamp(28px, 4vw, 52px); }
+    /* 1) the gap between the subheading (lede) and the video now matches
+       the gap below the video to the end of its section
+       (calc(var(--sect) * 0.465)). */
+    .page-hero { padding-bottom: calc(var(--sect) * 0.465); }
+    /* 2) the space below the video to the end of its section: 75% of the
+       .sect.tight default (calc(var(--sect) * 0.62) → * 0.465). */
+    .sect.tight.film { padding-bottom: calc(var(--sect) * 0.465); }
+    /* 3) match that same height for the gap between the video section and
+       the "Apply for this programme" text (the apply section's top padding). */
+    .sect.apply { padding-top: calc(var(--sect) * 0.465); }
+  </style>
   <script src="js/leads.js"></script>
   <!-- Meta Pixel Code -->
   <script>
@@ -48,52 +63,9 @@
 </head>
 <body>
 
-  <header class="site-head">
-    <div class="wrap nav">
-      <a class="brand" href="index.html" aria-label="Affinity Institute home">
-        <img src="assets/brand-mark.webp" alt="Affinity Institute">
-      </a>
-
-      <nav class="menu" aria-label="Primary">
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Courses
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop cols">
-            <a href="programmes.html#sales"><strong>Digital Sales Programme</strong><span>The core pathway. Remote sales, coached to a professional standard.</span></a>
-            <a href="programmes.html#women"><strong>Affinity for Women</strong><span>Flexible digital careers with a community behind you.</span></a>
-            <a href="programmes.html#tech-sales"><strong>Digital Tech Sales Programme</strong><span>Enterprise & B2B sales, coached to a professional standard.</span></a>
-            <a href="programmes.html#ai"><strong>AI Programme</strong><span>Practical AI literacy for the work that comes next.</span></a>
-          </div>
-        </div>
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Learn with us
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop cols">
-            <a href="how-it-works.html"><strong>How the curriculum works</strong><span>A 12-stage journey from first login to graduation.</span></a>
-            <a href="index.html#community"><strong>Community & events</strong><span>Trips, dinners, roadshows. The room around the work.</span></a>
-            <a href="open-day-brochure.html"><strong>Virtual Open Day</strong><span>Secure your seat. See if this is right for you.</span></a>
-            <a href="how-it-works.html#placement"><strong>The placement pathway</strong><span>How students move from practice into real roles.</span></a>
-          </div>
-        </div>
-        <div class="menu-item">
-          <button class="menu-btn" data-drop type="button">Our graduates
-            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <div class="drop">
-            <a href="graduates.html"><strong>Graduate stories</strong><span>The people, the numbers and the words behind them.</span></a>
-            <a href="graduates.html#employers"><strong>Hire our graduates</strong><span>Candidates developed before they reach your team.</span></a>
-          </div>
-        </div>
-        <a class="menu-btn" href="https://affinityapparel.co/" target="_blank" rel="noopener">Apparel</a>
-        <div class="menu-cta"><a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a></div>
-      </nav>
-
-      <div class="nav-cta">
-        <a class="btn orange" href="https://form.typeform.com/to/mUzyHsig">Apply here</a>
-        <button class="mob-toggle" data-mob-toggle type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
-      </div>
+  <header class="site-head logo-only">
+    <div class="wrap logo-bar">
+      <img class="logo-mark" src="assets/brand-mark.webp" alt="Affinity Institute">
     </div>
   </header>
 
@@ -105,13 +77,13 @@
         <div class="ctr-head rv">
           <p class="label no-dash">Watch on demand</p>
           <h1 class="d-xl" id="vod-prog-name">Watch the Virtual Open Day <em>in your own time</em></h1>
-          <p class="lede">Press play whenever suits. The full walk-through, then a short form to secure your seat or talk to an enrollment advisor.</p>
+          <p class="lede">Press play now to get the full walk-through. Then a short form to secure your seat or talk to an enrollment advisor.</p>
         </div>
       </div>
     </section>
 
     <!-- ============================================ on-demand video -->
-    <section class="sect tight film" id="video" style="padding-top:clamp(20px,3vw,32px)">
+    <section class="sect tight film" id="video" style="padding-top:0">
       <div class="wrap">
         <!-- Placeholder until the first Virtual Open Day is recorded.
              Swap this block for the per-programme Wistia embed when the
