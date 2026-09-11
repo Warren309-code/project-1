@@ -33,6 +33,24 @@
     /* 3) match that same height for the gap between the video section and
        the "Apply for this programme" text (the apply section's top padding). */
     .sect.apply { padding-top: calc(var(--sect) * 0.465); }
+
+    /* simple video frame — fixed 16:9 box, rounded corners, nothing else
+       moving/animating around the embed (same as the thank-you page). */
+    .tv-frame {
+      margin-inline: auto;
+      max-width: 1000px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: calc(var(--r-photo) + 8px);
+      overflow: hidden;
+      background: #000;
+    }
+    .tv-frame wistia-player { display: block; width: 100%; height: 100%; }
+    /* fill the frame with the blurred poster until the player defines. */
+    wistia-player[media-id='ofhvzczswz']:not(:defined) {
+      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/ofhvzczswz/swatch');
+      filter: blur(5px);
+    }
   </style>
   <script src="js/leads.js"></script>
   <!-- Meta Pixel Code -->
@@ -85,12 +103,11 @@
     <!-- ============================================ on-demand video -->
     <section class="sect tight film" id="video" style="padding-top:0">
       <div class="wrap">
-        <!-- Virtual Open Day recording (Wistia). The .film-frame wrapper
-             already holds a fixed 16:9 box (aspect-ratio), so no pre-load
-             placeholder is needed — just the plain embed. -->
+        <!-- Virtual Open Day recording (Wistia) — plain embed in a simple
+             rounded-corner frame; no reveal animation around it. -->
         <script src="https://fast.wistia.com/player.js" async></script>
         <script src="https://fast.wistia.com/embed/ofhvzczswz.js" async type="module"></script>
-        <div class="film-frame rv rv-scale" data-rv-delay="120" style="max-width:1000px;margin-inline:auto">
+        <div class="tv-frame">
           <wistia-player media-id="ofhvzczswz" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
