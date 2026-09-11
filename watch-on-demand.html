@@ -85,14 +85,12 @@
     <!-- ============================================ on-demand video -->
     <section class="sect tight film" id="video" style="padding-top:0">
       <div class="wrap">
-        <!-- Placeholder until the first Virtual Open Day is recorded.
-             Swap this block for the per-programme Wistia embed when the
-             recordings land. The ?prog= param already drives the heading. -->
-        <div class="film-frame rv rv-scale" data-rv-delay="120" style="max-width:1000px;margin-inline:auto;position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--forest)">
-          <div style="text-align:center;padding:24px;max-width:32em">
-            <p style="font-family:var(--display);font-size:clamp(20px,3.4vw,30px);font-weight:500;color:var(--paper);line-height:1.25;margin:0 0 10px">The video will be available after the first open day.</p>
-            <p style="margin:0;font-size:15px;color:rgba(250,244,235,0.7);line-height:1.5">Check back soon — the full recording for this programme lands here once it's run.</p>
-          </div>
+        <!-- Virtual Open Day recording (Wistia). -->
+        <script src="https://fast.wistia.com/player.js" async></script>
+        <script src="https://fast.wistia.com/embed/ofhvzczswz.js" async type="module"></script>
+        <style>wistia-player[media-id='ofhvzczswz']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/ofhvzczswz/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
+        <div class="film-frame rv rv-scale" data-rv-delay="120" style="max-width:1000px;margin-inline:auto">
+          <wistia-player media-id="ofhvzczswz" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
     </section>
@@ -105,13 +103,14 @@
           <h2 class="d-lg">Ready to <em>secure your seat?</em></h2>
           <p class="lede">A short application and an honest conversation about where you are. The team reads every response personally and usually replies within a day.</p>
         </div>
-        <!-- PLACEHOLDER: reuses the existing application typeform (mUzyHsig).
-             Swap data-tf-widget for a dedicated scheduling form when ready. -->
+        <!-- Calendly scheduling widget. -->
         <div class="tf-card rv" style="max-width:760px;margin-inline:auto;margin-top:30px">
-          <div class="tf-embed" data-tf-widget="mUzyHsig" data-tf-opacity="100" data-tf-auto-resize data-tf-hide-headers data-tf-transitive-search-params data-tf-iframe-props="title=Affinity application form" style="width:100%;min-height:680px;"></div>
+          <div class="calendly-embed" style="width:100%;min-height:680px;">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/fola-affinityinstitute/45min?utm_content=sender_id%3D82a0f36c-541f-451c-8598-d9b8f2264aeb&month=2026-09" style="min-width:320px;height:680px;"></div>
+          </div>
         </div>
       </div>
-      <script src="https://embed.typeform.com/next/embed.js" defer></script>
+      <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
     </section>
 
     <!-- ============================================ back to the open day -->

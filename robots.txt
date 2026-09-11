@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /archive/
 
 # Affinity Institute — site favicon (square webp)
 # Favicon: https://www.affinityinstitute.io/assets/favicon.webp

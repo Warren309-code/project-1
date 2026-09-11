@@ -145,24 +145,32 @@
       width: 100%;
     }
     .ty-video wistia-player { display: block; width: 100%; height: 100%; }
-    wistia-player[media-id='h90wm5sa0j']:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h90wm5sa0j/swatch');
+    wistia-player[media-id='b8eciz1m5l']:not(:defined) {
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/b8eciz1m5l/swatch');
       display: block; filter: blur(5px);
       width: 100%; height: 100%;
     }
 
-    /* step 2 image — matches the homepage VOD promo rendering exactly:
-       4/3 aspect, object-fit cover, photo radius, lift shadow. */
+    /* step 2 image — calendar RSVP screenshot; keeps its natural ~16:9
+       ratio (a forced 4/3 cover crop would cut off the highlighted "Yes"
+       button). Sized 25% up from the original 360px cap on desktop and
+       scales down linearly with the column below that. */
     .ty-step-img {
       width: 100%;
-      max-width: 360px;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
+      max-width: 450px;
+      height: auto;
       border-radius: var(--r-photo);
       box-shadow: var(--shadow-lift);
       margin-top: 22px;
       display: block;
     }
+
+    /* head start section — pull it up ~50%: the whitespace above it is
+       the steps bottom padding (~35px desktop) + this section's top
+       padding (~160px desktop = var(--sect)). Setting the top padding to
+       0.39 × --sect halves the combined gap (~195px → ~97px), scaling
+       linearly with the viewport like --sect does. */
+    #advisors { padding-top: calc(var(--sect) * 0.39); }
 
     @media (max-width: 560px) {
       .ty-step { grid-template-columns: 1fr; gap: 14px; }
@@ -240,8 +248,8 @@
             <p>A quick walk-through of what's coming and how to get ready before the Open Day begins.</p>
             <div class="ty-video">
               <script src="https://fast.wistia.com/player.js" async></script>
-              <script src="https://fast.wistia.com/embed/h90wm5sa0j.js" async type="module"></script>
-              <wistia-player media-id="h90wm5sa0j" aspect="1.7777777777777777" player-color="#22322a"></wistia-player>
+              <script src="https://fast.wistia.com/embed/b8eciz1m5l.js" async type="module"></script>
+              <wistia-player media-id="b8eciz1m5l" aspect="1.7777777777777777" player-color="#22322a"></wistia-player>
             </div>
           </div>
         </div>
@@ -252,10 +260,27 @@
           <div class="ty-step-body">
             <h3>Add the event to your calendar</h3>
             <p>Check the email we sent you with the calendar invite, and add the Virtual Open Day to your calendar so you don't miss it.</p>
-            <img class="ty-step-img" src="assets/photos/event-crowd-2.webp" alt="Affinity members at a live event" loading="lazy" decoding="async">
+            <img class="ty-step-img" src="assets/photos/calendar-rsvp.webp" alt="Calendar invite for the Virtual Open Day with the Yes RSVP button highlighted" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ========================================== enrollment advisors -->
+    <section class="sect apply" id="advisors">
+      <div class="wrap">
+        <div class="ctr-head rv">
+          <h2 class="d-lg">Want a <em>head start?</em></h2>
+          <p class="lede">Schedule a time with one of our enrollment advisors and get your questions answered before the Open Day!</p>
+        </div>
+        <!-- Calendly scheduling widget. -->
+        <div class="tf-card rv" style="max-width:760px;margin-inline:auto;margin-top:30px">
+          <div class="calendly-embed" style="width:100%;min-height:680px;">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/fola-affinityinstitute/45min?utm_content=sender_id%3D82a0f36c-541f-451c-8598-d9b8f2264aeb&month=2026-09" style="min-width:320px;height:680px;"></div>
+          </div>
+        </div>
+      </div>
+      <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
     </section>
 
   </main>
